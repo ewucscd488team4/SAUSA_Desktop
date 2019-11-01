@@ -1,0 +1,57 @@
+﻿<Window x:Class="WPFUI.default_main_window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUI"
+        mc:Ignorable="d"
+        Title="SAUSA" Height="600" Width="800">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem x:Name="fileNew" Header="New" InputGestureText="Ctrl+N"/>
+                    <MenuItem x:Name="fileOpen" Header="Open" InputGestureText="Ctrl+O"/>
+                    <MenuItem x:Name="fileSave" Header="Save" InputGestureText="Ctrl+S"/>
+                    <MenuItem x:Name="fileSaveAs" Header="Save As" InputGestureText="Ctrl+A"/>
+                    <MenuItem x:Name="fileClose" Header="Close" InputGestureText="Ctrl+N"/>                    
+                    <Separator/>
+                    <MenuItem x:Name="fileIn" Header="Inport"/>
+                    <MenuItem x:Name="fileEx" Header="Export"/>
+                    <Separator/>
+                    <MenuItem x:Name="filePref" Header="Preferences"/>
+                    <MenuItem x:Name="filePrint" Header="Print" InputGestureText="Ctrl+P"/>
+                    <Separator/>
+                    <MenuItem x:Name="menuExit" Header="Exit" Click="menuExit_Click" InputGestureText="Alt+F4"/>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem x:Name="editUndo" Header="Undo" Command="ApplicationCommands.Undo" InputGestureText="Ctrl+Z"/>
+                    <MenuItem x:Name="editCut" Header="Cut" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
+                    <MenuItem x:Name="editCopy" Header="Copy" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
+                    <MenuItem x:Name="editPaste" Header="Paste" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V"/>
+                    <MenuItem x:Name="editDel" Header="Delete"/>
+                    <Separator />
+                    <MenuItem x:Name="editFind" Header="Find"/>
+                    <MenuItem x:Name="editNext" Header="Find Next"/>
+                    <MenuItem x:Name="editRepl" Header="Replace"/>
+                    <MenuItem x:Name="editGoTo" Header="Go To"/>
+                    <Separator />
+                    <MenuItem x:Name="editArea" Header="Storage Area"/>
+                    <MenuItem x:Name="editAttr" Header="Crate Attributes"/>
+                    <MenuItem x:Name="editData" Header="Database Attributes"/>
+                </MenuItem>
+                <MenuItem Header="_View">
+                    <MenuItem x:Name="viewTheme" Header="Light/Dark"/>
+                    <MenuItem x:Name="viewZoomIn" Header="Zoom In"/>
+                    <MenuItem x:Name="viewZoomOut" Header="Zoom Out"/>
+                    <MenuItem x:Name="viewZoomRes" Header="Zoom Reset"/>
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem x:Name="helpHelp" Header="Help" InputGestureText="F1"/>
+                    <MenuItem x:Name="helpAbout" Header="About"/>
+                    <MenuItem x:Name="helpUpdate" Header="Update"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+    </Grid>
+</Window>

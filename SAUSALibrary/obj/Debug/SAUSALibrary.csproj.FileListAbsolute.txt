@@ -1,0 +1,5 @@
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.pdb
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.csprojAssemblyReference.cache
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.pdb

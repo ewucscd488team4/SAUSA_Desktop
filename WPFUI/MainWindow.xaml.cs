@@ -25,8 +25,11 @@ namespace WPFUI
             InitializeComponent();
         }
 
-        private void menuExit_Click(object sender, RoutedEventArgs e)
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
+            default_main_window default_window = new default_main_window();
+            default_window.Show();
             this.Close();
         }
     }

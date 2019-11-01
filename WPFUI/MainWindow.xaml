@@ -5,32 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
         mc:Ignorable="d"
-        Title="Stack" Height="1080" Width="1920" Topmost="False" WindowState="Normal">
+        Title="SAUSA" Height="480" Width="640" ResizeMode="NoResize">
     <Grid>
-
-        <DockPanel>
-            <Menu DockPanel.Dock="Top">
-                <MenuItem Header="_File">
-                    <MenuItem x:Name="menuNew" Header="_New" InputGestureText="Ctrl+N">
-                        <MenuItem.Icon>
-                            <Image Source="./Resources/NewDocument.bmp"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem x:Name="menuExit" Header="Exit" Click="menuExit_Click"/>
-                </MenuItem>
-                <MenuItem Header="_Edit">
-                    <MenuItem x:Name="menuCut" Header="Cut" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
-                    <MenuItem x:Name="menuCopy" Header="Copy" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
-                    <MenuItem x:Name="menuPaste" Header="Paste" Command="ApplicationCommands.Paste" InputGestureText="Ctrl+V"/>
-                </MenuItem>
-                <MenuItem Header="_View">
-
-                </MenuItem>
-                <MenuItem Header="_Help">
-
-                </MenuItem>
-            </Menu>
-
-        </DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="24"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="36" Padding="10">
+            SAUSA
+        </TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Padding="10">
+            Open Recent
+        </TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Padding="10">
+            Get Started
+        </TextBlock>
+        <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="3" Margin="10">
+            <Button x:Name="openProj" Margin="3" Height="48" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="2" Grid.Row="0" FontSize="16">
+                        Build a Stack
+                    </TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="1" FontSize="8" TextWrapping="Wrap">
+                        Build a stack provided by the desktop app.
+                    </TextBlock>
+                </Grid>
+            </Button>
+            <Button x:Name="openBuild" Margin="3" Height="48" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="2" Grid.Row="0" FontSize="16" VerticalAlignment="Center">
+                        Open a project
+                    </TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="1" FontSize="8">
+                        Open a local SAUSA project or XXX file.               
+                    </TextBlock>
+                </Grid>
+            </Button>
+            
+            <Button x:Name="stack" Margin="3" Height="48" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="18"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="2" Grid.Row="0" FontSize="14">
+                        Create a Project
+                    </TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="1" FontSize="8" TextWrapping="Wrap">
+                        Create a new stack in a storage area you define.
+                    </TextBlock>
+                </Grid>
+            </Button>
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink Click="Hyperlink_Click">Continue without a stack →</Hyperlink>
+            </TextBlock>
+        </StackPanel>
     </Grid>
+
+    
 </Window>
