@@ -26,7 +26,11 @@
         },
         "frameworks": {
           "netcoreapp3.0": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+                "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -54,6 +58,17 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj",
+        "projectName": "SAUSALibrary",
+        "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+      },
+      "frameworks": {
+        "net472": {}
       }
     }
   }

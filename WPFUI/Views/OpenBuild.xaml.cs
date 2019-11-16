@@ -10,21 +10,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPFUI
+namespace WPFUI.Views
 {
     /// <summary>
-    /// Interaction logic for default_main_window.xaml
+    /// Interaction logic for OpenBuild.xaml
     /// </summary>
-    public partial class default_main_window : Window
+    public partial class OpenBuild : Window
     {
-        public default_main_window()
+        public OpenBuild()
         {
             InitializeComponent();
-        }
-
-        private void menuExit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

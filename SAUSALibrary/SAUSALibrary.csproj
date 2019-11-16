@@ -41,23 +41,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="crates\Box.cs" />
-    <Compile Include="crates\Can.cs" />
-    <Compile Include="crates\Container.cs" />
-    <Compile Include="crates\Container_Factory.cs" />
-    <Compile Include="crates\Crate.cs" />
-    <Compile Include="crates\CrateWithFeet.cs" />
-    <Compile Include="crates\Palletized.cs" />
+    <Compile Include="Communication\CSV.cs" />
+    <Compile Include="Communication\MSSQL.cs" />
+    <Compile Include="Communication\MySQL.cs" />
+    <Compile Include="Communication\SQLite.cs" />
+    <Compile Include="Containers\Box.cs" />
+    <Compile Include="Containers\Can.cs" />
+    <Compile Include="Containers\Container.cs" />
+    <Compile Include="Containers\Container_Factory.cs" />
+    <Compile Include="Containers\Crate.cs" />
+    <Compile Include="Containers\Drum.cs" />
     <Compile Include="export\ExportAdapter.cs" />
+    <Compile Include="export\ToBMP.cs" />
+    <Compile Include="export\ToCSV.cs" />
+    <Compile Include="export\ToDatabase.cs" />
+    <Compile Include="export\ToIMG.cs" />
     <Compile Include="export\ToPDF.cs" />
+    <Compile Include="export\ToTablet.cs" />
+    <Compile Include="File\ReadProject.cs" />
+    <Compile Include="File\ReadXML.cs" />
+    <Compile Include="File\WriteProject.cs" />
+    <Compile Include="File\WriteXML.cs" />
+    <Compile Include="import\FromCSV.cs" />
+    <Compile Include="import\FromDatabase.cs" />
     <Compile Include="import\FromTablet.cs" />
     <Compile Include="import\ImportAdapter.cs" />
+    <Compile Include="Init\LoadPrefs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utilities\MS_SQL.cs" />
     <Compile Include="utilities\My_SQL.cs" />
     <Compile Include="utilities\Open.cs" />
     <Compile Include="utilities\Print.cs" />
     <Compile Include="utilities\Save.cs" />
+    <Compile Include="utilities\SQLite.cs" />
     <Compile Include="utilities\Util_Adapter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

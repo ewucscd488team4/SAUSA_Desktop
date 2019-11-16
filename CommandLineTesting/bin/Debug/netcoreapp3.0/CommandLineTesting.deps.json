@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.0": {
       "CommandLineTesting/1.0.0": {
+        "dependencies": {
+          "SAUSALibrary": "1.0.0"
+        },
         "runtime": {
           "CommandLineTesting.dll": {}
+        }
+      },
+      "SAUSALibrary/1.0.0": {
+        "runtime": {
+          "SAUSALibrary.dll": {}
         }
       }
     }
   },
   "libraries": {
     "CommandLineTesting/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SAUSALibrary/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

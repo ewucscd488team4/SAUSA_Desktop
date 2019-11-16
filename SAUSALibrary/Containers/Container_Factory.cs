@@ -32,19 +32,15 @@ namespace SAUSALibrary.crates
             return new Crate();
         }
 
-        public Box get_A_Box(List<string> boxFields)
+        public Box get_A_Box(List<string> baseFields,List<string> boxFields)
         {
-            return new Box();
+            return new Box(baseFields, boxFields);
         }
 
         public Can get_A_Can(List<string> canFields)
         {
             return new Can(canFields);
         }
-
-        public CrateWithFeet get_A_CrateWithFeet(List<string> crateFields)
-        {
-            return new CrateWithFeet(crateFields);
-        }
+                
     }
 }

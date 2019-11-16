@@ -7,15 +7,54 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="default_main_window.xaml.cs">
+    <Compile Update="Views\About.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DatabaseParameters.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Help.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OpenBuild.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OpenProject.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Preferences.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Splash.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="default_main_window.xaml">
+    <Page Update="Views\About.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Views\DatabaseParameters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Help.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OpenBuild.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OpenProject.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Preferences.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Splash.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
