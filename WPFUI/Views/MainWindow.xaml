@@ -24,8 +24,8 @@
                     <MenuItem Header="Close" InputGestureText="Ctrl+N"/>
                     <Separator/>
                     <MenuItem Header="Inport">
-                        <MenuItem x:Name="inportData" Header="Inport Database"/>
-                        <MenuItem x:Name="inportCSV" Header="Inport CSV"/>
+                        <MenuItem x:Name="importData" Header="Import Database"/>
+                        <MenuItem x:Name="importCSV" Header="Import CSV"/>
                     </MenuItem>
                     <MenuItem Header="Export">
                         <MenuItem x:Name="exportData" Header="Export Database"/>
