@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
         mc:Ignorable="d"
-        Title="Database Parameters" Height="450" Width="800">
+        Title="Database Parameters" Height="370" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -34,11 +34,11 @@
             <RadioButton>SQLite</RadioButton>
         </WrapPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center">
+        <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center">
             <TextBlock Text="Server Data"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="5" HorizontalAlignment="Center">            
+        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center">            
             <TextBlock Text=" Database Fields"/>
             <WrapPanel Margin="5">
                 <Label Content="Server"/>
@@ -59,6 +59,6 @@
             <Button Content="Apply" Width="80"/>
         </StackPanel>
 
-        <Button Content="OK" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Click="ApplyDatabaseParam_Click"/>
+        <Button Content="OK" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Click="ApplyDatabaseParam_Click"/>
     </Grid>
 </Window>

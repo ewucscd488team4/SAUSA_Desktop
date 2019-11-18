@@ -42,6 +42,6 @@
                 </RadioButton>
             </WrapPanel>
         </StackPanel>
-        <Button Content="Apply" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Width="80" VerticalAlignment="Center" Click="ApplyPrefs_Click"/>
+        <Button Content="Save" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Width="80" VerticalAlignment="Center" Click="ApplyPrefs_Click"/>
     </Grid>
 </Window>
