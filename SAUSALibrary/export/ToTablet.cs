@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.export
 {
-    class ToTablet
+    public class ToTablet
     {
     }
 }

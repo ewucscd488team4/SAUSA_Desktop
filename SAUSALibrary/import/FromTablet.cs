@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SAUSALibrary.import
 {
-    public class FromTablet
+    public public class FromTablet
     {
     }
 }

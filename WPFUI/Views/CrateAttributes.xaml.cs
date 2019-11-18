@@ -13,16 +13,16 @@ using System.Windows.Shapes;
 namespace WPFUI.Views
 {
     /// <summary>
-    /// Interaction logic for OpenBuild.xaml
+    /// Interaction logic for CrateAttributes.xaml
     /// </summary>
-    public partial class OpenBuild : Window
+    public partial class CrateAttributes : Window
     {
-        public OpenBuild()
+        public CrateAttributes()
         {
             InitializeComponent();
         }
 
-        private void Accept_Build(object sender, RoutedEventArgs e)
+        private void Apply_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

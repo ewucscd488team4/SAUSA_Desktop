@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.import
 {
-    class FromCSV
+    public class FromCSV
     {
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.File
 {
-    class ReadXML
+    public class ReadXML
     {
+        
     }
 }

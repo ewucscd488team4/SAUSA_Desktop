@@ -10,6 +10,9 @@
     <Compile Update="Views\About.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\CrateAttributes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DatabaseParameters.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -17,6 +20,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\NewStack.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\OpenBuild.xaml.cs">
@@ -36,6 +42,9 @@
     <Page Update="Views\About.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\CrateAttributes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\DatabaseParameters.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -43,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewStack.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\OpenBuild.xaml">

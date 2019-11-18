@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.File
 {
-    class ReadProject
+    public class ReadProject
     {
     }
 }

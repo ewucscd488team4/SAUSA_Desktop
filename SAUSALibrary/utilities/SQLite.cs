@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.utilities
 {
-    class SQLite
+    public class SQLite
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.Communication
 {
-    class MSSQL
+    public class MSSQL
     {
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
         mc:Ignorable="d"
-        Title="About" Width="580" SizeToContent="Height">
+        Title="About SAUSA" Width="580" SizeToContent="Height">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -34,7 +34,7 @@
                 <TextBlock Text="johnw.burress@eagles.ewu.edu" TextAlignment="Center"/>
             </StackPanel>            
         </StackPanel>
-        <Button Content="Okay"
+        <Button Content="OK"
                 Margin="10"
                 VerticalAlignment="Center"
                 Width="80"

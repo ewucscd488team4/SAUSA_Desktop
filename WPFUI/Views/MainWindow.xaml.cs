@@ -38,6 +38,12 @@ namespace WPFUI.Views
             newProject.Show();
         }
 
+        private void FileNewStack_Click(object sender, RoutedEventArgs e)
+        {
+            NewStack newStack = new NewStack();
+            newStack.Show();
+        }
+
         private void FileOpenDesign_Click(object sender, RoutedEventArgs e)
         {            
             OpenFileDialog openDlg = new OpenFileDialog
@@ -106,7 +112,7 @@ namespace WPFUI.Views
 
         private void HelpUpdates_Click(object sender, RoutedEventArgs e)
         {
-            //launch box showing not implemented yet
+            MessageBox.Show("Not implemented yet", "Oops!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
 

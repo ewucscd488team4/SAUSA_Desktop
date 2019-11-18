@@ -13,16 +13,16 @@ using System.Windows.Shapes;
 namespace WPFUI.Views
 {
     /// <summary>
-    /// Interaction logic for OpenBuild.xaml
+    /// Interaction logic for NewStack.xaml
     /// </summary>
-    public partial class OpenBuild : Window
+    public partial class NewStack : Window
     {
-        public OpenBuild()
+        public NewStack()
         {
             InitializeComponent();
         }
 
-        private void Accept_Build(object sender, RoutedEventArgs e)
+        private void Accept_Stack(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

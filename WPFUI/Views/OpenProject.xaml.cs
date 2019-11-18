@@ -21,5 +21,10 @@ namespace WPFUI.Views
         {
             InitializeComponent();
         }
+
+        private void Accept_Project(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

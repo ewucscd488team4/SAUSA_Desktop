@@ -13,6 +13,7 @@
                     <MenuItem Header="New" InputGestureText="Ctrl+N">
                         <MenuItem x:Name="fineNewProject" Header="New Project" Click="FileNewProject_Click"/>
                         <MenuItem x:Name="fineNewBuild" Header="New Build" Click="FileNewBuild_Click"/>
+                        <MenuItem x:Name="fineNewStack" Header="New Stack" Click="FileNewStack_Click"/>
                     </MenuItem>                    
                     <MenuItem Header="Open" InputGestureText="Ctrl+O">
                         <MenuItem x:Name="fileOpenProject" Header="Open Project" Click="FileOpenProject_Click"/>

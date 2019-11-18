@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAUSALibrary.export
 {
-    class ToCSV
+    public class ToCSV
     {
     }
 }
