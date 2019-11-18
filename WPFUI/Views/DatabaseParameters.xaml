@@ -16,13 +16,49 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>            
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        
+
         <TextBlock Text="Database Parameters" FontSize="36" TextAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
 
-        <Button Content="APPLY" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Click="ApplyDatabaseParam_Click"/>
+        <Label Content="Database Type" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Center" FontSize="16" FontWeight="Light"/>
+
+        <WrapPanel Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="10">
+            <RadioButton IsChecked="True">MSSQL</RadioButton>
+            <RadioButton>MySQL</RadioButton>
+            <RadioButton>SQLite</RadioButton>
+        </WrapPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center">
+            <TextBlock Text="Server Data"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="5" HorizontalAlignment="Center">            
+            <TextBlock Text=" Database Fields"/>
+            <WrapPanel Margin="5">
+                <Label Content="Server"/>
+                <TextBlock Width="90" Background="Gray"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="User"/>
+                <TextBlock Width="100" Background="Gray"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Password"/>
+                <TextBlock Width="75" Background="Gray"/>
+            </WrapPanel>
+            <WrapPanel Margin="5">
+                <Label Content="Extra"/>
+                <TextBlock Width="100" Background="Gray"/>
+            </WrapPanel>
+            <Button Content="Apply" Width="80"/>
+        </StackPanel>
+
+        <Button Content="OK" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Click="ApplyDatabaseParam_Click"/>
     </Grid>
 </Window>
