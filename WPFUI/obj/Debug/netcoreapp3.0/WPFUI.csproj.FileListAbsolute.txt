@@ -49,3 +49,6 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\NewStack.g.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\CrateAttributes.baml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\NewStack.baml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.csprojAssemblyReference.cache
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\Prefs.g.cs
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\Prefs.baml

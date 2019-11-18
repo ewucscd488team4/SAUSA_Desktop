@@ -87,10 +87,22 @@ namespace WPFUI.Views
             prefs.Show();
         }
 
+        private void EditStorageAttribs_Click(object sender, RoutedEventArgs e)
+        {
+            StorageArea storageArea = new StorageArea();
+            storageArea.Show();
+        }
+
         private void EditDatabaseParam_Click(object sender, RoutedEventArgs e)
         {
             DatabaseParameters dataPrefs = new DatabaseParameters();
             dataPrefs.Show();
+        }
+
+        private void EditCrateAttribs_Click(object sender, RoutedEventArgs e)
+        {
+            CrateAttributes cratePrefs = new CrateAttributes();
+            cratePrefs.Show();
         }
 
         private void MenuExit_Click(object sender, RoutedEventArgs e)

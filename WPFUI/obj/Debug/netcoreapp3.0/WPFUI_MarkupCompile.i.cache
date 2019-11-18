@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_0
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\App.xaml
-10533906884
+12318164191
 
-12-1635386954
+14-1227666933
 192-1037106189
-Views\About.xaml;Views\CrateAttributes.xaml;Views\DatabaseParameters.xaml;Views\Help.xaml;Views\MainWindow.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Preferences.xaml;Views\Splash.xaml;
+Views\About.xaml;Views\CrateAttributes.xaml;Views\DatabaseParameters.xaml;Views\Help.xaml;Views\MainWindow.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Preferences.xaml;Views\Prefs.xaml;Views\Splash.xaml;Views\StorageArea.xaml;
 
 False
 

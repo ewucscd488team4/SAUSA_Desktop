@@ -1,0 +1,28 @@
+﻿<Window x:Class="WPFUI.Views.StorageArea"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUI.Views"
+        mc:Ignorable="d"
+        Title="Edit Storage Area" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Database Parameters" FontSize="36" TextAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+        <Button Content="APPLY" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Click="ApplyStorageAttribs_Click"/>
+    </Grid>
+</Window>

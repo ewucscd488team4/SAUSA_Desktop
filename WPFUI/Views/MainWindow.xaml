@@ -49,8 +49,8 @@
                     <MenuItem x:Name="editRepl" Header="Replace"/>
                     <MenuItem x:Name="editGoTo" Header="Go To"/>
                     <Separator />
-                    <MenuItem x:Name="editArea" Header="Storage Area"/>
-                    <MenuItem x:Name="editAttr" Header="Crate Attributes"/>
+                    <MenuItem x:Name="editArea" Header="Storage Area" Click="EditStorageAttribs_Click"/>
+                    <MenuItem x:Name="editAttr" Header="Crate Attributes" Click="EditCrateAttribs_Click"/>
                     <MenuItem x:Name="editData" Header="Database Parameters" Click="EditDatabaseParam_Click"/>
                 </MenuItem>
                 <MenuItem Header="_View">
