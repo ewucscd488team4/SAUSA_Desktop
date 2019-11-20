@@ -19,8 +19,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -65,6 +65,6 @@
             <Button Content="Apply" Width="80"/>
         </StackPanel>
 
-        <Button Content="OK" Margin="10" VerticalAlignment="Center" Width="80" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Click="Apply_Click"/>
+        <Button Content="OK" VerticalAlignment="Center" Width="80" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Margin="5" Click="Apply_Click"/>
     </Grid>
 </Window>

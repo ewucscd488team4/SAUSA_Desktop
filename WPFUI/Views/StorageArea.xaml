@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
         mc:Ignorable="d"
-        Title="Edit Storage Area" Height="400" Width="800">
+        Title="Edit Storage Area" Height="420" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -19,8 +19,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -40,7 +40,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center">
-            <TextBlock Text="Container Fields"/>
+            <TextBlock Text="Storage Area Fields"/>
             <WrapPanel Margin="5">
                 <Label Content="Lentth"/>
                 <TextBlock Width="90" Background="Gray"/>
@@ -64,6 +64,6 @@
             <Button Content="Apply" Width="80"/>
         </StackPanel>
 
-        <Button Content="OK" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Click="ApplyStorageAttribs_Click"/>
+        <Button Content="OK" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Margin="5" Click="ApplyStorageAttribs_Click"/>
     </Grid>
 </Window>
