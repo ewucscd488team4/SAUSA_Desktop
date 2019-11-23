@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,12 +20,56 @@ namespace WPFUI.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll")]
+        static extern bool MoveWindow(IntPtr handle, int x, int y, int width, int height, bool redraw);
+
+        internal delegate int WindowEnumProc(IntPtr hwnd, IntPtr lparam);
+        [DllImport("user32.dll")] 
+        internal static extern bool EnumChildWindows(IntPtr hwnd, WindowEnumProc func, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        static extern int SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
+
         readonly string SAUSA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.Programs) + @"\Sausa";
         readonly string TYPE_FILTER = @"SDF files (*.sdf)|*sdf|All Files (*.*)|*.*";
+
+        private Process process;
+        private IntPtr unityHWND = IntPtr.Zero;
+
+        private const int WM_ACTIVATE = 0x0006;
+        private const int WA_ACTIVE = 1;
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializePanel();
+            try
+            {
+                process = new Process();
+                process.StartInfo.FileName = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
+                process.StartInfo.Arguments = "-parentHWND " + unityPanel.Handle.ToInt32() + " " + Environment.CommandLine;
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.CreateNoWindow = true;
+
+                process.Start();
+
+                process.WaitForInputIdle();
+
+                EnumChildWindows(unityPanel.Handle, WindowEnum, IntPtr.Zero);
+
+                unityHWNDLabel.Content = "Unity HWND: 0x" + unityHWND.ToString("X8");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ".\nCannot find Unity file: " + process.StartInfo.FileName);
+            }
+        }
+
+        private void InitializePanel()
+        {
+            this.unityPanel.TabIndex = 1;
+            this.unityPanel.TabStop = true;
+            this.unityPanel.Resize += new System.EventHandler(this.UnityPanelResize);
         }
 
         private void FileNewBuild_Click(object sender, RoutedEventArgs e)
@@ -125,6 +171,22 @@ namespace WPFUI.Views
         private void HelpUpdates_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Not implemented yet", "Oops!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }        
+        }
+
+        private int WindowEnum(IntPtr hwnd, IntPtr lparam)
+        {
+            unityHWND = hwnd;
+            ActivateUnityWindow();
+            return 0;
+        }
+        private void ActivateUnityWindow()
+        {
+            SendMessage(unityHWND, WM_ACTIVATE, WA_ACTIVE, IntPtr.Zero);
+        }
+        private void UnityPanelResize(object sender, EventArgs e)
+        {
+            MoveWindow(unityHWND, 0, 0, unityPanel.Width, unityPanel.Height, true);
+            ActivateUnityWindow();
+        }
     }
 }
