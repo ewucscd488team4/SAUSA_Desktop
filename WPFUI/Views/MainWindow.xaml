@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
+        xmlns:WinForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         mc:Ignorable="d"
         Title="SAUSA" Height="768" Width="1024">
     <Grid>
@@ -14,7 +15,7 @@
                         <MenuItem x:Name="fineNewProject" Header="New Project" Click="FileNewProject_Click"/>
                         <MenuItem x:Name="fineNewBuild" Header="New Build" Click="FileNewBuild_Click"/>
                         <MenuItem x:Name="fineNewStack" Header="New Stack" Click="FileNewStack_Click"/>
-                    </MenuItem>                    
+                    </MenuItem>
                     <MenuItem Header="Open" InputGestureText="Ctrl+O">
                         <MenuItem x:Name="fileOpenProject" Header="Open Project" Click="FileOpenProject_Click"/>
                         <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click"/>
@@ -64,7 +65,11 @@
                     <MenuItem x:Name="helpAbout" Header="About" Click="HelpAbout_Click"/>
                     <MenuItem x:Name="helpUpdate" Header="Update"/>
                 </MenuItem>
+                <Label x:Name="unityHWNDLabel" Content=""/>
             </Menu>
         </DockPanel>
+        <WindowsFormsHost Margin="10,40,300,10">
+            <WinForms:Panel x:Name="unityPanel"></WinForms:Panel>
+        </WindowsFormsHost>
     </Grid>
 </Window>

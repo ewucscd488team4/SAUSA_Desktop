@@ -16,17 +16,11 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-
-        <TextBlock Text="Preferences" FontSize="36" TextAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
-
-        <StackPanel Grid.Column="1" Grid.Row="2">
+        <StackPanel Grid.Column="1" Grid.Row="1">
             <WrapPanel Margin="10" VerticalAlignment="Center">
                 <TextBlock Text="Options One:" FontSize="14"/>
                 <RadioButton IsChecked="True">
@@ -37,7 +31,7 @@
                 </RadioButton>
             </WrapPanel>
         </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="2">
+        <StackPanel Grid.Column="2" Grid.Row="1">
             <WrapPanel Margin="10" VerticalAlignment="Center">
                 <TextBlock Text="Options Two:" FontSize="14"/>
                 <RadioButton IsChecked="True">
@@ -48,6 +42,6 @@
                 </RadioButton>
             </WrapPanel>
         </StackPanel>
-        <Button Content="Save" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="80" VerticalAlignment="Center" Margin="5" Click="ApplyPrefs_Click"/>
+        <Button Content="Save" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Width="80" VerticalAlignment="Center" Click="ApplyPrefs_Click"/>
     </Grid>
 </Window>
