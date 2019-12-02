@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
@@ -23,7 +23,7 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
             <TextBlock Text="SAUSA" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
             <TextBlock Text="Storage Asset Use in Available Space (SAUSA)" TextAlignment="Center"/>
-            <TextBlock TextAlignment="Center" Text="Version .1 - 32 bit" Padding="10"/>
+            <TextBlock TextAlignment="Center" Text="Version .2 - 32 bit" Padding="10"/>
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1">
             <TextBlock Margin="10" Text="Copyright © 2019" TextAlignment="Center" FontWeight="DemiBold"/>
@@ -32,7 +32,7 @@
                 <TextBlock Text="sarahbella@gmail.com" TextAlignment="Center"/>
                 <TextBlock Text="rhoughton1@eagles.ewu.edu" TextAlignment="Center"/>
                 <TextBlock Text="johnw.burress@eagles.ewu.edu" TextAlignment="Center"/>
-            </StackPanel>            
+            </StackPanel>
         </StackPanel>
         <Button Content="OK"
                 Margin="10"

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +34,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.112.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.112.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,16 +61,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Communication\CSV.cs" />
-    <Compile Include="Communication\MSSQL.cs" />
-    <Compile Include="Communication\MySQL.cs" />
-    <Compile Include="Communication\SQLite.cs" />
     <Compile Include="Containers\Box.cs" />
     <Compile Include="Containers\Can.cs" />
     <Compile Include="Containers\Container.cs" />
     <Compile Include="Containers\Container_Factory.cs" />
     <Compile Include="Containers\Crate.cs" />
     <Compile Include="Containers\Drum.cs" />
+    <Compile Include="DataProcessing\GetThemes.cs" />
+    <Compile Include="Defaults\FilePathDefaults.cs" />
+    <Compile Include="Defaults\ThemeEnums.cs" />
+    <Compile Include="Defaults\XMLDataDefaults.cs" />
     <Compile Include="export\ExportAdapter.cs" />
     <Compile Include="export\ToBMP.cs" />
     <Compile Include="export\ToCSV.cs" />
@@ -58,23 +78,49 @@
     <Compile Include="export\ToIMG.cs" />
     <Compile Include="export\ToPDF.cs" />
     <Compile Include="export\ToTablet.cs" />
-    <Compile Include="File\ReadProject.cs" />
-    <Compile Include="File\ReadXML.cs" />
-    <Compile Include="File\WriteProject.cs" />
-    <Compile Include="File\WriteXML.cs" />
+    <Compile Include="FileHandling\Compression\UnzipFromProjectFile.cs" />
+    <Compile Include="FileHandling\Compression\ZipFromScratchFolder.cs" />
+    <Compile Include="FileHandling\Database\Reading\ReadMYSQL.cs" />
+    <Compile Include="FileHandling\Database\Reading\ReadSQL.cs" />
+    <Compile Include="FileHandling\Database\Reading\ReadSQLite.cs" />
+    <Compile Include="FileHandling\Database\Writing\AddDataSQLite.cs" />
+    <Compile Include="FileHandling\Database\Writing\CreateNewSQLiteDatabase.cs" />
+    <Compile Include="FileHandling\XML\Reading\ReadDatabaseXML.cs" />
+    <Compile Include="FileHandling\XML\Reading\ReadLastProjectsXML.cs" />
+    <Compile Include="FileHandling\XML\Reading\ReadProjectXML.cs" />
+    <Compile Include="FileHandling\XML\Reading\ReadSettingsXML.cs" />
+    <Compile Include="FileHandling\XML\Writing\WriteBlankProjectXML.cs" />
+    <Compile Include="FileHandling\XML\Writing\WriteSettingsXML.cs" />
+    <Compile Include="FileHandling\XML\Writing\WriteToProjectXML.cs" />
     <Compile Include="import\FromCSV.cs" />
     <Compile Include="import\FromDatabase.cs" />
     <Compile Include="import\FromTablet.cs" />
     <Compile Include="import\ImportAdapter.cs" />
-    <Compile Include="Init\LoadPrefs.cs" />
+    <Compile Include="Init\NewProjectInit.cs" />
+    <Compile Include="Models\DatabaseModel.cs" />
+    <Compile Include="Models\LastProjectModel.cs" />
+    <Compile Include="Models\MiniStackModel.cs" />
+    <Compile Include="Models\ProjectSQLiteDatabase.cs" />
+    <Compile Include="Models\ProjectStorage.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\SQLiteDatabaseModel.cs" />
+    <Compile Include="Models\StackModel.cs" />
+    <Compile Include="Models\ThemeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="utilities\MS_SQL.cs" />
-    <Compile Include="utilities\My_SQL.cs" />
-    <Compile Include="utilities\Open.cs" />
-    <Compile Include="utilities\Print.cs" />
-    <Compile Include="utilities\Save.cs" />
-    <Compile Include="utilities\SQLite.cs" />
-    <Compile Include="utilities\Util_Adapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
 </Project>

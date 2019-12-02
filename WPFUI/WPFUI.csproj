@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Resources\load_window\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SAUSALibrary\SAUSALibrary.csproj" />
   </ItemGroup>
 
 </Project>

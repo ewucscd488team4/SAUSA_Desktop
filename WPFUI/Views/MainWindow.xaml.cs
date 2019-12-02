@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFUI.ViewModels;
 
 namespace WPFUI.Views
 {
@@ -43,6 +44,7 @@ namespace WPFUI.Views
         {
             InitializeComponent();
             InitializePanel();
+            DataContext = new MainWindowViewModel();
             try
             {
                 process = new Process();

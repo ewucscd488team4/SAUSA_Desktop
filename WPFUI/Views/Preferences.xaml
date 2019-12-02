@@ -4,44 +4,67 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
+        xmlns:local1="clr-namespace:WPFUI.ViewModels"
         mc:Ignorable="d"
-        Title="SAUSA Preferences" Height="450" Width="800">
+        Title="SAUSA Preferences" Height="310" Width="500">
+    <Window.DataContext>
+        <local1:PreferencesViewModel></local1:PreferencesViewModel>
+    </Window.DataContext>    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <WrapPanel Margin="10" VerticalAlignment="Center">
-                <TextBlock Text="Options One:" FontSize="14"/>
-                <RadioButton IsChecked="True">
-                    Option 1
-                </RadioButton>
-                <RadioButton>
-                    Option 2
-                </RadioButton>
-            </WrapPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="2" Grid.Row="1">
-            <WrapPanel Margin="10" VerticalAlignment="Center">
-                <TextBlock Text="Options Two:" FontSize="14"/>
-                <RadioButton IsChecked="True">
-                    Option 3
-                </RadioButton>
-                <RadioButton>
-                    Option 4
-                </RadioButton>
-            </WrapPanel>
-        </StackPanel>
-        <Button Content="Save" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Width="80" VerticalAlignment="Center" Click="ApplyPrefs_Click"/>
+
+        <TextBlock Text="Sausa Preferences" FontSize="36" TextAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+
+        <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Theme" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="5"/>
+            <TextBlock Text="Save Directory" Grid.Column="0" Grid.Row="1" Margin="5"/>
+
+            <ComboBox Grid.Column="1" Grid.Row="0" Margin="5" Width="90" ItemsSource="{Binding Path=Themes}" SelectedItem="{Binding Path=Theme}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=ThemeValue}" TextAlignment="Center" Margin="5"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBox Text="{Binding OnLoadFolder}" Width="150" Grid.Column="1" Grid.Row="1" Background="LightGray"  Margin="5"/>
+
+            <Button Content="..."  Width="20" Grid.Column="2" Grid.Row="1" Margin="5" Command="{Binding OpenFileSelectDialogCommand}"/>
+
+            <Button Content="Save" Grid.Column="0" Grid.Row="2" Width="80" Grid.ColumnSpan="3" VerticalAlignment="Center" Margin="5" Command="{Binding ApplyChangesCommand}"/>
+
+        </Grid>
+
+        <TextBlock Text="{Binding LightDark}" Margin="5" Grid.Column="1" Grid.Row="3" TextAlignment="Center"/>
+
+        <TextBlock Text="{Binding NewFolder}" Margin="5" Grid.Column="1" Grid.Row="4" TextAlignment="Center"/>
+
+        <Button Content="Close" Grid.Column="1" Grid.Row="5" Width="80" VerticalAlignment="Center" Margin="5" Click="ApplyPrefs_Click"/>
     </Grid>
 </Window>

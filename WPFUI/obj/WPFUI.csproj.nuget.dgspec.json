@@ -4,6 +4,17 @@
     "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj": {}
   },
   "projects": {
+    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj",
+        "projectName": "SAUSALibrary",
+        "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    },
     "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -26,7 +37,11 @@
         },
         "frameworks": {
           "netcoreapp3.0": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+                "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -51,7 +66,7 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.WindowsDesktop.App.WPF": {
+            "Microsoft.WindowsDesktop.App": {
               "privateAssets": "none"
             }
           },

@@ -7,8 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.0": {
       "WPFUI/1.0.0": {
+        "dependencies": {
+          "SAUSALibrary": "1.0.0"
+        },
         "runtime": {
           "WPFUI.dll": {}
+        }
+      },
+      "SAUSALibrary/1.0.0": {
+        "dependencies": {
+          "System.Data.SQLite": "1.0.112.0"
+        },
+        "runtime": {
+          "SAUSALibrary.dll": {}
+        }
+      },
+      "System.Data.SQLite.Reference/1.0.112.0": {
+        "runtime": {
+          "System.Data.SQLite.dll": {
+            "assemblyVersion": "1.0.112.0",
+            "fileVersion": "1.0.112.0"
+          }
         }
       }
     }
@@ -16,6 +35,16 @@
   "libraries": {
     "WPFUI/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SAUSALibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Data.SQLite.Reference/1.0.112.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

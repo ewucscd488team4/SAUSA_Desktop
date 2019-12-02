@@ -8,37 +8,39 @@
         mc:Ignorable="d"
         Title="SAUSA" Height="768" Width="1024">
     <Grid>
+        <!-- DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" -->
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="New" InputGestureText="Ctrl+N">
                         <MenuItem x:Name="fineNewProject" Header="New Project" Click="FileNewProject_Click"/>
                         <MenuItem x:Name="fineNewBuild" Header="New Build" Click="FileNewBuild_Click"/>
-                        <MenuItem x:Name="fineNewStack" Header="New Stack" Click="FileNewStack_Click"/>
+                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" IsEnabled="{Binding MenuState}"/>
+                        <MenuItem x:Name="fineNewStack" Header="New Stack" Click="FileNewStack_Click" IsEnabled="{Binding MenuState}"/>
                     </MenuItem>
                     <MenuItem Header="Open" InputGestureText="Ctrl+O">
                         <MenuItem x:Name="fileOpenProject" Header="Open Project" Click="FileOpenProject_Click"/>
                         <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click"/>
                     </MenuItem>
-                    <MenuItem Header="Save" InputGestureText="Ctrl+S"/>
-                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Click="FileSaveAs_Click"/>
-                    <MenuItem Header="Close" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="Save" InputGestureText="Ctrl+S" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Click="FileSaveAs_Click" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem Header="Close" InputGestureText="Ctrl+N" IsEnabled="{Binding MenuState}"/>
                     <Separator/>
-                    <MenuItem Header="Inport">
+                    <MenuItem Header="Inport" IsEnabled="{Binding MenuState}">
                         <MenuItem x:Name="importData" Header="Import Database"/>
                         <MenuItem x:Name="importCSV" Header="Import CSV"/>
                     </MenuItem>
-                    <MenuItem Header="Export">
+                    <MenuItem Header="Export" IsEnabled="{Binding MenuState}">
                         <MenuItem x:Name="exportData" Header="Export Database"/>
                         <MenuItem x:Name="exportCSV" Header="Export CSV"/>
                     </MenuItem>
                     <Separator/>
                     <MenuItem x:Name="filePref" Header="Preferences" Click="FilePref_Click"/>
-                    <MenuItem x:Name="filePrint" Header="Print" InputGestureText="Ctrl+P"/>
+                    <MenuItem x:Name="filePrint" Header="Print" InputGestureText="Ctrl+P" IsEnabled="{Binding MenuState}"/>
                     <Separator/>
                     <MenuItem Header="Exit" Click="MenuExit_Click" InputGestureText="Alt+F4"/>
                 </MenuItem>
-                <MenuItem Header="_Edit">
+                <MenuItem Header="_Edit" IsEnabled="{Binding MenuState}">
                     <MenuItem x:Name="editUndo" Header="Undo" Command="ApplicationCommands.Undo" InputGestureText="Ctrl+Z"/>
                     <MenuItem x:Name="editCut" Header="Cut" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
                     <MenuItem x:Name="editCopy" Header="Copy" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
@@ -56,9 +58,9 @@
                 </MenuItem>
                 <MenuItem Header="_View">
                     <MenuItem x:Name="viewTheme" Header="Light/Dark"/>
-                    <MenuItem x:Name="viewZoomIn" Header="Zoom In"/>
-                    <MenuItem x:Name="viewZoomOut" Header="Zoom Out"/>
-                    <MenuItem x:Name="viewZoomRes" Header="Zoom Reset"/>
+                    <MenuItem x:Name="viewZoomIn" Header="Zoom In" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem x:Name="viewZoomOut" Header="Zoom Out" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem x:Name="viewZoomRes" Header="Zoom Reset" IsEnabled="{Binding MenuState}"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem x:Name="helpHelp" Header="Help" InputGestureText="F1" Click="HelpHelp_Click"/>
