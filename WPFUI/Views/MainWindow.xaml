@@ -8,8 +8,23 @@
         mc:Ignorable="d"
         Title="SAUSA" Height="768" Width="1024">
     <Grid>
-        <!-- DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" -->
-        <DockPanel>
+
+        <!-- main grid layout definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
+        <!-- <DockPanel-->
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="New" InputGestureText="Ctrl+N">
@@ -70,8 +85,45 @@
                 <Label x:Name="unityHWNDLabel" Content=""/>
             </Menu>
         </DockPanel>
-        <WindowsFormsHost Margin="10,40,300,10">
+        <WindowsFormsHost Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
             <WinForms:Panel x:Name="unityPanel"></WinForms:Panel>
         </WindowsFormsHost>
+
+        <!-- container list section -->
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Containeers in the Stack" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Medium" Grid.Row="0"/>
+            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1">
+
+            </ListBox>
+        </Grid>
+
+        <!-- container list attributes section -->
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Crate Fields" Margin="5" FontSize="14" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="0" Grid.Row="1" Background="LightGray">
+                <!-- crate fields entry box labels go here -->
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Background="LightGray">
+                <!-- crate field entry boxes go here -->
+            </StackPanel>
+            <!-- add container to list and to unity view via adding to sqlite databse -->
+            <Button x:Name="mAddContainer" Background="LightGray" Grid.Row="2" Width="80" Margin="5" Content="Add" HorizontalAlignment="Center" Grid.ColumnSpan="2" IsEnabled="{Binding MenuState}"/>
+        </Grid>
     </Grid>
 </Window>
