@@ -12,7 +12,7 @@ namespace SAUSALibrary.Init
         /// <param name="projectName"></param>
         public static void NewProjectDetailOperations(string projectName)
         {
-            WriteBlankProjectXML.WriteBlankXML(Path.Combine(FilePathDefaults.DefaultSavePath, projectName)); //write a new project file out with the given name
+            WriteXML.WriteBlankXML(Path.Combine(FilePathDefaults.DefaultSavePath, projectName)); //write a new project file out with the given name
         }
     }
 }

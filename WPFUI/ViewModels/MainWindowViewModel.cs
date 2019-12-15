@@ -14,7 +14,7 @@ namespace WPFUI.ViewModels
 
         #region statement definitions
 
-        ObservableCollection<MiniStackModel> People { get; } = new ObservableCollection<MiniStackModel>();
+        ObservableCollection<MiniStackModel> Containers { get; } = new ObservableCollection<MiniStackModel>();
 
         public bool MenuState { get; set; }
 

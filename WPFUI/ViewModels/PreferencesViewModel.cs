@@ -182,7 +182,7 @@ namespace WPFUI.ViewModels
         /// <param></param>
         private void SetThemeXML(string newData)
         {
-            WriteSettingsXML.WriteThemeSetting(FilePathDefaults.SettingsFile, newData);
+            WriteXML.WriteThemeSetting(FilePathDefaults.SettingsFile, newData);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void SetDirectoryXML(string newData)
         {
-            WriteSettingsXML.WritePathSetting(FilePathDefaults.SettingsFile, newData);
+            WriteXML.WritePathSetting(FilePathDefaults.SettingsFile, newData);
         }
     }
 }
