@@ -152,7 +152,7 @@ namespace WPFUI.ViewModels
         /// <returns></returns>
         private string GetLightDarkFromXML()
         {
-            SettingsModel model = ReadSettingsXML.ReadSettings(FilePathDefaults.SettingsFile);
+            SettingsModel model = ReadXML.ReadSettings(FilePathDefaults.SettingsFile);
             return model.SettingOne;
         }
 
@@ -162,7 +162,7 @@ namespace WPFUI.ViewModels
         /// <returns></returns>
         private string GetSaveFolderFromXML()
         {
-            SettingsModel model = ReadSettingsXML.ReadSettings(FilePathDefaults.SettingsFile);
+            SettingsModel model = ReadXML.ReadSettings(FilePathDefaults.SettingsFile);
             return model.SettingTwo;
         }
 

@@ -85,10 +85,7 @@
     <Compile Include="FileHandling\Database\Writing\WriteMSSQL.cs" />
     <Compile Include="FileHandling\Database\Writing\WriteMySQL.cs" />
     <Compile Include="FileHandling\Database\Writing\WriteSQLite.cs" />
-    <Compile Include="FileHandling\XML\Reading\ReadDatabaseXML.cs" />
-    <Compile Include="FileHandling\XML\Reading\ReadLastProjectsXML.cs" />
-    <Compile Include="FileHandling\XML\Reading\ReadProjectXML.cs" />
-    <Compile Include="FileHandling\XML\Reading\ReadSettingsXML.cs" />
+    <Compile Include="FileHandling\XML\Reading\ReadXML.cs" />
     <Compile Include="FileHandling\XML\Writing\WriteXML.cs" />
     <Compile Include="import\FromCSV.cs" />
     <Compile Include="import\FromDatabase.cs" />
