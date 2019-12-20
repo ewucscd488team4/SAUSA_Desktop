@@ -3,10 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFUI.Views"
+        
+        xmlns:views="clr-namespace:WPFUI.Views"
+        xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"
+        xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
+        
         xmlns:WinForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
+        
         Title="SAUSA" Height="768" Width="1024">
+
+    <Window.Resources>
+        
+        <!-- data converter can go here -->
+        
+        <!-- data templates can go here -->
+        
+    </Window.Resources>
+    
     <Grid>
 
         <!-- main grid layout definitions -->
@@ -17,7 +35,7 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
@@ -80,7 +98,7 @@
                 <MenuItem Header="_Help">
                     <MenuItem x:Name="helpHelp" Header="Help" InputGestureText="F1" Click="HelpHelp_Click"/>
                     <MenuItem x:Name="helpAbout" Header="About" Click="HelpAbout_Click"/>
-                    <MenuItem x:Name="helpUpdate" Header="Update"/>
+                    <MenuItem x:Name="helpUpdate" Header="Update" Click="HelpUpdates_Click"/>
                 </MenuItem>
                 <Label x:Name="unityHWNDLabel" Content=""/>
             </Menu>

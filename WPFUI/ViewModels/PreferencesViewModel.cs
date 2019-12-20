@@ -1,4 +1,5 @@
-﻿using SAUSALibrary.DataProcessing;
+﻿using GalaSoft.MvvmLight.Command;
+using SAUSALibrary.DataProcessing;
 using SAUSALibrary.Defaults;
 using SAUSALibrary.FileHandling.XML.Reading;
 using SAUSALibrary.FileHandling.XML.Writing;
@@ -85,12 +86,12 @@ namespace WPFUI.ViewModels
         /// <summary>
         /// Xaml buttons point to this to execute a button click
         /// </summary>
-        public ICommand ApplyChangesCommand { get; }
+        public RelayCommand ApplyChangesCommand { get; }
 
         /// <summary>
         /// Xaml buttons point to this to execute a button click
         /// </summary>
-        public ICommand OpenFileSelectDialogCommand { get; }
+        public RelayCommand OpenFileSelectDialogCommand { get; }
 
         /// <summary>
         /// Constructor that instantiates both settings fields and turns on the button commands
@@ -102,8 +103,8 @@ namespace WPFUI.ViewModels
             LightDark = GetLightDarkFromXML(); //gets default theme setting from settings file
             Themes = GetThemesFromEnumClass(); //gets list of setting types from settings enum class
             Theme = new ThemeModel(); //sets default ThemeModel (will have "blank")
-            ApplyChangesCommand = new Command(OnChangeTheme); //wires up command
-            OpenFileSelectDialogCommand = new Command(OnChangeSaveFolder); //wires up command
+            ApplyChangesCommand = new RelayCommand(OnChangeTheme); //wires up command
+            OpenFileSelectDialogCommand = new RelayCommand(OnChangeSaveFolder); //wires up command
         }
 
         /// <summary>

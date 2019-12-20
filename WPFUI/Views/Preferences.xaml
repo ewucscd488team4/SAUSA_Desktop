@@ -3,12 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFUI.Views"
-        xmlns:local1="clr-namespace:WPFUI.ViewModels"
+        
+        xmlns:views="clr-namespace:WPFUI.Views"
+        xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"
+        
         mc:Ignorable="d"
-        Title="SAUSA Preferences" Height="310" Width="500">
+        d:DataContext="{d:DesignInstance Type=viewmodels:PreferencesViewModel}"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
+        
+        Title="SAUSA Preferences" MinHeight="360" MinWidth="530" Width="530" Height="360">
     <Window.DataContext>
-        <local1:PreferencesViewModel></local1:PreferencesViewModel>
+        <viewmodels:PreferencesViewModel>
+            
+        </viewmodels:PreferencesViewModel>
     </Window.DataContext>    
     
     <Grid>
@@ -53,7 +61,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <TextBox Text="{Binding OnLoadFolder}" Width="150" Grid.Column="1" Grid.Row="1" Background="LightGray"  Margin="5"/>
+            <TextBox Text="{Binding OnLoadFolder}" Width="210" Grid.Column="1" Grid.Row="1" Margin="5" TextAlignment="Center" VerticalAlignment="Center"/>
 
             <Button Content="..."  Width="20" Grid.Column="2" Grid.Row="1" Margin="5" Command="{Binding OpenFileSelectDialogCommand}"/>
 

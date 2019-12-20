@@ -172,7 +172,8 @@ namespace WPFUI.Views
 
         private void HelpUpdates_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented yet", "Oops!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            UpdateNotImplemented update = new UpdateNotImplemented();
+            update.Show();
         }
 
         private int WindowEnum(IntPtr hwnd, IntPtr lparam)

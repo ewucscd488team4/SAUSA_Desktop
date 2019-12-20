@@ -3,8 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFUI.Views"
+        
+        xmlns:views="clr-namespace:WPFUI.Views"
+        
         mc:Ignorable="d"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
+        
         Title="Database Parameters" Height="440" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>

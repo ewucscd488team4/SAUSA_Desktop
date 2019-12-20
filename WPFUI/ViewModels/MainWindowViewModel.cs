@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Command;
 
 namespace WPFUI.ViewModels
 {
@@ -22,11 +23,11 @@ namespace WPFUI.ViewModels
 
         #region commands
 
-        public ICommand OpenProjectCommand { get; }
+        public RelayCommand OpenProjectCommand { get; }
 
-        public ICommand NewProjectCommand { get; }
+        public RelayCommand NewProjectCommand { get; }
 
-        public ICommand CloseCommand { get; }
+        public RelayCommand CloseCommand { get; }
 
         #endregion
 
@@ -34,9 +35,9 @@ namespace WPFUI.ViewModels
         public MainWindowViewModel()
         {
             MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
-            OpenProjectCommand = new Command(OnOpenProject);
-            NewProjectCommand = new Command(OnNewProject);
-            CloseCommand = new Command(OnClose);
+            OpenProjectCommand = new RelayCommand(OnOpenProject);
+            NewProjectCommand = new RelayCommand(OnNewProject);
+            CloseCommand = new RelayCommand(OnClose);
         }
 
         #region command methods

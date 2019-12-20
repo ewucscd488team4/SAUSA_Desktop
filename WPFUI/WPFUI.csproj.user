@@ -16,6 +16,9 @@
     <Compile Update="Views\DatabaseParameters.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\FileNotFoundError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Help.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +43,9 @@
     <Compile Update="Views\StorageArea.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\UpdateNotImplemented.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\About.xaml">
@@ -49,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DatabaseParameters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileNotFoundError.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Help.xaml">
@@ -73,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\StorageArea.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UpdateNotImplemented.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

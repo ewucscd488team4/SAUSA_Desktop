@@ -3,8 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPFUI.Views"
+        
+        xmlns:views="clr-namespace:WPFUI.Views"
+        
         mc:Ignorable="d"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
+        
         Title="About SAUSA" Width="580" SizeToContent="Height">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,10 +28,10 @@
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
             <TextBlock Text="SAUSA" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
             <TextBlock Text="Storage Asset Use in Available Space (SAUSA)" TextAlignment="Center"/>
-            <TextBlock TextAlignment="Center" Text="Version .2 - 32 bit" Padding="10"/>
+            <TextBlock TextAlignment="Center" Text="Version .45 - 32 bit" Padding="10"/>
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1">
-            <TextBlock Margin="10" Text="Copyright © 2019" TextAlignment="Center" FontWeight="DemiBold"/>
+            <TextBlock Margin="10" Text="Copyright © 2020" TextAlignment="Center" FontWeight="DemiBold"/>
             <StackPanel Margin="10">
                 <TextBlock Text="markdietzler@gmail.com" TextAlignment="Center"/>
                 <TextBlock Text="sarahbella@gmail.com" TextAlignment="Center"/>
@@ -35,12 +40,13 @@
             </StackPanel>
         </StackPanel>
         <Button Content="OK"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Grid.Row="2"
                 Margin="10"
                 VerticalAlignment="Center"
                 Width="80"
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Grid.Row="2" Click="About_Click"
+                Click="About_Click"
                 />
     </Grid>
 </Window>
