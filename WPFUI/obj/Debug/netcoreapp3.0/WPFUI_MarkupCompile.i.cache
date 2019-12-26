@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\
 WPFUI
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_0
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\App.xaml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\WPFUI\App.xaml
 14-1696751363
 
 23-26543211
-203-902295866
+203-1243791856
 Views\About.xaml;Views\CrateAttributes.xaml;Views\DatabaseParameters.xaml;Views\FileNotFoundError.xaml;Views\Help.xaml;Views\MainWindow.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Preferences.xaml;Views\Prefs.xaml;Views\Splash.xaml;Views\StorageArea.xaml;Views\UpdateNotImplemented.xaml;
 
 False

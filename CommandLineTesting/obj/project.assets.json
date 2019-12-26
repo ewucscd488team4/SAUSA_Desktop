@@ -119,17 +119,21 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Diesel\\.nuget\\packages\\": {}
+    "C:\\Users\\Diesel\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\CommandLineTesting\\CommandLineTesting.csproj",
+      "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\CommandLineTesting\\CommandLineTesting.csproj",
       "projectName": "CommandLineTesting",
-      "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\CommandLineTesting\\CommandLineTesting.csproj",
+      "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\CommandLineTesting\\CommandLineTesting.csproj",
       "packagesPath": "C:\\Users\\Diesel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\CommandLineTesting\\obj\\",
+      "outputPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\CommandLineTesting\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
         "C:\\Users\\Diesel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -144,8 +148,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
-              "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+            "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+              "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
             }
           }
         }

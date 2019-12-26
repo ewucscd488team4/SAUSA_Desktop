@@ -44,18 +44,18 @@ namespace WPFUI.ViewModels
 
         private void OnOpenProject()
         {
-            //open a project here
+            //TODO open a project here
         }
 
         private void OnNewProject()
         {
-            //make a new project here
+            //TODO make a new project here
         }
 
         private void OnClose()
         {
-            //close current project
-            //set menu state to disabled (MenuState = false)
+            //TODO close current project
+            //TODOset menu state to disabled (MenuState = false)
         }
 
         #endregion

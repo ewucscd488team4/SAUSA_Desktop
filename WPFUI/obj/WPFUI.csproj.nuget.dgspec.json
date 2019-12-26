@@ -1,29 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj": {}
+    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj",
         "projectName": "SAUSALibrary",
-        "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+        "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
       },
       "frameworks": {
         "net472": {}
       }
     },
-    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj": {
+    "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj",
+        "projectUniqueName": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj",
         "projectName": "WPFUI",
-        "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj",
+        "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\WPFUI\\WPFUI.csproj",
         "packagesPath": "C:\\Users\\Diesel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\WPFUI\\obj\\",
+        "outputPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\WPFUI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\Diesel\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -38,8 +41,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
-                "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\senior project\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
+              "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj": {
+                "projectPath": "C:\\Users\\Diesel\\Documents\\c sharp workspaces\\cscd488\\SAUSA_Desktop\\SAUSALibrary\\SAUSALibrary.csproj"
               }
             }
           }
