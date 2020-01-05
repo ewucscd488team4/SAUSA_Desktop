@@ -40,6 +40,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -97,11 +98,13 @@
     <Compile Include="Models\LastProjectModel.cs" />
     <Compile Include="Models\MiniStackModel.cs" />
     <Compile Include="Models\ProjectSQLiteDatabase.cs" />
+    <Compile Include="Models\ProjectSQLiteDatabaseFieldNamesModel.cs" />
     <Compile Include="Models\ProjectStorage.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\SQLiteDatabaseModel.cs" />
     <Compile Include="Models\StackModel.cs" />
     <Compile Include="Models\ThemeModel.cs" />
+    <Compile Include="Models\VisibilityConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

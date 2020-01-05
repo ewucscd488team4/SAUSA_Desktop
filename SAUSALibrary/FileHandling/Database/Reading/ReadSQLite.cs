@@ -97,5 +97,36 @@ namespace SAUSALibrary.FileHandling.Database.Reading
 
             return modelList;
         }
+
+        /// <summary>
+        /// Reads the current project SQLite database and returns the column header labels for the database        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static ProjectSQLiteDatabaseFieldNamesModel GetDatabaseFieldLabels(string filePath, string fileName)
+        {
+            ProjectSQLiteDatabaseFieldNamesModel model = new ProjectSQLiteDatabaseFieldNamesModel();
+            var fileNameSplit = fileName.Split('.');
+
+            if (File.Exists(filePath))
+            {
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + filePath + ";Version=3;");
+                SQLiteDataReader dritem = null;
+                m_dbConnection.Open();
+
+                SQLiteCommand command = new SQLiteCommand("select * from " + fileNameSplit[0], m_dbConnection);
+
+                dritem = command.ExecuteReader();
+
+
+            } else
+            {
+                //TODO throw error dialog if passed in database file location is not found
+            }
+
+            return model;            
+        }
+
     }
 }

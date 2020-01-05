@@ -125,3 +125,5 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\WPFUI\obj\Deb
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.csproj.CopyComplete
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.pdb
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\NewRoom.g.cs
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\NewRoom.baml

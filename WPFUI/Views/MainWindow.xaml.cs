@@ -1,17 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using SAUSALibrary.Defaults;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WPFUI.ViewModels;
 
 namespace WPFUI.Views
@@ -30,10 +22,7 @@ namespace WPFUI.Views
 
         [DllImport("user32.dll")]
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
-
-        readonly string SAUSA_DIR = Environment.GetFolderPath(Environment.SpecialFolder.Programs) + @"\Sausa";
-        readonly string TYPE_FILTER = @"SDF files (*.sdf)|*sdf|All Files (*.*)|*.*";
-
+        
         private Process process;
         private IntPtr unityHWND = IntPtr.Zero;
 
@@ -48,7 +37,7 @@ namespace WPFUI.Views
             try
             {
                 process = new Process();
-                process.StartInfo.FileName = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
+                process.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
                 process.StartInfo.Arguments = "-parentHWND " + unityPanel.Handle.ToInt32() + " " + Environment.CommandLine;
                 process.StartInfo.UseShellExecute = true;
                 process.StartInfo.CreateNoWindow = true;
@@ -71,7 +60,7 @@ namespace WPFUI.Views
         {
             this.unityPanel.TabIndex = 1;
             this.unityPanel.TabStop = true;
-            this.unityPanel.Resize += new System.EventHandler(this.UnityPanelResize);
+            this.unityPanel.Resize += new EventHandler(this.UnityPanelResize);
         }
 
         private void FileNewBuild_Click(object sender, RoutedEventArgs e)
@@ -80,54 +69,10 @@ namespace WPFUI.Views
             newBuild.Show();
         }
 
-        private void FileNewProject_Click(object sender, RoutedEventArgs e)
-        {
-            OpenProject newProject = new OpenProject();
-            newProject.Show();
-        }
-
-        private void FileNewStack_Click(object sender, RoutedEventArgs e)
-        {
-            NewStack newStack = new NewStack();
-            newStack.Show();
-        }
-
         private void FileOpenDesign_Click(object sender, RoutedEventArgs e)
-        {            
-            OpenFileDialog openDlg = new OpenFileDialog
-            {
-                InitialDirectory = SAUSA_DIR,
-                Filter = TYPE_FILTER,
-                DefaultExt = "sdf"
-                //FilterIndex = 2,
-                //RestoreDirectory = true
-        };            
-            openDlg.ShowDialog();
-        }
-
-        private void FileOpenProject_Click(object sender, RoutedEventArgs e)
-        {            
-            OpenFileDialog openDlg = new OpenFileDialog
-            {
-                InitialDirectory = SAUSA_DIR,
-                Filter = TYPE_FILTER,
-                DefaultExt = "sdf"
-                //FilterIndex = 2,
-                //RestoreDirectory = true
-            };
-            openDlg.ShowDialog();
-        }
-
-        private void FileSaveAs_Click(object sender, RoutedEventArgs e)
-        {            
-            SaveFileDialog saveDlg = new SaveFileDialog
-            {
-                InitialDirectory = SAUSA_DIR,
-                Filter=TYPE_FILTER,
-                DefaultExt = "sdf"
-            };
-            saveDlg.ShowDialog();
-        }
+        {           
+            
+        }        
 
         private void FilePref_Click(object sender, RoutedEventArgs e)
         {
@@ -153,8 +98,19 @@ namespace WPFUI.Views
             cratePrefs.Show();
         }
 
+        /// <summary>
+        /// Clears the scratch folder and closes the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuExit_Click(object sender, RoutedEventArgs e)
         {
+            DirectoryInfo di = new DirectoryInfo(FilePathDefaults.ScratchFolder);
+
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
             this.Close();
         }
 

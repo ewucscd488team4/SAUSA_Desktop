@@ -19,9 +19,30 @@
 
     <Window.Resources>
         
-        <!-- data converter can go here -->
+        <!-- ministackviewmodel visibility data converter can go here -->
+        <models:VisibilityConverter x:Key="converter"/>
+
+        <!-- container list templates -->
+        <DataTemplate DataType="{x:Type models:MiniStackModel}" x:Key="ContainerItemTemplate">
+            <WrapPanel Margin="5">
+                <TextBlock Text="{Binding Index}" FontSize="14"/>
+                <TextBlock Text="{Binding CrateName}" FontSize="14"/>
+            </WrapPanel>
+        </DataTemplate>
         
-        <!-- data templates can go here -->
+        <!-- container attribute template -->
+        <DataTemplate DataType="{x:Type models:StackModel}" x:Key="ContainerAttributesTemplate">
+            <StackPanel>
+                <TextBlock Text="{Binding Length}" FontSize="12"/>
+                <TextBlock Text="{Binding Width}" FontSize="12"/>
+                <TextBlock Text="{Binding Height}" FontSize="12"/>
+                <TextBlock Text="{Binding Weight}" FontSize="12"/>
+                <TextBlock Text="{Binding CrateName}" FontSize="12"/>
+            </StackPanel>            
+        </DataTemplate>
+        
+        <!-- container attributes entry textboxes template -->
+        
         
     </Window.Resources>
     
@@ -46,18 +67,18 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="New" InputGestureText="Ctrl+N">
-                        <MenuItem x:Name="fineNewProject" Header="New Project" Click="FileNewProject_Click"/>
+                        <MenuItem x:Name="fineNewProject" Header="New Project" Command="{Binding NewProjectCommand}" IsEnabled="{Binding OpenProjectState}"/>
                         <MenuItem x:Name="fineNewBuild" Header="New Build" Click="FileNewBuild_Click"/>
-                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" IsEnabled="{Binding MenuState}"/>
-                        <MenuItem x:Name="fineNewStack" Header="New Stack" Click="FileNewStack_Click" IsEnabled="{Binding MenuState}"/>
+                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" Command="{Binding NewStorageCommand}" IsEnabled="{Binding ProjectState}"/>
+                        <MenuItem x:Name="fineNewStack" Header="New Stack" Command="{Binding NewStackCommand}" IsEnabled="{Binding ProjectState}"/>
                     </MenuItem>
                     <MenuItem Header="Open" InputGestureText="Ctrl+O">
-                        <MenuItem x:Name="fileOpenProject" Header="Open Project" Click="FileOpenProject_Click"/>
+                        <MenuItem x:Name="fileOpenProject" Header="Open Project" Command="{Binding OpenProjectCommand}"/>
                         <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click"/>
                     </MenuItem>
-                    <MenuItem Header="Save" InputGestureText="Ctrl+S" IsEnabled="{Binding MenuState}"/>
-                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Click="FileSaveAs_Click" IsEnabled="{Binding MenuState}"/>
-                    <MenuItem Header="Close" InputGestureText="Ctrl+N" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}" IsEnabled="{Binding MenuState}" />
+                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding ProjectState}"/>                    
                     <Separator/>
                     <MenuItem Header="Inport" IsEnabled="{Binding MenuState}">
                         <MenuItem x:Name="importData" Header="Import Database"/>
@@ -124,6 +145,7 @@
 
         <!-- container list attributes section -->
         <Grid Grid.Column="2" Grid.Row="2">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -133,15 +155,20 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Crate Fields" Margin="5" FontSize="14" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
+            <TextBlock Text="Container Fields" Margin="5" FontSize="14" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
             <StackPanel Grid.Column="0" Grid.Row="1" Background="LightGray">
                 <!-- crate fields entry box labels go here -->
             </StackPanel>
+            
             <StackPanel Grid.Column="1" Grid.Row="1" Background="LightGray">
                 <!-- crate field entry boxes go here -->
             </StackPanel>
+            
             <!-- add container to list and to unity view via adding to sqlite databse -->
-            <Button x:Name="mAddContainer" Background="LightGray" Grid.Row="2" Width="80" Margin="5" Content="Add" HorizontalAlignment="Center" Grid.ColumnSpan="2" IsEnabled="{Binding MenuState}"/>
+            
+            <Button x:Name="mAddContainer" Background="LightGray" Grid.Row="2" Width="80" Margin="5" Content="Add" HorizontalAlignment="Center" Grid.ColumnSpan="2" IsEnabled="{Binding ProjectState}"/>
         </Grid>
     </Grid>
 </Window>

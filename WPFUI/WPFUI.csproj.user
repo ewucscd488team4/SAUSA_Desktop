@@ -25,6 +25,9 @@
     <Compile Update="Views\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\NewRoom.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\NewStack.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +67,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\NewRoom.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewStack.xaml">

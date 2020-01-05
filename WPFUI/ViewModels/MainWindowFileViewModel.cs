@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
+using WPFUI.Views;
 
 namespace WPFUI.ViewModels
 {
@@ -65,6 +66,12 @@ namespace WPFUI.ViewModels
         }
 
         private void OnNewStack()
+        {
+            NewStack newStack = new NewStack();
+            newStack.Show();
+        }
+
+        private void OnNewRoom()
         {
 
         }
