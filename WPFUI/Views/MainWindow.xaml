@@ -138,8 +138,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Stack Containers" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Medium" Grid.Row="0"/>
-            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1">
-
+            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1" ItemsSource="{Binding Containers}" SelectedItem="{Binding ContainerListModel}" ItemTemplate="{StaticResource ContainerItemTemplate}" Visibility="{Binding ContainerListVisibility}">
+                <!-- text -->                
             </ListBox>
         </Grid>
 

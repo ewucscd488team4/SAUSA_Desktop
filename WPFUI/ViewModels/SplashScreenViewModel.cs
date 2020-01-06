@@ -5,8 +5,7 @@ using SAUSALibrary.Models;
 
 namespace WPFUI.ViewModels
 {
-    public class NewRoomViewModel
+    public class SplashScreenViewModel
     {
-
     }
 }

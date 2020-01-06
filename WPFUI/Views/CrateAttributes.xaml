@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
         xmlns:views="clr-namespace:WPFUI.Views"
+        xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"
+        xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
         
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:CrateAttributesViewModel}"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         

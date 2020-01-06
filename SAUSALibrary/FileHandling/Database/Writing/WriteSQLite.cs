@@ -10,6 +10,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
     /// </summary>
     public class WriteSQLite
     {
+        private const string DEFAULT_EXTENSION = ".sqlite";
 
         //TODO expand design of creating a new database to take a list of type string for column headers
         //default database fiels, will later bring these values in via a List of type string, for more flexibile database design.
@@ -93,20 +94,23 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             }
             else
             {
-                //TODO throw error dialog if database file does not exist
+                throw new FileNotFoundException("Database file for writing does not exist!");
             }
 
         }
 
         /// <summary>
         /// Creates a new empty SQLite database with the file name specified and at the file path specified.
+        /// New database will have a default table in the database using the given file name as the table name
+        /// with minimum acceptable column headers.
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="file"></param>
-        public static void CreateDatabase(string filePath, string file)
+        /// <param name="directoryToCreateIn"></param>
+        /// <param name="newDatabaseFileName"></param>
+        public static void CreateDatabase(string directoryToCreateIn, string newDatabaseFileName)
         {
-            var fqFilePath = Path.Combine(filePath, file); //cobines path and file into a full file path 
-            var fileNameSplit = file.Split('.'); //splits the file name given into a 2 column array
+            var fileName = newDatabaseFileName + DEFAULT_EXTENSION; //marries given file name with the default sqlite file extension
+            var fqFilePath = Path.Combine(directoryToCreateIn, fileName); //combines given save folder and file name into a fully qualified file path          
+                        
             StringBuilder sb = new StringBuilder();
 
             SQLiteConnection.CreateFile(fqFilePath); //creates a new sqlite database file (that is empty, no tables at all)
@@ -119,7 +123,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
 
             //use stringbuider to build sql command.
             sb.Append("create table ");
-            sb.Append(fileNameSplit[0]);
+            sb.Append(newDatabaseFileName);
             sb.Append(" (ID INTEGER PRIMARY KEY AUTOINCREMENT,");
             sb.Append(defaultFields[4] + " REAL,"); //xpos
             sb.Append(defaultFields[5] + " REAL,"); //ypos
@@ -131,7 +135,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             sb.Append(defaultFields[7] + " VARCHAR(80)"); //name
             sb.Append(");");
 
-            //defines the sql query command, what database connection to execute it on
+            //defines the sql query command, and what database connection to execute it on
             SQLiteCommand command = new SQLiteCommand(sb.ToString(), m_dbConnection);
 
             //runs command to build new table

@@ -22,11 +22,13 @@ namespace SAUSALibrary.FileHandling.XML.Writing
             {
                 var xmlNode =
                     new XElement("Sausa",                               //root of xml node
+
                                 new XElement("ProjName",                //1st inner child node
                                     new XElement("Name",                //data node
                                         new XAttribute("Name", "XXX")   //attribute in data node
                                     ),
-                                ""),
+                                ""), //end of 1st child node
+
                                 new XElement("Storage",                 //2nd child node
                                     new XElement("Dimensions",          //data node
                                         new XAttribute("Length", "XXX"),//attribute 1
@@ -34,14 +36,26 @@ namespace SAUSALibrary.FileHandling.XML.Writing
                                         new XAttribute("Height", "XXX"),//attribute 3
                                         new XAttribute("Weight", "XXX") //attribute 4
                                     ),
-                                ""),
-                                new XElement("Stacks",                  //3rd child node
+                                ""), //end of 2nd child node
+
+                                new XElement("ExternalDatabase",        //3rd child node
                                     new XElement("Data",                //data node
-                                        new XAttribute("FileName", "XXX"),//first attribute
-                                        new XAttribute("Path", "XXX")     //2nd attribute
+                                        new XAttribute("Type", "XXX"),  //attribute 1
+                                        new XAttribute("Server", "XXX"),//attribute 2
+                                        new XAttribute("Database", "XXX"),//attribute 3
+                                        new XAttribute("UserID", "XXX"),//attribute 4
+                                        new XAttribute("Password","XXX")//attribute 5
                                     ),
-                                ""),  //3rd inner child node
-                    "");
+                                ""), //end of 3rd child node
+
+                                new XElement("Stacks",                  //4th child node
+                                    new XElement("Data",                //data node
+                                        new XAttribute("Tablename", "XXX"),//first attribute
+                                        new XAttribute("Filename", "XXX")  //2nd attribute
+                                    ),
+                                ""),  //end of last child node
+
+                    ""); //end of root node
                 xmlNode.Save(fullyQualifiedFileName);
             }
             else
@@ -68,7 +82,7 @@ namespace SAUSALibrary.FileHandling.XML.Writing
             }
             else
             {
-                //TODO throw error dialog if project file does not exist
+                throw new FileNotFoundException("Given XML File does not exist!");
             }
 
         }
@@ -90,7 +104,7 @@ namespace SAUSALibrary.FileHandling.XML.Writing
             }
             else
             {
-                //TODO throw error dialog if project file does not exist
+                throw new FileNotFoundException("Given XML File does not exist!");
             }
         }
 
@@ -101,26 +115,39 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <param name="projectName"></param>
         public static void SaveProjectName(string fullProjectXMLFilePath, string projectName)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(fullProjectXMLFilePath);
-            XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectNameStructure);
-            node.Attributes[0].Value = projectName; //only one attribute in this node
-            xmlDoc.Save(fullProjectXMLFilePath);
+            if(File.Exists(fullProjectXMLFilePath))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(fullProjectXMLFilePath);
+                XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectNameStructure);
+                node.Attributes[0].Value = projectName; //only one attribute in this node
+                xmlDoc.Save(fullProjectXMLFilePath);
+            } else
+            {
+                throw new FileNotFoundException("Given XML File does not exist!");
+            }            
         }
 
         /// <summary>
-        /// Sets the project database name and path in the project XML file.
+        /// Sets the project data base table name and database file in the project XML file.
         /// </summary>
-        /// <param name="fullProjectXMLFilePath"></param>
-        /// <param name="dBaseName"></param>
-        public static void SaveDatabase(string fullProjectXMLFilePath, string dBaseName)
+        /// <param name="dBaseFileName"></param>
+        /// <param name="dBaseTableName"></param>
+        public static void SaveDatabase(string FullProjectXMLFilePath, string dBaseTableName, string dBaseFileName)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(fullProjectXMLFilePath);
-            XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectDataStructure);
-            node.Attributes[0].Value = dBaseName; //database name
-            node.Attributes[1].Value = fullProjectXMLFilePath; //database path
-            xmlDoc.Save(fullProjectXMLFilePath);
+            if(File.Exists(FullProjectXMLFilePath))
+            {
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(FullProjectXMLFilePath);
+                XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectStackDataStructure);
+                node.Attributes[0].Value = dBaseTableName; //database table name
+                node.Attributes[1].Value = dBaseFileName; //database file name
+                xmlDoc.Save(FullProjectXMLFilePath);
+            } else
+            {
+                throw new FileNotFoundException("Given XML File does not exist!");
+            }
+            
         }
 
         /// <summary>
@@ -131,23 +158,27 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <param name="dimensionsDataArray"></param>
         public static void SaveDimensions(string fullProjectXMLFilePath, string[] dimensionsDataArray)
         {
-            if (dimensionsDataArray.Length == 4)
+            if(File.Exists(fullProjectXMLFilePath))
             {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(fullProjectXMLFilePath);
-                XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectDimensionsStructure);
-                node.Attributes[0].Value = dimensionsDataArray[0]; //length
-                node.Attributes[1].Value = dimensionsDataArray[1]; //width
-                node.Attributes[2].Value = dimensionsDataArray[2]; //height
-                node.Attributes[3].Value = dimensionsDataArray[3]; //weight capacity
-                xmlDoc.Save(fullProjectXMLFilePath);
-            }
-            else
+                if (dimensionsDataArray.Length == 4)
+                {
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(fullProjectXMLFilePath);
+                    XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectRoomDimensionsStructure);
+                    node.Attributes[0].Value = dimensionsDataArray[0]; //length
+                    node.Attributes[1].Value = dimensionsDataArray[1]; //width
+                    node.Attributes[2].Value = dimensionsDataArray[2]; //height
+                    node.Attributes[3].Value = dimensionsDataArray[3]; //weight capacity
+                    xmlDoc.Save(fullProjectXMLFilePath);
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("Array must contain indices for length, width, height, and weight!");
+                }
+            } else
             {
-                throw new ArgumentOutOfRangeException("Array must contain indices for length, width, height, and weight!");
+                throw new FileNotFoundException("Given XML File does not exist!");
             }
-
         }
-
     }
 }

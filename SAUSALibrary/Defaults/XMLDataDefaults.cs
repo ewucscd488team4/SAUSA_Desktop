@@ -19,7 +19,15 @@ namespace SAUSALibrary.Defaults
             }
         }
 
-        public static string ProjectDimensionsStructure
+        public static string ProjectExternalDatabaseStructure
+        {
+            get
+            {
+                return "Sausa/ExternalDatabase/Data";
+            }
+        }
+
+        public static string ProjectRoomDimensionsStructure
         {
             get
             {
@@ -27,7 +35,7 @@ namespace SAUSALibrary.Defaults
             }
         }
 
-        public static string ProjectDataStructure
+        public static string ProjectStackDataStructure
         {
             get
             {
@@ -40,6 +48,14 @@ namespace SAUSALibrary.Defaults
             get
             {
                 return "Sausa/Settings/Setting";
+            }
+        }
+
+        public static string SettingsProjectsStructure
+        {
+            get
+            {
+                return "Sausa/Projects/Project";
             }
         }
     }

@@ -1,6 +1,8 @@
 ﻿using SAUSALibrary.Defaults;
 using SAUSALibrary.Models;
 using SAUSALibrary.FileHandling.Database.Reading;
+using SAUSALibrary.FileHandling.XML.Writing;
+using SAUSALibrary.FileHandling.Database.Writing;
 using System.Collections.ObjectModel;
 using System;
 
@@ -17,20 +19,20 @@ namespace CommandLineTesting
             };*/
 
             //write a new database with the given file name
-            //CreateNewSQLiteDatabase.CreateDatabase(@"C:\Users\Diesel\Documents\Sausa\","Hangerbay.sqlite");
+            //WriteSQLite.CreateDatabase(FilePathDefaults.DefaultSavePath, "HangerbayTest");
 
             //add new line to the project database file
-            //AddDataSQLite.AddSQLiteData(@"C:\Users\Diesel\Documents\Sausa\","Hangerbay.sqlite", defField);
+            //WriteXML.SaveDatabase(FilePathDefaults.DefaultSavePath + @"\Hangerbay.xml", "Hangerbay", "Hangerbay.sqlite");
 
             //write to project XML file and change an attribute
-            //WriteToProjectXML.SaveProjectName(FilePathDefaults.SettingsFolder + @"\Test_Write_Settings.xml","ZZZ");
+            //WriteXML.SaveProjectName(FilePathDefaults.DefaultSavePath + @"\Hangerbay.xml","ZZZ");
 
             //test writing to storage dimension part of project XML file
             /*string[] values =
             {
                 "YYY","YYY","YYY","YYY"
             };
-            WriteToProjectXML.SaveDimensions(FilePathDefaults.SettingsFolder + @"\Test_Write_Settings.xml", values);*/
+            WriteXML.SaveDimensions(FilePathDefaults.DefaultSavePath + @"\Hangerbay.xml", values);*/
 
             //test writing to database area of peoject XML file
             //WriteToProjectXML.SaveDatabase(FilePathDefaults.SettingsFolder + @"\Test_Write_Settings.xml", "ZZZ");
@@ -48,6 +50,18 @@ namespace CommandLineTesting
                     + model.Weight + " "
                     + model.CrateName + " ");
             }*/
+
+            //testing extracting the container list from the given database
+            /*ObservableCollection<MiniStackModel> models = ReadSQLite.GetContainerListInfo(FilePathDefaults.DefaultSavePath, "Hangerbay");
+            foreach (MiniStackModel model in models)
+            {
+                Console.WriteLine("Index: " + model.Index + " Name: " + model.CrateName);
+            }*/
+
+            //write out test databse table column headers
+            /*ProjectSQLiteDatabaseFieldNamesModel model;
+            model = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.DefaultSavePath, "Hangerbay");
+            Console.WriteLine(model.name);*/
         }
     }
 }

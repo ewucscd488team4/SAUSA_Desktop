@@ -97,8 +97,8 @@
     <Compile Include="Models\DatabaseModel.cs" />
     <Compile Include="Models\LastProjectModel.cs" />
     <Compile Include="Models\MiniStackModel.cs" />
+    <Compile Include="Models\ProjectDBFieldModel.cs" />
     <Compile Include="Models\ProjectSQLiteDatabase.cs" />
-    <Compile Include="Models\ProjectSQLiteDatabaseFieldNamesModel.cs" />
     <Compile Include="Models\ProjectStorage.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\SQLiteDatabaseModel.cs" />

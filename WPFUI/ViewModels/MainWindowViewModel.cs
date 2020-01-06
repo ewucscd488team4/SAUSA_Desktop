@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using SAUSALibrary.FileHandling.Compression;
 using WPFUI.Views;
 using System.IO;
+using System.Windows;
 
 namespace WPFUI.ViewModels
 {
@@ -25,7 +26,7 @@ namespace WPFUI.ViewModels
 
         private string? _FileName;
 
-        ObservableCollection<MiniStackModel> Containers { get; } = new ObservableCollection<MiniStackModel>();
+        public ObservableCollection<MiniStackModel> Containers { get; } = new ObservableCollection<MiniStackModel>();
 
         private bool _OpenProjectState;
 
@@ -45,6 +46,22 @@ namespace WPFUI.ViewModels
         public bool ProjectState {
             get => _ProjectState;
             set => SetProperty(ref _ProjectState, value);
+        }
+
+        private MiniStackModel _ContainerListModel;
+
+        public MiniStackModel ContainerListModel
+        {
+            get => _ContainerListModel;
+            set => SetProperty(ref _ContainerListModel, value);
+        }
+
+        private Visibility _ContainerListVisibility;
+
+        public Visibility ContainerListVisibility
+        {
+            get => _ContainerListVisibility;
+            set => SetProperty(ref _ContainerListVisibility, value);
         }
 
         #endregion
@@ -77,6 +94,7 @@ namespace WPFUI.ViewModels
             MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
             ProjectState = false; //it is assumed no project is open, ergo menu items are disabled by default
             OpenProjectState = true; //because SAUSA opens in a closed project state by default, this must be enabled
+            ContainerListVisibility = Visibility.Collapsed;
             OpenProjectCommand = new RelayCommand(OnOpenProject);
             NewProjectCommand = new RelayCommand(OnNewProject);
             NewStackCommand = new RelayCommand(OnNewStack);
@@ -104,15 +122,18 @@ namespace WPFUI.ViewModels
 
             //if 
             if(openDlg.ShowDialog() == true)
-            {
-                //ChangeMenuState();
+            {                
                 _FileName = openDlg.SafeFileName;
                 OpenProjectState = false; //this is disabled so we can't open a new project again, we have one already open
-                ProjectState = true;
+                ProjectState = true; //enable menu commands to make a new storage room and a new stack
                 FileCompressionUtils.OpenProject(openDlg.FileName, FilePathDefaults.ScratchFolder);
                 //write project to settings file recent project section
+
                 //open list of ministackmodel to populate the container list
+                ContainerListVisibility = Visibility.Visible;
+
                 //grab crate attributes to populate new crate entry fields
+
                 //TODO populate 3d window with all existing containers in the database
             } else
             {
