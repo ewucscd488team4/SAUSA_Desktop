@@ -37,22 +37,28 @@ namespace WPFUI.Views
             try
             {
                 process = new Process();
-                process.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
+                process.StartInfo.FileName = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
                 process.StartInfo.Arguments = "-parentHWND " + unityPanel.Handle.ToInt32() + " " + Environment.CommandLine;
                 process.StartInfo.UseShellExecute = true;
                 process.StartInfo.CreateNoWindow = true;
-
                 process.Start();
 
                 process.WaitForInputIdle();
 
                 EnumChildWindows(unityPanel.Handle, WindowEnum, IntPtr.Zero);
-
-                unityHWNDLabel.Content = "Unity HWND: 0x" + unityHWND.ToString("X8");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ".\nCannot find Unity file: " + process.StartInfo.FileName);
+            }
+            try
+            {
+                //Testing communication between Unity and Application
+                File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\TestFile.txt", "[10, 10, 20]");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ".\nUnable to create communication file.");
             }
         }
 

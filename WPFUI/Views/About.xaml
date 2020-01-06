@@ -29,7 +29,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="10">
             <TextBlock Text="SAUSA" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
-            <TextBlock Text="Storage Asset Use in Available Space (SAUSA)" TextAlignment="Center"/>
+            <TextBlock Text="Storage Asset Use in Space Available (SAUSA)" TextAlignment="Center"/>
             <TextBlock TextAlignment="Center" Text="Version .45 - 32 bit" Padding="10"/>
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="1">

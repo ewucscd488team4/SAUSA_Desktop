@@ -80,7 +80,7 @@
                     <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding MenuState}"/>
                     <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding ProjectState}"/>                    
                     <Separator/>
-                    <MenuItem Header="Inport" IsEnabled="{Binding MenuState}">
+                    <MenuItem Header="Import" IsEnabled="{Binding MenuState}">
                         <MenuItem x:Name="importData" Header="Import Database"/>
                         <MenuItem x:Name="importCSV" Header="Import CSV"/>
                     </MenuItem>
