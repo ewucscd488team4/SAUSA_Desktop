@@ -65,12 +65,12 @@ namespace WPFUI.ViewModels
             set => SetProperty(ref _ContainerListModel, value);
         }
 
-        private Visibility _ContainerListVisibility;
+        private Visibility _FieldVisibility;
 
-        public Visibility ContainerListVisibility
+        public Visibility FieldVisibility
         {
-            get => _ContainerListVisibility;
-            set => SetProperty(ref _ContainerListVisibility, value);
+            get => _FieldVisibility;
+            set => SetProperty(ref _FieldVisibility, value);
         }
 
         private ProjectDBFieldModel _FieldModel;
@@ -111,7 +111,7 @@ namespace WPFUI.ViewModels
             MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
             ProjectState = false; //it is assumed no project is open, ergo menu items are disabled by default
             OpenProjectState = true; //because SAUSA opens in a closed project state by default, this must be enabled
-            ContainerListVisibility = Visibility.Collapsed;
+            FieldVisibility = Visibility.Collapsed;
             OpenProjectCommand = new RelayCommand(OnOpenProject);
             NewProjectCommand = new RelayCommand(OnNewProject);
             NewStackCommand = new RelayCommand(OnNewStack);
@@ -154,7 +154,7 @@ namespace WPFUI.ViewModels
                 //open list of ministackmodel to populate the container list
                 //Containers = ReadSQLite.GetContainerListInfo(Path.Combine(FilePathDefaults.ScratchFolder, convertSQLiteFileName(_FileName)), convertSQLiteFileName(_FileName));
                 //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
-                ContainerListVisibility = Visibility.Visible;
+                FieldVisibility = Visibility.Visible;
 
                 //grab crate attributes to populate new crate entry fields
                 //FieldModel = ReadSQLite.GetDatabaseFieldLabels(openDlg.FileName, openDlg.SafeFileName);
@@ -249,6 +249,7 @@ namespace WPFUI.ViewModels
             MenuState = false; 
             ProjectState = false;
             DirectoryInfo di = new DirectoryInfo(FilePathDefaults.ScratchFolder);
+            FieldVisibility = Visibility.Hidden;
             foreach (FileInfo file in di.GetFiles())
             {
                 file.Delete();
@@ -279,6 +280,8 @@ namespace WPFUI.ViewModels
             //delete container from container List
             //delete container from SQLite database
             //TODO delete container from 3d view
+            Containers.Remove(ContainerListModel);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
         }
 
         #endregion

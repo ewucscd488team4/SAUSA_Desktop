@@ -63,15 +63,16 @@ namespace WPFUI.Views
             this.unityPanel.Resize += new EventHandler(this.UnityPanelResize);
         }
 
-        private void FileNewBuild_Click(object sender, RoutedEventArgs e)
+        private void FileNewDesign_Click(object sender, RoutedEventArgs e)
         {
-            OpenBuild newBuild = new OpenBuild();
+            NewBuild newBuild = new NewBuild();
             newBuild.Show();
         }
 
         private void FileOpenDesign_Click(object sender, RoutedEventArgs e)
-        {           
-            
+        {
+            OpenBuild openBuild = new OpenBuild();
+            openBuild.Show();
         }        
 
         private void FilePref_Click(object sender, RoutedEventArgs e)
