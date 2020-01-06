@@ -15,10 +15,16 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <summary>
         /// Writes out a blank project XML file to to given fully qualified file name.
         /// </summary>
-        /// <param name="fullyQualifiedFileName"></param>
-        public static void WriteBlankXML(string fullyQualifiedFileName) //NOTE this includes the xml file we need to write
+        /// <param name="xmlFilePath"></param>
+        public static void WriteBlankXML(string xmlFilePath, string xmlFileName) //NOTE this includes the xml file we need to write
         {
-            if (!File.Exists(fullyQualifiedFileName)) //ensure we don't have a file 
+            
+            string[] file = xmlFileName.Split('.');
+            var xmlFile = file + "xml";
+
+            var fqPath = Path.Combine(xmlFilePath, xmlFile);
+
+            if (!File.Exists(fqPath)) //ensure we don't have a file 
             {
                 var xmlNode =
                     new XElement("Sausa",                               //root of xml node
@@ -56,7 +62,7 @@ namespace SAUSALibrary.FileHandling.XML.Writing
                                 ""),  //end of last child node
 
                     ""); //end of root node
-                xmlNode.Save(fullyQualifiedFileName);
+                xmlNode.Save(fqPath);
             }
             else
             {

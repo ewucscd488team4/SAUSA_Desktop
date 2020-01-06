@@ -13,36 +13,36 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <summary>
         /// Gets a truncated list of items in the project stack, index and name only. For use in the main window crate list ListBox.
         /// </summary>
-        /// <param name="databaseFolder"></param>
-        /// <param name="dataBaseFile"></param>
+        /// <param name="dbFullFilePath"></param>
+        /// <param name="dbFile"></param>
         /// <returns></returns>
-        public static ObservableCollection<MiniStackModel> GetContainerListInfo(string databaseFolder, string dataBaseFile)
+        public static ObservableCollection<MiniStackModel> GetContainerListInfo(string dbFullFilePath, string dbFile)
         {
             ObservableCollection<MiniStackModel> modelList = new ObservableCollection<MiniStackModel>();
-            var dbFile = dataBaseFile + DEFAULT_EXTENSION;
-            var fqFilePath = Path.Combine(databaseFolder, dbFile);            
+            
+            string[] file = dbFile.Split('.');
 
-            if (File.Exists(fqFilePath))
+            if (File.Exists(dbFullFilePath))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + dbFullFilePath + ";Version=3;");
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
                 //var query = "select ID, Name from " + fileNameSplit[0];
 
-                SQLiteCommand command = new SQLiteCommand("select ID, Name from " + dataBaseFile, m_dbConnection);
+                SQLiteCommand command = new SQLiteCommand("select ID, Name from " + file[0], m_dbConnection);
                 //command.Parameters.AddWithValue("@ID", ID); //to paremeterize
 
                 dritem = command.ExecuteReader();
 
                 while (dritem.Read())
                 {
-                    MiniStackModel model = new MiniStackModel
+                    /*MiniStackModel model = new MiniStackModel
                     {
                         Index = (long)dritem["ID"],
                         CrateName = dritem["Name"].ToString()
                     };
-                    modelList.Add(model);
+                    modelList.Add(model);*/
                 }
 
             }
@@ -56,22 +56,21 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <summary>
         /// Reads and returns the entire project database for use in drawing the 3D GUI view window
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="dbFullFilePath"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static ObservableCollection<StackModel> GetEntireStack(string filePath, string dataBaseFile)
+        public static ObservableCollection<StackModel> GetEntireStack(string dbFullFilePath, string dbFile)
         {
             ObservableCollection<StackModel> modelList = new ObservableCollection<StackModel>();
-            var dbFile = dataBaseFile + DEFAULT_EXTENSION;
-            var fqFilePath = Path.Combine(filePath, dbFile);            
+            string[] file = dbFile.Split('.');
 
-            if (File.Exists(fqFilePath))
+            if (File.Exists(dbFullFilePath))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + dbFullFilePath + ";Version=3;");
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
-                SQLiteCommand command = new SQLiteCommand("select * from " + dataBaseFile, m_dbConnection);
+                SQLiteCommand command = new SQLiteCommand("select * from " + file[0], m_dbConnection);
 
                 dritem = command.ExecuteReader();
 
@@ -104,22 +103,21 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <summary>
         /// Reads the current project SQLite database and returns the column header labels for the database        /// 
         /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="fileName"></param>
+        /// <param name="dbFullFilePath"></param>
+        /// <param name="dbFile"></param>
         /// <returns></returns>
-        public static ProjectDBFieldModel GetDatabaseFieldLabels(string filePath, string fileName)
+        public static ProjectDBFieldModel GetDatabaseFieldLabels(string dbFullFilePath, string dbFile)
         {
             ProjectDBFieldModel model = new ProjectDBFieldModel();
-            var dbFile = fileName + DEFAULT_EXTENSION;
-            var fqFilePath = Path.Combine(filePath, dbFile);            
+            string[] file = dbFile.Split('.');
 
-            if (File.Exists(fqFilePath))
+            if (File.Exists(dbFullFilePath))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + dbFullFilePath + ";Version=3;");
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
-                SQLiteCommand command = new SQLiteCommand("select * from " + fileName, m_dbConnection);
+                SQLiteCommand command = new SQLiteCommand("select * from " + file[0], m_dbConnection);
 
                 dritem = command.ExecuteReader();
                 

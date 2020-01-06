@@ -25,8 +25,8 @@
         <!-- container list templates -->
         <DataTemplate DataType="{x:Type models:MiniStackModel}" x:Key="ContainerItemTemplate">
             <WrapPanel Margin="5">
-                <TextBlock Text="{Binding Index}" FontSize="14"/>
-                <TextBlock Text="{Binding CrateName}" FontSize="14"/>
+                <TextBlock Text="{Binding Index}" FontSize="14" Margin="5"/>
+                <TextBlock Text="{Binding CrateName}" FontSize="14" Margin="5"/>
             </WrapPanel>
         </DataTemplate>
         
@@ -158,17 +158,20 @@
             
             <TextBlock Text="Container Fields" Margin="5" FontSize="14" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             
-            <StackPanel Grid.Column="0" Grid.Row="1" Background="LightGray">
+            <StackPanel Grid.Column="0" Grid.Row="1" Background="LightGray" Margin="0,0,0,0">
                 <!-- crate fields entry box labels go here -->
+                
             </StackPanel>
             
             <StackPanel Grid.Column="1" Grid.Row="1" Background="LightGray">
                 <!-- crate field entry boxes go here -->
+                
             </StackPanel>
             
             <!-- add container to list and to unity view via adding to sqlite databse -->
             
-            <Button x:Name="mAddContainer" Background="LightGray" Grid.Row="2" Width="80" Margin="5" Content="Add" HorizontalAlignment="Center" Grid.ColumnSpan="2" IsEnabled="{Binding ProjectState}"/>
+            <Button x:Name="mAddContainer" Grid.Row="2" Grid.Column="0" Width="80" Margin="5" Content="Add" HorizontalAlignment="Center" IsEnabled="{Binding ProjectState}" Command="{Binding AddContainerCommand}"/>
+            <Button x:Name="mDelContainer" Grid.Row="2" Grid.Column="1" Width="80" Margin="5" Content="Delete" HorizontalAlignment="Center" IsEnabled="{Binding ProjectState}" Command="{Binding DeleteContainerCommand}"/>
         </Grid>
     </Grid>
 </Window>

@@ -40,25 +40,19 @@ namespace SAUSALibrary.FileHandling.Compression
         /// using the given project file name
         /// </summary>
         /// <param name="workingDirectory"></param>
-        /// <param name="projectFileName"></param>
+        /// <param name="fullSaveFilePath"></param>
         /// <param name="projectFilePath"></param>
-        public static void SaveProject(string workingDirectory, string projectFileName, string projectFilePath)
-        {
-            if (Directory.Exists(projectFilePath))
-            {
-                throw new DirectoryNotFoundException("Project save path does not exist!");
-            }
+        public static void SaveProject(string workingDirectory, string fullSaveFilePath)
+        {            
             if (Directory.Exists(workingDirectory))
             {
                 throw new DirectoryNotFoundException("Directory to compress does not exist!");
             }
-            if (string.IsNullOrEmpty(projectFileName))
+            if (string.IsNullOrEmpty(fullSaveFilePath))
             {
                 throw new ArgumentOutOfRangeException("Project file name cannot be null or empty!");
-            }
-
-            var fullZipFilePath = Path.Combine(projectFilePath, projectFileName);
-            ZipFile.CreateFromDirectory(workingDirectory, fullZipFilePath);
+            }         
+            ZipFile.CreateFromDirectory(workingDirectory, fullSaveFilePath);
         }
     }
 }
