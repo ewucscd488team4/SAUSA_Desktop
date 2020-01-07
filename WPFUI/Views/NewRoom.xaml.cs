@@ -10,21 +10,39 @@ namespace WPFUI.Views
     /// </summary>
     public partial class NewRoom : Window
     {
-        private string? fileName;
+        private string? _WorkingFile;
 
         public NewRoom()
         {
             InitializeComponent();
         }
 
-        public NewRoom(string? fileName)
+        public NewRoom(string? incomingFileName)
         {
-            this.fileName = fileName;
+            this._WorkingFile = incomingFileName;
+            InitializeComponent();
         }
 
-        private void Accept_Room(object sender, RoutedEventArgs e)
+        private void CloseNewRoom_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void SetRoomDimensions(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(rLength.Text) || string.IsNullOrEmpty(rWidth.Text) || string.IsNullOrEmpty(rHeight.Text) || string.IsNullOrEmpty(rWeight.Text))
+            {
+                //launch error dialog for enpty fields
+            }
+            else
+            {
+                string[] dimensions = new string[4];
+                dimensions[0] = rLength.Text;
+                dimensions[1] = rWidth.Text;
+                dimensions[2] = rHeight.Text;
+                dimensions[3] = rWeight.Text;
+                WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder + _WorkingFile, dimensions);
+            }
         }
     }
 }

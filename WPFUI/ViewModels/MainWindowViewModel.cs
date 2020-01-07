@@ -29,11 +29,17 @@ namespace WPFUI.ViewModels
 
         private const string SAUSA_FILE = ".sausa";
 
-        private const string SQLITE = ".sqlite";
+        private const string SQLITE_FILE = ".sqlite";
 
-        private string? _FileName;
+        private const string XML_FILE = ".xml";
 
-        private string? _SavePath;
+        private string? _ProjectFileName;
+
+        private string? _ProjectSavePath;
+
+        private string? _ProjectXMLFile;
+
+        private string? _ProjectDB;
 
         public ObservableCollection<MiniStackModel> Containers { get; set; } = new ObservableCollection<MiniStackModel>();
 
@@ -139,8 +145,10 @@ namespace WPFUI.ViewModels
 
             if(openDlg.ShowDialog() == true)
             {                
-                _FileName = openDlg.SafeFileName;
-                _SavePath = openDlg.FileName;
+                _ProjectFileName = openDlg.SafeFileName;
+                _ProjectSavePath = openDlg.FileName;
+                _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
+                _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
 
                 OpenProjectState = false; //this is disabled so we can't open a new project again, we have one already open
                 ProjectState = true; //enable menu commands to make a new storage room and a new stack
@@ -150,8 +158,8 @@ namespace WPFUI.ViewModels
                 //write project details to settings file, Projects child node
 
                 //open list of ministackmodel to populate the container list
-                var fqfilePath = FilePathDefaults.ScratchFolder + convertSQLiteFileName(_FileName);
-                var dbFileName = convertSQLiteFileName(_FileName);
+                var fqfilePath = FilePathDefaults.ScratchFolder + ConvertToSQLiteFileName(_ProjectFileName);
+                var dbFileName = ConvertToSQLiteFileName(_ProjectFileName);
                 Containers = ReadSQLite.GetContainerListInfo(fqfilePath, dbFileName);                
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
 
@@ -208,7 +216,7 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnNewStoreroom()
         {
-            NewRoom newRoom = new NewRoom(_FileName);
+            NewRoom newRoom = new NewRoom(_ProjectXMLFile);
             newRoom.Show();
             //TODO let view know state has changed
         }
@@ -302,10 +310,16 @@ namespace WPFUI.ViewModels
             }
         }
         
-        private string convertSQLiteFileName (string filename)
+        private string ConvertToSQLiteFileName (string filename)
         {
             string[] file = filename.Split('.');
-            return file[0] + SQLITE;
+            return file[0] + SQLITE_FILE;
+        }
+
+        private string ConvertToXMLFileName(string filename)
+        {
+            string[] file = filename.Split('.');
+            return file[0] + XML_FILE;
         }
 
         #endregion
