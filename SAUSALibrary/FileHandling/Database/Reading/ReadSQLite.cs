@@ -1,5 +1,4 @@
 ﻿using SAUSALibrary.Models;
-using System;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.IO;
@@ -8,8 +7,6 @@ namespace SAUSALibrary.FileHandling.Database.Reading
 {
     public class ReadSQLite
     {
-        private const string DEFAULT_EXTENSION = ".sqlite";
-
         /// <summary>
         /// Gets a truncated list of items in the project stack, index and name only. For use in the main window crate list ListBox.
         /// </summary>
@@ -18,9 +15,9 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <returns></returns>
         public static ObservableCollection<MiniStackModel> GetContainerListInfo(string dbFullFilePath, string dbFile)
         {
-            ObservableCollection<MiniStackModel> modelList = new ObservableCollection<MiniStackModel>();
+            ObservableCollection<MiniStackModel> modelList = new ObservableCollection<MiniStackModel>(); //collection to return
             
-            string[] file = dbFile.Split('.');
+            string[] file = dbFile.Split('.'); //split the dbfile so we can use the file name with out the file extension
 
             if (File.Exists(dbFullFilePath))
             {
@@ -28,28 +25,23 @@ namespace SAUSALibrary.FileHandling.Database.Reading
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
-                //var query = "select ID, Name from " + fileNameSplit[0];
+                var queryString = "select ID, Name from " + file[0];
 
-                SQLiteCommand command = new SQLiteCommand("select ID, Name from " + file[0], m_dbConnection);
-                //command.Parameters.AddWithValue("@ID", ID); //to paremeterize
+                SQLiteCommand command = new SQLiteCommand(queryString, m_dbConnection);                
 
                 dritem = command.ExecuteReader();
 
                 while (dritem.Read())
-                {
-                    /*MiniStackModel model = new MiniStackModel
-                    {
-                        Index = (long)dritem["ID"],
-                        CrateName = dritem["Name"].ToString()
-                    };
-                    modelList.Add(model);*/
+                {                    
+                    modelList.Add(new MiniStackModel((long)dritem["ID"], dritem["Name"].ToString()));
                 }
-
+                m_dbConnection.Close();
             }
             else
             {
-                //TODO throw error dialog if passed in database file is not found
+                throw new FileNotFoundException("Database to read does not exist!");
             }
+            
             return modelList;
         }
 
@@ -91,6 +83,7 @@ namespace SAUSALibrary.FileHandling.Database.Reading
 
                     modelList.Add(model);
                 }
+                m_dbConnection.Close();
             }
             else
             {
@@ -101,7 +94,7 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         }
 
         /// <summary>
-        /// Reads the current project SQLite database and returns the column header labels for the database        /// 
+        /// Reads the current project SQLite database and returns the column header labels for the database
         /// </summary>
         /// <param name="dbFullFilePath"></param>
         /// <param name="dbFile"></param>
@@ -109,6 +102,7 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         public static ProjectDBFieldModel GetDatabaseFieldLabels(string dbFullFilePath, string dbFile)
         {
             ProjectDBFieldModel model = new ProjectDBFieldModel();
+
             string[] file = dbFile.Split('.');
 
             if (File.Exists(dbFullFilePath))
@@ -129,7 +123,7 @@ namespace SAUSALibrary.FileHandling.Database.Reading
                 model.height = dritem.GetName(6);
                 model.weight = dritem.GetName(7);
                 model.name = dritem.GetName(8);
-
+                m_dbConnection.Close();
             } else
             {
                 throw new FileNotFoundException("Database to read does not exist!");

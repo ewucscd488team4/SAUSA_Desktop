@@ -64,6 +64,10 @@
             "MvvmLightLibsStd10": {
               "target": "Package",
               "version": "[5.4.1.1, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.112, )"
             }
           },
           "imports": [

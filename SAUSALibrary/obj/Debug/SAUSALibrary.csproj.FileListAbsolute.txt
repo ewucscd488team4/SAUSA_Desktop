@@ -1,18 +1,3 @@
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.pdb
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.pdb
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll.config
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.EF6.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.Linq.dll
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.xml
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.xml
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.dll.config
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.csproj.CopyComplete
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll.config
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.pdb
@@ -29,4 +14,19 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.csproj.CopyComplete
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.pdb
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll.config
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\SAUSALibrary.pdb
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.xml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.xml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.csproj.CopyComplete
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.pdb
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\SAUSALibrary\obj\Debug\SAUSALibrary.csprojAssemblyReference.cache

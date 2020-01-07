@@ -11,7 +11,7 @@ namespace SAUSALibrary.Defaults
         {
             get
             {
-                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Sausa";
+                return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Sausa\";
                 //on my dev machine, this maps to C:\Users\Diesel\AppData\Roaming\Sausa\
             }
         }

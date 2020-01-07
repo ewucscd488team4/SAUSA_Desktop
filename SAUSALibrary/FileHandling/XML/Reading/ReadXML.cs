@@ -18,18 +18,18 @@ namespace SAUSALibrary.FileHandling.XML.Reading
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public static List<DatabaseModel> GetDatabaseModel(string filePath)
+        public static List<ExternalDBModel> GetDatabaseModel(string filePath)
         {
 
-            List<DatabaseModel> models = new List<DatabaseModel>();
+            List<ExternalDBModel> models = new List<ExternalDBModel>();
 
             using (XmlReader _Reader = XmlReader.Create(new FileStream(filePath, FileMode.Open), new XmlReaderSettings() { CloseInput = true }))
             {
 
                 while (_Reader.Read()) //while reader can read
                 {
-                    DatabaseModel model = new DatabaseModel();
-                    if ((_Reader.NodeType == XmlNodeType.Element) && (_Reader.Name == "Database")) //looks for xml parent node type of "project" (will look like <Database>
+                    ExternalDBModel model = new ExternalDBModel();
+                    if ((_Reader.NodeType == XmlNodeType.Element) && (_Reader.Name == "Data")) //looks for xml parent node type of "project" (will look like <Data />
                     {
                         if (_Reader.HasAttributes) //if current line has attributes
                         {
@@ -45,7 +45,6 @@ namespace SAUSALibrary.FileHandling.XML.Reading
                     }
                 }//end of while
             }
-
             return models;
         }
 
@@ -98,8 +97,8 @@ namespace SAUSALibrary.FileHandling.XML.Reading
                         {
                             if (_Reader.HasAttributes)
                             {
-                                model.DatabaseName = _Reader.GetAttribute("FileName");
-                                model.DatabasePath = _Reader.GetAttribute("Path");
+                                model.TableName = _Reader.GetAttribute("TableName");
+                                model.FileName = _Reader.GetAttribute("FileName");
                             }
                         }
 
@@ -109,13 +108,65 @@ namespace SAUSALibrary.FileHandling.XML.Reading
             catch (FileNotFoundException e)
             {
                 Console.WriteLine("File not found: " + e);
-                model.DatabaseName = "BAD FILE";
-                model.DatabasePath = @"c:\";
+                model.TableName = "BAD FILE";
+                model.FileName = @"c:\";
             }
-
-
             return model;
         }
+
+        /// <summary>
+        /// Returns the present project database table name
+        /// </summary>
+        /// <param name="fullFilePath"></param>
+        /// <returns></returns>
+        public static string ReadProjectDBTableName(string fullFilePath)
+        {
+            string model = "";
+            using (XmlReader _Reader = XmlReader.Create(new FileStream(fullFilePath, FileMode.Open), new XmlReaderSettings() { CloseInput = true }))
+            {
+                while (_Reader.Read())
+                {
+
+                    if ((_Reader.NodeType == XmlNodeType.Element) && (_Reader.Name == "Data"))
+                    {
+                        if (_Reader.HasAttributes)
+                        {
+                            model = _Reader.GetAttribute("TableName");
+                        }
+                    }
+
+                }
+            }
+            return model;
+        }
+
+        /// <summary>
+        /// Returns the present project database file name
+        /// </summary>
+        /// <param name="fullFilePath"></param>
+        /// <returns></returns>
+        public static string ReadProjectDBFileName(string fullFilePath)
+        {
+            string model = "";
+            using (XmlReader _Reader = XmlReader.Create(new FileStream(fullFilePath, FileMode.Open), new XmlReaderSettings() { CloseInput = true }))
+            {
+                while (_Reader.Read())
+                {
+
+                    if ((_Reader.NodeType == XmlNodeType.Element) && (_Reader.Name == "Data"))
+                    {
+                        if (_Reader.HasAttributes)
+                        {
+                            model = _Reader.GetAttribute("FileName");
+                        }
+                    }
+
+                }
+            }
+            return model;
+        }
+
+
 
         /// <summary>
         /// Reads the project name from the project XML file and returns it as a string.
@@ -125,7 +176,6 @@ namespace SAUSALibrary.FileHandling.XML.Reading
         public static string ReadProjectName(string fullFilePath)
         {
             string model = "";
-
             try
             {
                 using (XmlReader _Reader = XmlReader.Create(new FileStream(fullFilePath, FileMode.Open), new XmlReaderSettings() { CloseInput = true }))
@@ -149,8 +199,6 @@ namespace SAUSALibrary.FileHandling.XML.Reading
                 Console.WriteLine("File not found: " + e);
                 model = "BAD FILE";
             }
-
-
             return model;
         }
 
@@ -192,8 +240,6 @@ namespace SAUSALibrary.FileHandling.XML.Reading
                 model.Height = "666";
                 model.Weight = "666";
             }
-
-
             return model;
         }
 

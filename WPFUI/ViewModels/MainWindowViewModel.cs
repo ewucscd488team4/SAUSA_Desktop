@@ -29,7 +29,7 @@ namespace WPFUI.ViewModels
 
         private const string SAUSA_FILE = ".sausa";
 
-        private const string SQLITE = "sqlite";
+        private const string SQLITE = ".sqlite";
 
         private string? _FileName;
 
@@ -111,7 +111,7 @@ namespace WPFUI.ViewModels
             MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
             ProjectState = false; //it is assumed no project is open, ergo menu items are disabled by default
             OpenProjectState = true; //because SAUSA opens in a closed project state by default, this must be enabled
-            FieldVisibility = Visibility.Collapsed;
+            FieldVisibility = Visibility.Hidden;
             OpenProjectCommand = new RelayCommand(OnOpenProject);
             NewProjectCommand = new RelayCommand(OnNewProject);
             NewStackCommand = new RelayCommand(OnNewStack);
@@ -120,10 +120,7 @@ namespace WPFUI.ViewModels
             SaveAsCommand = new RelayCommand(OnSaveAs);
             CloseCommand = new RelayCommand(OnClose);
             AddContainerCommand = new RelayCommand(OnAddContainer);
-            DeleteContainerCommand = new RelayCommand(OnDeleteContainer);
-            Containers.Add(new MiniStackModel(1, "Crate"));
-            Containers.Add(new MiniStackModel(2, "Box"));
-            Containers.Add(new MiniStackModel(3, "Drum"));
+            DeleteContainerCommand = new RelayCommand(OnDeleteContainer);            
         }
 
         #region command methods
@@ -140,26 +137,31 @@ namespace WPFUI.ViewModels
                 DefaultExt = SAUSA_FILE
             };
 
-            //if 
             if(openDlg.ShowDialog() == true)
             {                
                 _FileName = openDlg.SafeFileName;
                 _SavePath = openDlg.FileName;
+
                 OpenProjectState = false; //this is disabled so we can't open a new project again, we have one already open
                 ProjectState = true; //enable menu commands to make a new storage room and a new stack
                 MenuState = true; //enable full menu options
+
                 FileCompressionUtils.OpenProject(openDlg.FileName, FilePathDefaults.ScratchFolder);
-                //write project to settings file recent project section
+                //write project details to settings file, Projects child node
 
                 //open list of ministackmodel to populate the container list
-                //Containers = ReadSQLite.GetContainerListInfo(Path.Combine(FilePathDefaults.ScratchFolder, convertSQLiteFileName(_FileName)), convertSQLiteFileName(_FileName));
-                //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+                var fqfilePath = FilePathDefaults.ScratchFolder + convertSQLiteFileName(_FileName);
+                var dbFileName = convertSQLiteFileName(_FileName);
+                Containers = ReadSQLite.GetContainerListInfo(fqfilePath, dbFileName);                
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+
+                //change field visibility to enable use
                 FieldVisibility = Visibility.Visible;
 
                 //grab crate attributes to populate new crate entry fields
                 //FieldModel = ReadSQLite.GetDatabaseFieldLabels(openDlg.FileName, openDlg.SafeFileName);
 
-                //TODO populate 3d window with all existing containers in the database
+                //TODO populate 3d window with all existing containers in the project database
             } else
             {
                 //TODO show error dialog that "something went wrong" opening the given project file
@@ -171,7 +173,7 @@ namespace WPFUI.ViewModels
         /// </summary>        
         private void OnNewProject()
         {            
-            OpenFileDialog openDlg = new OpenFileDialog
+            SaveFileDialog openDlg = new SaveFileDialog
             {
                 InitialDirectory = FilePathDefaults.DefaultSavePath,
                 Filter = FILE_FILTER,
@@ -187,12 +189,12 @@ namespace WPFUI.ViewModels
 
                 //write blank sqlite database to scratch directory
 
-                //write project name and path to settings file
+                //write project name and path to settings file Projects child node
             }            
         }
 
         /// <summary>
-        /// 
+        /// Set up a new stack database including all database fields
         /// </summary>        
         private void OnNewStack()
         {
@@ -202,7 +204,7 @@ namespace WPFUI.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Set up a new store room to store a stack in.
         /// </summary>
         private void OnNewStoreroom()
         {
@@ -212,7 +214,7 @@ namespace WPFUI.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// Save project in current state.
         /// </summary>
         private void OnSaveProject()
         {
@@ -232,10 +234,11 @@ namespace WPFUI.ViewModels
 
             if(saveDlg.ShowDialog() == true)
             {
+                //TODO save current working files to given new save file.
+                //compress working files in scratch folder to given save directory.
+                //write given save directory to settings file, LastProjectSavedDirectory attribute.
+                //_Savepath set to given save directory, so that save command saves to the right place.
 
-            } else
-            {
-                //TODO maybe throw error dialog here?
             }
         }
 
@@ -250,13 +253,14 @@ namespace WPFUI.ViewModels
             ProjectState = false;
             DirectoryInfo di = new DirectoryInfo(FilePathDefaults.ScratchFolder);
             FieldVisibility = Visibility.Hidden;
+            Containers.Clear();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
             foreach (FileInfo file in di.GetFiles())
             {
                 file.Delete();
             }
-
-            //TODO on close turn off list of containers by setting the list to empty and set the list to disabled
-            //TODO on close turn off container attribute list by setting the attribute model to an empty one and disable the list.
+                        
+            //TODO on close turn off container attribute list by setting the attribute model to an empty one and disable the list.            
             //TODO on colse turn off 3d view
         }
 

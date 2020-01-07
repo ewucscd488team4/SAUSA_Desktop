@@ -16,6 +16,7 @@
     <PackageReference Include="MaterialDesignColors" Version="1.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="3.0.0" />
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112" />
   </ItemGroup>
 
   <ItemGroup>

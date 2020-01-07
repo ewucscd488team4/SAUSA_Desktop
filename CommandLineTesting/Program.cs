@@ -52,7 +52,7 @@ namespace CommandLineTesting
             }*/
 
             //testing extracting the container list from the given database
-            /*ObservableCollection<MiniStackModel> models = ReadSQLite.GetContainerListInfo(FilePathDefaults.DefaultSavePath, "Hangerbay");
+            /*ObservableCollection<MiniStackModel> models = ReadSQLite.GetContainerListInfo(FilePathDefaults.ScratchFolder + @"\Hangerbay.sqlite", "Hangerbay.sqlite");
             foreach (MiniStackModel model in models)
             {
                 Console.WriteLine("Index: " + model.Index + " Name: " + model.CrateName);
@@ -62,6 +62,15 @@ namespace CommandLineTesting
             /*ProjectSQLiteDatabaseFieldNamesModel model;
             model = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.DefaultSavePath, "Hangerbay");
             Console.WriteLine(model.name);*/
+
+            string test = FilePathDefaults.ScratchFolder + convertSQLiteFileName("Hangerbay.sousa");
+            Console.WriteLine(test);
+        }
+
+        private static string convertSQLiteFileName(string filename)
+        {
+            string[] file = filename.Split('.');
+            return file[0] + ".sqlite";
         }
     }
 }
