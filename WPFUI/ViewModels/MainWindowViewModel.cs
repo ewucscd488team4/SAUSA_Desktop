@@ -41,7 +41,7 @@ namespace WPFUI.ViewModels
 
         private string? _ProjectDB;
 
-        public ObservableCollection<MiniStackModel> Containers { get; set; } = new ObservableCollection<MiniStackModel>();
+        public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
 
         private bool _OpenProjectState;
 
@@ -63,9 +63,9 @@ namespace WPFUI.ViewModels
             set => SetProperty(ref _ProjectState, value);
         }
 
-        private MiniStackModel _ContainerListModel;
+        private FullStackModel _ContainerListModel;
 
-        public MiniStackModel ContainerListModel
+        public FullStackModel ContainerListModel
         {
             get => _ContainerListModel;
             set => SetProperty(ref _ContainerListModel, value);
@@ -160,7 +160,7 @@ namespace WPFUI.ViewModels
                 //open list of ministackmodel to populate the container list
                 var fqfilePath = FilePathDefaults.ScratchFolder + ConvertToSQLiteFileName(_ProjectFileName);
                 var dbFileName = ConvertToSQLiteFileName(_ProjectFileName);
-                Containers = ReadSQLite.GetContainerListInfo(fqfilePath, dbFileName);                
+                Containers = ReadSQLite.GetEntireStack(fqfilePath, dbFileName);                
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
 
                 //change field visibility to enable use
@@ -229,8 +229,12 @@ namespace WPFUI.ViewModels
             //TODO Save Project           
             //compress project XML and SQLite database to save directory
             //FileCompressionUtils.SaveProject();
+            //write new containers to the project database.
         }
 
+        /// <summary>
+        /// Open save as dialog to save a project in a directory of the user's discretion
+        /// </summary>
         private void OnSaveAs()
         {
             SaveFileDialog saveDlg = new SaveFileDialog
@@ -255,45 +259,50 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnClose()
         {
-            //sets both enabled properties to false, and updates the window
-            OpenProjectState = true; //so we can open a new project again
-            MenuState = false; 
-            ProjectState = false;
+            //set menu state
+            OpenProjectState = true; //so we can open a new project again.
+            MenuState = false;  //no open project, so all fields not relevent get disabled.
+            ProjectState = false; //project is closed, so disable project related options
+
             DirectoryInfo di = new DirectoryInfo(FilePathDefaults.ScratchFolder);
+            //hide container list, container fields, and container text boxes
             FieldVisibility = Visibility.Hidden;
+            //clear the container list
             Containers.Clear();
+            //update view
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+            //clear scratch folder
             foreach (FileInfo file in di.GetFiles())
             {
                 file.Delete();
-            }
-                        
-            //TODO on close turn off container attribute list by setting the attribute model to an empty one and disable the list.            
+            }                                    
             //TODO on colse turn off 3d view
         }
 
         /// <summary>
-        /// 
+        /// Add a container to the container list, and to the 3d Window for placement
         /// </summary>
         private void OnAddContainer()
-        {
+        {            
             //add new container to SQLite database
+            Containers.Add(new FullStackModel(99,0,0,0,0,0,0,0, $"Count {Containers.Count}"));
             //call update on listbox List to pull new list from SQLite database
-            //TODO add new container to 3d view
-            Containers.Add(new MiniStackModel(99, $"Count {Containers.Count}"));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+            //TODO add new container to project SQLite database.
+            //TODO add new container to 3d view.
         }
 
         /// <summary>
-        /// 
+        /// Delete a container from the container list and the 3d window
         /// </summary>
         private void OnDeleteContainer()
         {
             //delete container from container List
-            //delete container from SQLite database
-            //TODO delete container from 3d view
             Containers.Remove(ContainerListModel);
+            //call update on view
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+            //TODO detele container from database OnDeleteContainer
+            //TODO delete container from 3d view
         }
 
         #endregion

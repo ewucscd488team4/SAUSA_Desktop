@@ -51,9 +51,9 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <param name="dbFullFilePath"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static ObservableCollection<StackModel> GetEntireStack(string dbFullFilePath, string dbFile)
+        public static ObservableCollection<FullStackModel> GetEntireStack(string dbFullFilePath, string dbFile)
         {
-            ObservableCollection<StackModel> modelList = new ObservableCollection<StackModel>();
+            ObservableCollection<FullStackModel> modelList = new ObservableCollection<FullStackModel>();
             string[] file = dbFile.Split('.');
 
             if (File.Exists(dbFullFilePath))
@@ -68,20 +68,18 @@ namespace SAUSALibrary.FileHandling.Database.Reading
 
                 while (dritem.Read())
                 {
-                    StackModel model = new StackModel
-                    {
-                        Index = (long)dritem["ID"],
-                        XPOS = (double)dritem["Xpos"],
-                        YPOS = (double)dritem["Ypos"],
-                        ZPOS = (double)dritem["Zpos"],
-                        Length = (double)dritem["Length"],
-                        Width = (double)dritem["Width"],
-                        Height = (double)dritem["Height"],
-                        Weight = (double)dritem["Weight"],
-                        CrateName = dritem["Name"].ToString()
-                    };
-
-                    modelList.Add(model);
+                    modelList.Add(new FullStackModel(
+                        (long)dritem["ID"],
+                        (double)dritem["Xpos"],
+                        (double)dritem["Ypos"],
+                        (double)dritem["Zpos"],
+                        (double)dritem["Length"],
+                        (double)dritem["Width"],
+                        (double)dritem["Height"],
+                        (double)dritem["Weight"],
+                        dritem["Name"].ToString()
+                        )
+                        );
                 }
                 m_dbConnection.Close();
             }

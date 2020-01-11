@@ -95,6 +95,7 @@
     <Compile Include="Init\NewProjectInit.cs" />
     <Compile Include="Init\ViewController.cs" />
     <Compile Include="Models\ExternalDBModel.cs" />
+    <Compile Include="Models\FullStackModel.cs" />
     <Compile Include="Models\LastProjectModel.cs" />
     <Compile Include="Models\MiniStackModel.cs" />
     <Compile Include="Models\ProjectDBFieldModel.cs" />

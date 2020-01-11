@@ -23,7 +23,7 @@
         <models:VisibilityConverter x:Key="converter"/>
 
         <!-- container list templates -->
-        <DataTemplate DataType="{x:Type models:MiniStackModel}" x:Key="ContainerItemTemplate">
+        <DataTemplate DataType="{x:Type models:FullStackModel}" x:Key="ContainerItemTemplate">
             <WrapPanel>
                 <TextBlock Text="{Binding Index}" FontSize="14" Margin="5,0,10,0"/>
                 <TextBlock Text="{Binding CrateName}" FontSize="14" Margin="10,0,5,0"/>
@@ -42,7 +42,7 @@
         </DataTemplate>
         
         <!-- container attributes entry textboxes template -->
-        <DataTemplate DataType="{x:Type models:StackModel}" x:Key="ContainerFieldsTemplate">
+        <DataTemplate DataType="{x:Type models:FullStackModel}" x:Key="ContainerFieldsTemplate">
             <StackPanel>
                 <TextBox Text="{Binding Length}"/>
                 <TextBox Text="{Binding Width}"/>
