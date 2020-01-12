@@ -3,15 +3,15 @@ namespace SAUSALibrary.Models
 {
     public class FullStackModel
     {
-        public long Index { get; set; }
-        public double XPOS { get; set; }
-        public double YPOS { get; set; }
-        public double ZPOS { get; set; }
-        public double Length { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
-        public string CrateName { get; set; }
+        public long Index { get; set; } = 0;
+        public double XPOS { get; set; } = 0.0;
+        public double YPOS { get; set; } = 0.0;
+        public double ZPOS { get; set; } = 0.0;
+        public double Length { get; set; } = 0.0;
+        public double Width { get; set; } = 0.0;
+        public double Height { get; set; } = 0.0;
+        public double Weight { get; set; } = 0.0;
+        public string CrateName { get; set; } = "";
 
         public FullStackModel(long index, double xPOS, double yPOS, double zPOS, double length, double width, double height, double weight, string crateName)
         {

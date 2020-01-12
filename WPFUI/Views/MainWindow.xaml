@@ -33,22 +33,22 @@
         <!-- container attribute template -->
         <DataTemplate DataType="{x:Type models:ProjectDBFieldModel}" x:Key="ContainerAttributesTemplate">
             <StackPanel>
-                <TextBlock Text="{Binding Length}" FontSize="12"/>
-                <TextBlock Text="{Binding Width}" FontSize="12"/>
-                <TextBlock Text="{Binding Height}" FontSize="12"/>
-                <TextBlock Text="{Binding Weight}" FontSize="12"/>
-                <TextBlock Text="{Binding CrateName}" FontSize="12"/>
+                <TextBlock Text="{Binding Length}" FontSize="18" Margin="5"/>
+                <TextBlock Text="{Binding Width}" FontSize="18" Margin="5"/>
+                <TextBlock Text="{Binding Height}" FontSize="18" Margin="5"/>
+                <TextBlock Text="{Binding Weight}" FontSize="18" Margin="5"/>
+                <TextBlock Text="{Binding CrateName}" FontSize="18" Margin="5"/>
             </StackPanel>            
         </DataTemplate>
         
         <!-- container attributes entry textboxes template -->
-        <DataTemplate DataType="{x:Type models:FullStackModel}" x:Key="ContainerFieldsTemplate">
+        <DataTemplate DataType="{x:Type models:StackModel}" x:Key="ContainerFieldsTemplate">
             <StackPanel>
-                <TextBox Text="{Binding Length}"/>
-                <TextBox Text="{Binding Width}"/>
-                <TextBox Text="{Binding Height}"/>
-                <TextBox Text="{Binding Weight}"/>
-                <TextBox Text="{Binding CrateName}"/>                
+                <TextBox Margin="5" Text="{Binding Length}"/>
+                <TextBox Margin="5" Text="{Binding Width}"/>
+                <TextBox Margin="5" Text="{Binding Height}"/>
+                <TextBox Margin="5" Text="{Binding Weight}"/>
+                <TextBox Margin="5" Text="{Binding CrateName}"/>                
             </StackPanel>
         </DataTemplate>
         
@@ -168,29 +168,19 @@
             </Grid.RowDefinitions>
             
             <TextBlock Text="Container Fields" Margin="5" FontSize="24" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            
-            <StackPanel Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" Visibility="{Binding FieldVisibility}">
-                <!-- crate fields entry box labels go here -->
-                <StackPanel>
-                    <TextBlock Text="Length" Margin="5" FontSize="18"/>
-                    <TextBlock Text="Width" Margin="5" FontSize="18"/>
-                    <TextBlock Text="Height" Margin="5" FontSize="18"/>
-                    <TextBlock Text="Weight" Margin="5" FontSize="18"/>
-                    <TextBlock Text="Name" Margin="5" FontSize="18"/>
-                </StackPanel>
-            </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="1" Visibility="{Binding FieldVisibility}">
-                <StackPanel>
-                    <TextBox x:Name="xLength" Margin="5" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>
-                    <TextBox x:Name="xWidth" Margin="5" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>
-                    <TextBox x:Name="xHeight" Margin="5" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>
-                    <TextBox x:Name="xWeight" Margin="5" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>
-                    <TextBox x:Name="xName" Margin="5" Width="180" HorizontalAlignment="Center" TextAlignment="Center"/>
-                </StackPanel>
-                <!-- crate field entry boxes go here -->
+            <ContentControl Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" Content="{Binding FieldModel}" ContentTemplate="{StaticResource ContainerAttributesTemplate}" Visibility="{Binding FieldVisibility}">
+                <!-- crate fields entry box labels go here -->
+                <!-- <TextBlock Text="Length" Margin="5" FontSize="18"/> -->
+                <!-- <TextBlock Text="Width" Margin="5" FontSize="18"/> -->
+                <!-- <TextBlock Text="Height" Margin="5" FontSize="18"/> -->
+                <!-- <TextBlock Text="Weight" Margin="5" FontSize="18"/> -->
+                <!-- <TextBlock Text="Name" Margin="5" FontSize="18"/> -->
+            </ContentControl>
+
+            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding AddContainerModel}" ContentTemplate="{StaticResource ContainerFieldsTemplate}" Visibility="{Binding FieldVisibility}">
                 
-            </StackPanel>
+            </ContentControl>
             
             <!-- add container to list and to unity view via adding to sqlite databse -->
             <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">

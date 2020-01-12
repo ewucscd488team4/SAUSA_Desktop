@@ -116,11 +116,11 @@ namespace SAUSALibrary.FileHandling.Database.Reading
                 //TODO read fields from database with fields outside of the defaults
 
                 //reads default column fields
-                model.length = dritem.GetName(4);
-                model.width = dritem.GetName(5);
-                model.height = dritem.GetName(6);
-                model.weight = dritem.GetName(7);
-                model.name = dritem.GetName(8);
+                model.Length = dritem.GetName(4);
+                model.Width = dritem.GetName(5);
+                model.Height = dritem.GetName(6);
+                model.Weight = dritem.GetName(7);
+                model.CrateName = dritem.GetName(8);
                 m_dbConnection.Close();
             } else
             {

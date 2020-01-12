@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SAUSALibrary.Models;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
 using System.Text;
@@ -144,6 +145,11 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             //do clean up
             sb.Clear();
             m_dbConnection.Close();
+        }
+
+        public static bool AddToProjectDatabase(string fullDBFilePath, string dbFileName, FullStackModel incomingData)
+        {
+            return false;
         }
 
     }

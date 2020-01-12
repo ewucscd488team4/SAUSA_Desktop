@@ -42,7 +42,7 @@ namespace WPFUI.ViewModels
         private string? _ProjectDB;
 
         public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
-
+        
         private bool _OpenProjectState;
 
         public bool OpenProjectState
@@ -61,6 +61,14 @@ namespace WPFUI.ViewModels
         public bool ProjectState {
             get => _ProjectState;
             set => SetProperty(ref _ProjectState, value);
+        }
+
+        private StackModel _AddContainerModel;
+
+        public StackModel AddContainerModel
+        {
+            get => _AddContainerModel;
+            set => SetProperty(ref _AddContainerModel, value);
         }
 
         private FullStackModel _ContainerListModel;
@@ -117,7 +125,7 @@ namespace WPFUI.ViewModels
             MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
             ProjectState = false; //it is assumed no project is open, ergo menu items are disabled by default
             OpenProjectState = true; //because SAUSA opens in a closed project state by default, this must be enabled
-            FieldVisibility = Visibility.Hidden;
+            FieldVisibility = Visibility.Hidden;            
             OpenProjectCommand = new RelayCommand(OnOpenProject);
             NewProjectCommand = new RelayCommand(OnNewProject);
             NewStackCommand = new RelayCommand(OnNewStack);
@@ -145,10 +153,12 @@ namespace WPFUI.ViewModels
 
             if(openDlg.ShowDialog() == true)
             {                
+                //variables needed for methods used in this command
                 _ProjectFileName = openDlg.SafeFileName;
                 _ProjectSavePath = openDlg.FileName;
                 _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
                 _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
+                var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;                
 
                 OpenProjectState = false; //this is disabled so we can't open a new project again, we have one already open
                 ProjectState = true; //enable menu commands to make a new storage room and a new stack
@@ -157,17 +167,18 @@ namespace WPFUI.ViewModels
                 FileCompressionUtils.OpenProject(openDlg.FileName, FilePathDefaults.ScratchFolder);
                 //write project details to settings file, Projects child node
 
-                //open list of ministackmodel to populate the container list
-                var fqfilePath = FilePathDefaults.ScratchFolder + ConvertToSQLiteFileName(_ProjectFileName);
-                var dbFileName = ConvertToSQLiteFileName(_ProjectFileName);
-                Containers = ReadSQLite.GetEntireStack(fqfilePath, dbFileName);                
+                //open list of stackmodel to populate the container list                
+                Containers = ReadSQLite.GetEntireStack(fqDBFilePath, _ProjectDB);                
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
 
-                //change field visibility to enable use
-                FieldVisibility = Visibility.Visible;
+                //populate field list
+                FieldModel = ReadSQLite.GetDatabaseFieldLabels(fqDBFilePath, _ProjectDB);
 
-                //grab crate attributes to populate new crate entry fields
-                //FieldModel = ReadSQLite.GetDatabaseFieldLabels(openDlg.FileName, openDlg.SafeFileName);
+                //initialize the attribute entry fields
+                AddContainerModel = new StackModel();
+
+                //change field visibility to enable use
+                FieldVisibility = Visibility.Visible;                                
 
                 //TODO populate 3d window with all existing containers in the project database
             } else
@@ -276,7 +287,7 @@ namespace WPFUI.ViewModels
             {
                 file.Delete();
             }                                    
-            //TODO on colse turn off 3d view
+            //TODO on close menu command turn off 3d view
         }
 
         /// <summary>
@@ -285,11 +296,11 @@ namespace WPFUI.ViewModels
         private void OnAddContainer()
         {            
             //add new container to SQLite database
-            Containers.Add(new FullStackModel(99,0,0,0,0,0,0,0, $"Count {Containers.Count}"));
+            Containers.Add(new FullStackModel(Containers.Count+1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
             //call update on listbox List to pull new list from SQLite database
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
-            //TODO add new container to project SQLite database.
-            //TODO add new container to 3d view.
+            //TODO add new container to project SQLite database when add button is pressed.
+            //TODO add new container to 3d view when add button is pressed.
         }
 
         /// <summary>
@@ -301,8 +312,8 @@ namespace WPFUI.ViewModels
             Containers.Remove(ContainerListModel);
             //call update on view
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
-            //TODO detele container from database OnDeleteContainer
-            //TODO delete container from 3d view
+            //TODO detele container from database when delete button is pressed
+            //TODO delete container from 3d view when delete button is pressed
         }
 
         #endregion
