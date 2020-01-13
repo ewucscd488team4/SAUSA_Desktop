@@ -107,10 +107,10 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// </summary>
         /// <param name="directoryToCreateIn"></param>
         /// <param name="newDatabaseFileName"></param>
-        public static void CreateDatabase(string directoryToCreateIn, string newDatabaseFileName)
-        {
-            var fileName = newDatabaseFileName + DEFAULT_EXTENSION; //marries given file name with the default sqlite file extension
-            var fqFilePath = Path.Combine(directoryToCreateIn, fileName); //combines given save folder and file name into a fully qualified file path          
+        public static void CreateDefaultProjectDatabase(string directoryToCreateIn, string newDatabaseFileName)
+        {            
+            var fqFilePath = Path.Combine(directoryToCreateIn, newDatabaseFileName); //combines given save folder and file name into a fully qualified file path
+            string[] file = newDatabaseFileName.Split('.');
                         
             StringBuilder sb = new StringBuilder();
 
@@ -124,7 +124,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
 
             //use stringbuider to build sql command.
             sb.Append("create table ");
-            sb.Append(newDatabaseFileName);
+            sb.Append(file[0]);
             sb.Append(" (ID INTEGER PRIMARY KEY AUTOINCREMENT,");
             sb.Append(defaultFields[4] + " REAL,"); //xpos
             sb.Append(defaultFields[5] + " REAL,"); //ypos
@@ -147,9 +147,104 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             m_dbConnection.Close();
         }
 
+        /// <summary>
+        /// Create project database with default fields AND custom fields defined by the user in the New Stack View.
+        /// </summary>
+        /// <param name="fullDBFilePath"></param>
+        /// <param name="dbFileName"></param>
+        /// <param name="incomingData"></param>
+        /// <returns></returns>
         public static bool AddToProjectDatabase(string fullDBFilePath, string dbFileName, FullStackModel incomingData)
         {
             return false;
+        }
+
+        /// <summary>
+        /// Creates a project SQLite database file with nothing in it.
+        /// </summary>
+        /// <param name="directoryToCreateIn"></param>
+        public static void CreateProjectDatabase(string directoryToCreateIn, string dbFileName)
+        {
+            var fqFilePath = Path.Combine(directoryToCreateIn, dbFileName);
+            SQLiteConnection.CreateFile(fqFilePath);
+        }
+
+        /// <summary>
+        /// Writes default project database table and minimum required SAUSA fields to the given project database, with default table being defined as the given file name minus given extension.
+        /// </summary>
+        /// <param name="fullDBFilePath"></param>
+        /// <param name="dbFileName"></param>
+        public static void PopulateProjectDatabase(string fullDBFilePath, string dbFileName)
+        {
+            StringBuilder sb = new StringBuilder();
+            string[] table = dbFileName.Split('.');
+
+            //defines the SQLite connection
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fullDBFilePath + ";Version=3;");
+
+            //opens the connection
+            m_dbConnection.Open();
+
+            //use stringbuider to build sql command.
+            sb.Append("create table ");
+            sb.Append(table[0]);
+            sb.Append(" (ID INTEGER PRIMARY KEY AUTOINCREMENT,");
+            sb.Append(defaultFields[4] + " REAL,"); //xpos
+            sb.Append(defaultFields[5] + " REAL,"); //ypos
+            sb.Append(defaultFields[6] + " REAL,"); //zpos
+            sb.Append(defaultFields[0] + " REAL,"); //length
+            sb.Append(defaultFields[1] + " REAL,"); //width
+            sb.Append(defaultFields[2] + " REAL,"); //height
+            sb.Append(defaultFields[3] + " REAL,"); //weight
+            sb.Append(defaultFields[7] + " VARCHAR(80)"); //name
+            sb.Append(");");
+
+            //defines the sql query command, and what database connection to execute it on
+            SQLiteCommand command = new SQLiteCommand(sb.ToString(), m_dbConnection);
+
+            //runs command to build new table
+            command.ExecuteNonQuery();
+
+            //do clean up
+            sb.Clear();
+            m_dbConnection.Close();
+        }
+
+        /// <summary>
+        /// Delete container presently in Main Window view from the database, if it exists therein.
+        /// </summary>
+        /// <param name="fullDBFilePath"></param>
+        /// <param name="dbFileName"></param>
+        /// <param name="IndexToDelete"></param>
+        /// <returns></returns>
+        public static bool DeleteContainerFromProjectDatabase(string fullDBFilePath, string dbFileName, long IndexToDelete)
+        {
+            //TODO when delete container is called figure out order of operations for deleting an entry out of the project sqlite database
+            string[] table = dbFileName.Split('.');
+
+            //defines the SQLite connection
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fullDBFilePath + ";Version=3;");
+
+            //opens the connection
+            m_dbConnection.Open();
+
+            //defines index deletion command
+            SQLiteCommand command = new SQLiteCommand("", m_dbConnection);
+
+            //executes index deletion command; query returns # of rows affected, so affectedrows = 1 if index deleted successfully, 0 if not.
+            int affectedRows = command.ExecuteNonQuery();
+
+            //closes connection to database
+            m_dbConnection.Close();
+
+            if (affectedRows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

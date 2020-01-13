@@ -17,8 +17,16 @@ namespace WPFUI.Views
     /// </summary>
     public partial class NewStack : Window
     {
+        private string? projectDB;
+
         public NewStack()
         {
+            InitializeComponent();
+        }
+
+        public NewStack(string? projectDBName)
+        {
+            projectDB = projectDBName;
             InitializeComponent();
         }
 

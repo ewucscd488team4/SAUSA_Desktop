@@ -15,9 +15,7 @@
         
         Title="SAUSA Preferences" MinHeight="360" MinWidth="530" Width="530" Height="360">
     <Window.DataContext>
-        <viewmodels:PreferencesViewModel>
-            
-        </viewmodels:PreferencesViewModel>
+        <viewmodels:PreferencesViewModel/>
     </Window.DataContext>    
     
     <Grid>

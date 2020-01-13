@@ -63,17 +63,17 @@ namespace WPFUI.ViewModels
             set => SetProperty(ref _ProjectState, value);
         }
 
-        private StackModel _AddContainerModel;
+        private StackModel? _AddContainerModel;
 
-        public StackModel AddContainerModel
+        public StackModel? AddContainerModel
         {
             get => _AddContainerModel;
             set => SetProperty(ref _AddContainerModel, value);
         }
 
-        private FullStackModel _ContainerListModel;
+        private FullStackModel? _ContainerListModel;
 
-        public FullStackModel ContainerListModel
+        public FullStackModel? ContainerListModel
         {
             get => _ContainerListModel;
             set => SetProperty(ref _ContainerListModel, value);
@@ -87,9 +87,9 @@ namespace WPFUI.ViewModels
             set => SetProperty(ref _FieldVisibility, value);
         }
 
-        private ProjectDBFieldModel _FieldModel;
+        private ProjectDBFieldModel? _FieldModel;
 
-        public ProjectDBFieldModel FieldModel
+        public ProjectDBFieldModel? FieldModel
         {
             get => _FieldModel;
             set => SetProperty(ref _FieldModel, value);
@@ -201,14 +201,21 @@ namespace WPFUI.ViewModels
 
             if(openDlg.ShowDialog() == true)
             {
-                //set up blank project files to scratch directory
+                _ProjectFileName = openDlg.SafeFileName;
+                _ProjectSavePath = openDlg.FileName;
+                _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
+                _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
+                var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;
 
-                //NewProjectInit.NewProjectDetailOperations(openDlg.FileName, openDlg.SafeFileName);
-                //WriteXML.WriteBlankXML(FilePathDefaults.ScratchFolder, openDlg.SafeFileName);
+                OpenProjectState = false; //this is set to disabled so we can't open a new project again; we have one already open
+                ProjectState = true; //enable menu commands to make a new storage room and a new stack
+                //MenuState = true; //leave full menu options disabled, as we have nothing to act on with those menu options
 
-                //write blank sqlite database to scratch directory
+                //set up blank project files to the scratch directory
+                NewProjectInit.NewProjectDetailOperations(FilePathDefaults.ScratchFolder, _ProjectXMLFile, _ProjectDB);
 
-                //write project name and path to settings file Projects child node
+
+
             }            
         }
 
@@ -217,9 +224,9 @@ namespace WPFUI.ViewModels
         /// </summary>        
         private void OnNewStack()
         {
-            NewStack newStack = new NewStack();
+            NewStack newStack = new NewStack(_ProjectDB);
             newStack.Show();            
-            //TODO let view know state has changed
+            //TODO let 3d view know project database has been populated
         }
 
         /// <summary>
@@ -229,18 +236,20 @@ namespace WPFUI.ViewModels
         {
             NewRoom newRoom = new NewRoom(_ProjectXMLFile);
             newRoom.Show();
-            //TODO let view know state has changed
+            //TODO let 3d view know that room state has changed
         }
 
         /// <summary>
         /// Save project in current state.
         /// </summary>
         private void OnSaveProject()
-        {
-            //TODO Save Project           
+        {            
             //compress project XML and SQLite database to save directory
-            //FileCompressionUtils.SaveProject();
-            //write new containers to the project database.
+            FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, _ProjectSavePath);
+
+            //TODO write NEW containers in container list to the project database when save menu dialog is involked.
+
+            //TODO write new project save date to appropriate project in settings XML file
         }
 
         /// <summary>
@@ -257,8 +266,10 @@ namespace WPFUI.ViewModels
 
             if(saveDlg.ShowDialog() == true)
             {
-                //TODO save current working files to given new save file.
+                _ProjectSavePath = saveDlg.FileName;
                 //compress working files in scratch folder to given save directory.
+                FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, _ProjectSavePath);
+
                 //write given save directory to settings file, LastProjectSavedDirectory attribute.
                 //_Savepath set to given save directory, so that save command saves to the right place.
 
@@ -294,13 +305,21 @@ namespace WPFUI.ViewModels
         /// Add a container to the container list, and to the 3d Window for placement
         /// </summary>
         private void OnAddContainer()
-        {            
-            //add new container to SQLite database
-            Containers.Add(new FullStackModel(Containers.Count+1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
-            //call update on listbox List to pull new list from SQLite database
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
-            //TODO add new container to project SQLite database when add button is pressed.
-            //TODO add new container to 3d view when add button is pressed.
+        {   
+            if(ContainerFieldValidator())
+            {
+                //add new container to SQLite database
+                Containers.Add(new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                //call update on listbox List to pull new list from SQLite database
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+                //TODO add new container to project SQLite database when add button is pressed.
+
+                //TODO add new container to 3d view when add button is pressed.
+            } else
+            {
+                //TODO launch error dialog complaining about empty or unchanged container entry fields
+            }
+
         }
 
         /// <summary>
@@ -340,6 +359,21 @@ namespace WPFUI.ViewModels
         {
             string[] file = filename.Split('.');
             return file[0] + XML_FILE;
+        }
+
+        private bool ContainerFieldValidator()
+        {
+            if (AddContainerModel.Length <= 0)
+                return false;
+            else if (AddContainerModel.Width <= 0)
+                return false;
+            else if (AddContainerModel.Height <= 0)
+                return false;
+            else if (AddContainerModel.Weight <= 0)
+                return false;
+            else if (string.IsNullOrEmpty(AddContainerModel.CrateName))
+                return false;
+            return true;
         }
 
         #endregion

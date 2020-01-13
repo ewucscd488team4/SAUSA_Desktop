@@ -68,7 +68,9 @@
     <Compile Include="Containers\Container_Factory.cs" />
     <Compile Include="Containers\Crate.cs" />
     <Compile Include="Containers\Drum.cs" />
+    <Compile Include="DataProcessing\GetEnums.cs" />
     <Compile Include="DataProcessing\GetThemes.cs" />
+    <Compile Include="Defaults\DBFieldEnum.cs" />
     <Compile Include="Defaults\FilePathDefaults.cs" />
     <Compile Include="Defaults\ThemeEnums.cs" />
     <Compile Include="Defaults\XMLDataDefaults.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="import\ImportAdapter.cs" />
     <Compile Include="Init\NewProjectInit.cs" />
     <Compile Include="Init\ViewController.cs" />
+    <Compile Include="Models\Database\IndividualDatabaseFieldModel.cs" />
     <Compile Include="Models\ExternalDBModel.cs" />
     <Compile Include="Models\FullStackModel.cs" />
     <Compile Include="Models\LastProjectModel.cs" />

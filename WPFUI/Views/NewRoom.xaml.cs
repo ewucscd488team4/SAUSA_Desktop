@@ -12,6 +12,8 @@ namespace WPFUI.Views
     {
         private string? _WorkingFile;
 
+        public string? WorkingFile => _WorkingFile;
+
         public NewRoom()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace WPFUI.Views
         {
             if (string.IsNullOrEmpty(rLength.Text) || string.IsNullOrEmpty(rWidth.Text) || string.IsNullOrEmpty(rHeight.Text) || string.IsNullOrEmpty(rWeight.Text))
             {
-                //launch error dialog for enpty fields
+                //TODO launch error dialog for enpty room dimension fields
             }
             else
             {

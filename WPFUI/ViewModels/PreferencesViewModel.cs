@@ -173,7 +173,7 @@ namespace WPFUI.ViewModels
         /// <returns></returns>
         private List<ThemeModel> GetThemesFromEnumClass()
         {
-            return GetThemes.GetThemesList(); ;
+            return GetThemes.GetThemesList();
         }
 
 

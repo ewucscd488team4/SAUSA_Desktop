@@ -15,14 +15,10 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <summary>
         /// Writes out a blank project XML file to to given fully qualified file name.
         /// </summary>
-        /// <param name="xmlFilePath"></param>
-        public static void WriteBlankXML(string xmlFilePath, string xmlFileName) //NOTE this includes the xml file we need to write
-        {
-            
-            string[] file = xmlFileName.Split('.');
-            var xmlFile = file + "xml";
-
-            var fqPath = Path.Combine(xmlFilePath, xmlFile);
+        /// <param name="folderToCreateIn"></param>
+        public static void WriteBlankXML(string folderToCreateIn, string xmlFileName) //NOTE this includes the xml file we need to write
+        {            
+            var fqPath = Path.Combine(folderToCreateIn, xmlFileName);
 
             if (!File.Exists(fqPath)) //ensure we don't have a file 
             {
