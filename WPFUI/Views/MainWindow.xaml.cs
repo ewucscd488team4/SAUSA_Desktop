@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using WPFUI.ViewModels;
+using System.IO.Pipes;
 
 namespace WPFUI.Views
 {
@@ -42,10 +43,29 @@ namespace WPFUI.Views
                 process.StartInfo.UseShellExecute = true;
                 process.StartInfo.CreateNoWindow = true;
                 process.Start();
+                ////Piping Code
+                //using (AnonymousPipeServerStream pipeServer = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
+                //{
+                //    try
+                //    {
+                //        using (StreamWriter sw = new StreamWriter(pipeServer))
+                //        {
+                //            sw.AutoFlush = true;
+                //            sw.WriteLine("SYNC");
+                //            pipeServer.WaitForPipeDrain();
+                //            sw.WriteLine("Hello");
+                //        }
+                //    }
+                //    catch (IOException e)
+                //    {
 
+                //    }
+                //}
                 process.WaitForInputIdle();
 
                 EnumChildWindows(unityPanel.Handle, WindowEnum, IntPtr.Zero);
+
+                process.Close();
             }
             catch (Exception ex)
             {
