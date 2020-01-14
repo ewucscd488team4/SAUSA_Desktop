@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_0
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\App.xaml
-16-342886048
+16-304539659
 
-301376351275
+301815429754
 204-1287166992
-Views\About.xaml;Views\CrateAttributes.xaml;Views\DatabaseParameters.xaml;Views\FileNotFoundError.xaml;Views\Help.xaml;Views\MainWindow.xaml;Views\NewBuild.xaml;Views\NewRoom.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Preferences.xaml;Views\Prefs.xaml;Views\Splash.xaml;Views\StorageArea.xaml;Views\UpdateNotImplemented.xaml;
+Views\About.xaml;Views\CrateAttributes.xaml;Views\DatabaseParameters.xaml;Views\FileNotFoundError.xaml;Views\Help.xaml;Views\MainWindow.xaml;Views\NewBuild.xaml;Views\NewRoom.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Preferences.xaml;Views\Prefs.xaml;Views\Splash.xaml;Views\StorageArea.xaml;Views\WarningViews\UpdateNotImplemented.xaml;
 
 False
 

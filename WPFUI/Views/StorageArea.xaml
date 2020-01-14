@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
-        xmlns:views="clr-namespace:WPFUI.Views"
-        xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"
+        xmlns:views="clr-namespace:WPFUI.Views.WarningViews"
+        xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"        
         xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
         
         mc:Ignorable="d"

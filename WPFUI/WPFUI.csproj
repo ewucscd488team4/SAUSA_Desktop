@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Resources\load_window\" />
-    <Folder Include="ViewModels\File\" />
   </ItemGroup>
 
   <ItemGroup>

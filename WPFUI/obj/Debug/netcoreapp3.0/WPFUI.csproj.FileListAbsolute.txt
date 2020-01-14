@@ -99,7 +99,6 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\Prefs.g.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\Splash.g.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\StorageArea.g.cs
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\UpdateNotImplemented.g.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\App.g.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\GeneratedInternalTypeHelper.g.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI_MarkupCompile.cache
@@ -120,7 +119,6 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\Prefs.baml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\Splash.baml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\StorageArea.baml
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\UpdateNotImplemented.baml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.g.resources
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.AssemblyInfoInputs.cache
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\WPFUI.AssemblyInfo.cs
@@ -131,3 +129,5 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\bin\Debug\netcoreapp3.0\runtimes\osx-x64\native\netstandard2.0\SQLite.Interop.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\bin\Debug\netcoreapp3.0\runtimes\win-x64\native\netstandard2.0\SQLite.Interop.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\bin\Debug\netcoreapp3.0\runtimes\win-x86\native\netstandard2.0\SQLite.Interop.dll
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\WarningViews\UpdateNotImplemented.g.cs
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\WarningViews\UpdateNotImplemented.baml

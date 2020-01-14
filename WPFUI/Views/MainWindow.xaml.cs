@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using WPFUI.ViewModels;
 using System.IO.Pipes;
+using WPFUI.Views.WarningViews;
 
 namespace WPFUI.Views
 {
@@ -24,7 +25,7 @@ namespace WPFUI.Views
         [DllImport("user32.dll")]
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
         
-        private Process process;
+        private Process? process;
         private IntPtr unityHWND = IntPtr.Zero;
 
         private const int WM_ACTIVATE = 0x0006;
@@ -38,7 +39,7 @@ namespace WPFUI.Views
             try
             {
                 process = new Process();
-                process.StartInfo.FileName = System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
+                process.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\Child.exe";
                 process.StartInfo.Arguments = "-parentHWND " + unityPanel.Handle.ToInt32() + " " + Environment.CommandLine;
                 process.StartInfo.UseShellExecute = true;
                 process.StartInfo.CreateNoWindow = true;
@@ -74,7 +75,7 @@ namespace WPFUI.Views
             try
             {
                 //Testing communication between Unity and Application
-                File.WriteAllText(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\TestFile.txt", "[10, 10, 20]");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\TestFile.txt", "[10, 10, 20]");
             }
             catch (Exception ex)
             {

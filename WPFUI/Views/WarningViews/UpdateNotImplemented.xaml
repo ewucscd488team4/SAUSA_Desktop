@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPFUI.Views.UpdateNotImplemented"
+﻿<Window x:Class="WPFUI.Views.WarningViews.UpdateNotImplemented"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,14 +9,13 @@
         
         mc:Ignorable="d"
         
-        
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         
-        Title="Updates" Height="210" Width="400">
+        Title="UpdateNotImplemented" Height="210" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>            
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
@@ -27,7 +26,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="1" Grid.Row="1" Text="Updates not implemented yet!" FontSize="24" Margin="5"/>
-        
+
         <Button Content="OK"
                 Grid.Column="1"
                 Grid.Row="2"

@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPFUI.Views
+namespace WPFUI.Views.WarningViews
 {
     /// <summary>
     /// Interaction logic for UpdateNotImplemented.xaml

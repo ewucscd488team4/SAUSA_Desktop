@@ -49,7 +49,7 @@
     <Compile Update="Views\StorageArea.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\UpdateNotImplemented.xaml.cs">
+    <Compile Update="Views\WarningViews\UpdateNotImplemented.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -96,7 +96,7 @@
     <Page Update="Views\StorageArea.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\UpdateNotImplemented.xaml">
+    <Page Update="Views\WarningViews\UpdateNotImplemented.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
