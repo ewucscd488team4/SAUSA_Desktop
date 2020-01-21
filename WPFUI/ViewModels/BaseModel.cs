@@ -1,22 +1,19 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using SAUSALibrary.Models;
+using System.Collections.ObjectModel;
 
 namespace WPFUI.ViewModels
 {
-    public class BaseModel : INotifyPropertyChanged
+    public class BaseModel
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        protected ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
 
-        private void SetProperty<T>(ref T field, T value,
-            [CallerMemberName]string propertyName = null) //<- this is an optional parameter so we dont have to pass a value to use the method
-        {
-            if (!EqualityComparer<T>.Default.Equals(field, value)) //if using custom classes need to implement equals
-            {
-                field = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        protected string? _ProjectFileName;
+
+        protected string? _ProjectSavePath;
+
+        protected string? _ProjectXMLFile;
+
+        protected string? _ProjectDB;
 
     }
 }

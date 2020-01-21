@@ -19,7 +19,7 @@ using System.Windows;
 
 namespace WPFUI.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : BaseModel,INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -33,15 +33,15 @@ namespace WPFUI.ViewModels
 
         private const string XML_FILE = ".xml";
 
-        private string? _ProjectFileName;
+        /*private string? _ProjectFileName;
 
         private string? _ProjectSavePath;
 
         private string? _ProjectXMLFile;
 
-        private string? _ProjectDB;
+        private string? _ProjectDB;*/
 
-        public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
+        //public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
         
         private bool _OpenProjectState;
 
@@ -213,9 +213,6 @@ namespace WPFUI.ViewModels
 
                 //set up blank project files to the scratch directory
                 NewProjectInit.NewProjectDetailOperations(FilePathDefaults.ScratchFolder, _ProjectXMLFile, _ProjectDB);
-
-
-
             }            
         }
 
@@ -224,7 +221,7 @@ namespace WPFUI.ViewModels
         /// </summary>        
         private void OnNewStack()
         {
-            NewStack newStack = new NewStack(_ProjectDB);
+            NewStack newStack = new NewStack(_ProjectDB, Containers);
             newStack.Show();            
             //TODO let 3d view know project database has been populated
         }

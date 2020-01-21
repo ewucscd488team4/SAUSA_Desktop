@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SAUSALibrary.Models;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace WPFUI.Views
 {
@@ -19,14 +11,17 @@ namespace WPFUI.Views
     {
         private string? projectDB;
 
+        private ObservableCollection<FullStackModel> containers;
+
         public NewStack()
         {
             InitializeComponent();
         }
 
-        public NewStack(string? projectDBName)
+        public NewStack(string? projectDBName, ObservableCollection<FullStackModel> incomingContainers)
         {
             projectDB = projectDBName;
+            containers = incomingContainers;
             InitializeComponent();
         }
 

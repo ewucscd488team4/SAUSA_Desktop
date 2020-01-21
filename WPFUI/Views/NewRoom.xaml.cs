@@ -1,7 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using SAUSALibrary.Defaults;
 using SAUSALibrary.FileHandling.XML.Reading;
 using SAUSALibrary.FileHandling.XML.Writing;
+using SAUSALibrary.Models;
 
 namespace WPFUI.Views
 {
@@ -20,7 +22,7 @@ namespace WPFUI.Views
         }
 
         public NewRoom(string? incomingFileName)
-        {
+        {            
             this._WorkingFile = incomingFileName;
             InitializeComponent();
         }
