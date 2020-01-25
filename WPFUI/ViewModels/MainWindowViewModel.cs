@@ -33,16 +33,16 @@ namespace WPFUI.ViewModels
 
         private const string XML_FILE = ".xml";
 
-        /*private string? _ProjectFileName;
+        private string? _ProjectFileName;
 
         private string? _ProjectSavePath;
 
         private string? _ProjectXMLFile;
 
-        private string? _ProjectDB;*/
+        private string? _ProjectDB;
 
-        //public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
-        
+        public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
+
         private bool _OpenProjectState;
 
         public bool OpenProjectState

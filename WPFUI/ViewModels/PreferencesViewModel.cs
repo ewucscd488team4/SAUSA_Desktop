@@ -7,41 +7,12 @@ using SAUSALibrary.Models;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 
 namespace WPFUI.ViewModels
 {
     public class PreferencesViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Private field to hold the last saved directory string being extracted out of the settings file
-        /// </summary>
-        private string _NewFolder;
-
-        /// <summary>
-        /// Setter and getter for setting and getting the save directory. has event propertychangedevent handler wired to it
-        /// </summary>
-        public string NewFolder
-        {
-            get => _NewFolder;
-            set => SetProperty(ref _NewFolder, value);
-        }
-
-        /// <summary>
-        /// Private field to hold the light/dark setting string being extracted out of the settings file
-        /// </summary>
-        private string _LightDark;
-
-        /// <summary>
-        /// Setter and getter for setting and getting the light/dark setting. has event propertychangedevent handler wired to it
-        /// </summary>
-        public string LightDark
-        {
-            get => _LightDark;
-            set => SetProperty(ref _LightDark, value);
-        }
 
         /// <summary>
         /// Value for the text box
@@ -99,8 +70,6 @@ namespace WPFUI.ViewModels
         public PreferencesViewModel()
         {
             OnLoadFolder = FilePathDefaults.DefaultSavePath; //set to the default file save directory in settings
-            NewFolder = "XXX";
-            LightDark = GetLightDarkFromXML(); //gets default theme setting from settings file
             Themes = GetThemesFromEnumClass(); //gets list of setting types from settings enum class
             Theme = new ThemeModel(); //sets default ThemeModel (will have "blank")
             ApplyChangesCommand = new RelayCommand(OnChangeTheme); //wires up command
@@ -132,8 +101,6 @@ namespace WPFUI.ViewModels
         private void OnChangeTheme()
         {
             //save the new directory folder into the settings file
-            LightDark = Theme.ThemeValue + " written";
-            NewFolder = OnLoadFolder + " written";
             SetThemeXML(Theme.ThemeValue);
             SetDirectoryXML(OnLoadFolder);
         }
@@ -145,27 +112,7 @@ namespace WPFUI.ViewModels
                 field = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
-        }
-
-        /// <summary>
-        /// Gets current light/dark setting from settings file and returns it
-        /// </summary>
-        /// <returns></returns>
-        private string GetLightDarkFromXML()
-        {
-            SettingsModel model = ReadXML.ReadSettings(FilePathDefaults.SettingsFile);
-            return model.SettingOne;
-        }
-
-        /// <summary>
-        /// Gets current last saved directory from setting fine and returns it
-        /// </summary>
-        /// <returns></returns>
-        private string GetSaveFolderFromXML()
-        {
-            SettingsModel model = ReadXML.ReadSettings(FilePathDefaults.SettingsFile);
-            return model.SettingTwo;
-        }
+        }               
 
         /// <summary>
         /// Retrieves List of enums from enum class

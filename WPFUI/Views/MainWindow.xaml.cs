@@ -5,7 +5,10 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using WPFUI.ViewModels;
-using System.IO.Pipes;
+using WPFUI.Views.AboutViews;
+using WPFUI.Views.EditViews;
+using WPFUI.Views.ErrorViews;
+using WPFUI.Views.FileViews;
 using WPFUI.Views.WarningViews;
 
 namespace WPFUI.Views

@@ -1,7 +1,16 @@
-﻿using System.Windows;
-using WPFUI.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
-namespace WPFUI.Views
+namespace WPFUI.Views.FileViews
 {
     /// <summary>
     /// Interaction logic for Preferences.xaml
@@ -10,7 +19,7 @@ namespace WPFUI.Views
     {
         public Preferences()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void ApplyPrefs_Click(object sender, RoutedEventArgs e)

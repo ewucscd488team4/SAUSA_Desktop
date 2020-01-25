@@ -87,6 +87,8 @@
     <Compile Include="FileHandling\Database\Writing\WriteMSSQL.cs" />
     <Compile Include="FileHandling\Database\Writing\WriteMySQL.cs" />
     <Compile Include="FileHandling\Database\Writing\WriteSQLite.cs" />
+    <Compile Include="FileHandling\Text\Reading\ReadText.cs" />
+    <Compile Include="FileHandling\Text\Writing\WriteText.cs" />
     <Compile Include="FileHandling\XML\Reading\ReadXML.cs" />
     <Compile Include="FileHandling\XML\Writing\WriteXML.cs" />
     <Compile Include="import\FromCSV.cs" />
@@ -107,7 +109,9 @@
     <Compile Include="Models\SQLiteDatabaseModel.cs" />
     <Compile Include="Models\StackModel.cs" />
     <Compile Include="Models\ThemeModel.cs" />
+    <Compile Include="Models\Theme\ThemeModel.cs" />
     <Compile Include="Models\VisibilityConverter.cs" />
+    <Compile Include="Models\XML\SettingsXMLModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

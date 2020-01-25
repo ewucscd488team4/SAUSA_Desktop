@@ -10,13 +10,28 @@
     <Compile Update="Views\About.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AboutViews\About.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AboutViews\Help.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CrateAttributes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\DatabaseParameters.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\EditViews\EditStack.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ErrorViews\FileNotFoundError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\FileNotFoundError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FileViews\Preferences.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Help.xaml.cs">
@@ -40,9 +55,6 @@
     <Compile Update="Views\OpenProject.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Preferences.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\Splash.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -57,13 +69,28 @@
     <Page Update="Views\About.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AboutViews\About.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AboutViews\Help.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\CrateAttributes.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DatabaseParameters.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\EditViews\EditStack.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ErrorViews\FileNotFoundError.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\FileNotFoundError.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileViews\Preferences.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Help.xaml">
@@ -85,9 +112,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\OpenProject.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\Preferences.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Splash.xaml">

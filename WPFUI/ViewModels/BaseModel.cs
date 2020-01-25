@@ -5,7 +5,7 @@ namespace WPFUI.ViewModels
 {
     public class BaseModel
     {
-        protected ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
+        /*protected ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
 
         protected string? _ProjectFileName;
 
@@ -13,7 +13,7 @@ namespace WPFUI.ViewModels
 
         protected string? _ProjectXMLFile;
 
-        protected string? _ProjectDB;
+        protected string? _ProjectDB;*/
 
     }
 }
