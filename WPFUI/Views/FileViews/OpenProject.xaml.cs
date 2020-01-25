@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPFUI.Views
+namespace WPFUI.Views.FileViews
 {
     /// <summary>
     /// Interaction logic for OpenProject.xaml
@@ -20,11 +20,6 @@ namespace WPFUI.Views
         public OpenProject()
         {
             InitializeComponent();
-        }
-
-        private void Accept_Project(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

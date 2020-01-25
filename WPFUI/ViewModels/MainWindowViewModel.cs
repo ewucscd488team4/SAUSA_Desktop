@@ -14,6 +14,9 @@ using SAUSALibrary.FileHandling.XML.Reading;
 using SAUSALibrary.FileHandling.XML.Writing;
 using SAUSALibrary.Init;
 using WPFUI.Views;
+using WPFUI.Views.EditViews;
+using WPFUI.Views.ErrorViews;
+using WPFUI.Views.FileViews;
 using System.IO;
 using System.Windows;
 

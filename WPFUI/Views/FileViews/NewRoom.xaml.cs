@@ -5,16 +5,14 @@ using SAUSALibrary.FileHandling.XML.Reading;
 using SAUSALibrary.FileHandling.XML.Writing;
 using SAUSALibrary.Models;
 
-namespace WPFUI.Views
+namespace WPFUI.Views.FileViews
 {
     /// <summary>
     /// Interaction logic for NewRoom.xaml
     /// </summary>
     public partial class NewRoom : Window
     {
-        private string? _WorkingFile;
-
-        public string? WorkingFile => _WorkingFile;
+        public string? WorkingFile { get; }
 
         public NewRoom()
         {
@@ -22,8 +20,8 @@ namespace WPFUI.Views
         }
 
         public NewRoom(string? incomingFileName)
-        {            
-            this._WorkingFile = incomingFileName;
+        {
+            this.WorkingFile = incomingFileName;
             InitializeComponent();
         }
 
@@ -45,7 +43,7 @@ namespace WPFUI.Views
                 dimensions[1] = rWidth.Text;
                 dimensions[2] = rHeight.Text;
                 dimensions[3] = rWeight.Text;
-                WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder + _WorkingFile, dimensions);
+                WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder + WorkingFile, dimensions);
             }
         }
     }

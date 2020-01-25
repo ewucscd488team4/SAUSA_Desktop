@@ -113,7 +113,7 @@ namespace WPFUI.Views
 
         private void EditStorageAttribs_Click(object sender, RoutedEventArgs e)
         {
-            StorageArea storageArea = new StorageArea();
+            StorageAreaAttributes storageArea = new StorageAreaAttributes();
             storageArea.Show();
         }
 

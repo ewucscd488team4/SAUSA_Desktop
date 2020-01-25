@@ -22,7 +22,19 @@
     <Compile Update="Views\EditViews\EditStackAttributes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\EditViews\StorageAreaAttributes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ErrorViews\FileNotFoundError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FileViews\NewRoom.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FileViews\NewStack.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FileViews\OpenProject.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\FileViews\Preferences.xaml.cs">
@@ -34,22 +46,10 @@
     <Compile Update="Views\FileViews\NewBuild.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\NewRoom.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\NewStack.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\OpenBuild.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\OpenProject.xaml.cs">
+    <Compile Update="Views\FileViews\OpenBuild.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Splash.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\StorageArea.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\WarningViews\UpdateNotImplemented.xaml.cs">
@@ -72,7 +72,19 @@
     <Page Update="Views\EditViews\EditStackAttributes.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\EditViews\StorageAreaAttributes.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ErrorViews\FileNotFoundError.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileViews\NewRoom.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileViews\NewStack.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileViews\OpenProject.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\FileViews\Preferences.xaml">
@@ -84,22 +96,10 @@
     <Page Update="Views\FileViews\NewBuild.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\NewRoom.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\NewStack.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\OpenBuild.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\OpenProject.xaml">
+    <Page Update="Views\FileViews\OpenBuild.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Splash.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\StorageArea.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\WarningViews\UpdateNotImplemented.xaml">

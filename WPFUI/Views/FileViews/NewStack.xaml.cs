@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace WPFUI.Views
+namespace WPFUI.Views.FileViews
 {
     /// <summary>
     /// Interaction logic for NewStack.xaml

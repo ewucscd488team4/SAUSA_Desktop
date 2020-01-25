@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
-using WPFUI.Views;
+using WPFUI.Views.FileViews;
 
 namespace WPFUI.ViewModels
 {

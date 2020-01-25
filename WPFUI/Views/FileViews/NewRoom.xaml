@@ -1,9 +1,10 @@
-﻿<Window x:Class="WPFUI.Views.NewRoom"
+﻿<Window x:Class="WPFUI.Views.FileViews.NewRoom"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
+        xmlns:local="clr-namespace:WPFUI.Views.FileViews"
         xmlns:views="clr-namespace:WPFUI.Views"
         xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"
         xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
@@ -11,10 +12,10 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=viewmodels:NewRoomViewModel}"
         
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"        
-        
-        Title="New Storage Area" Height="450" Width="800">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"   
+        Title="NewRoom" Height="450" Width="800">
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
