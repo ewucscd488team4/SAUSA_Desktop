@@ -10,7 +10,7 @@ using SAUSALibrary.Defaults;
 
 namespace WPFUI.ViewModels
 {
-    public class NewStackViewModel : INotifyPropertyChanged
+    public class NewStackViewModel : BaseModel,INotifyPropertyChanged
     {
         #region fields
 

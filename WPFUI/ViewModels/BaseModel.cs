@@ -1,19 +1,33 @@
-﻿using SAUSALibrary.Models;
+﻿using GalaSoft.MvvmLight;
+using SAUSALibrary.Models;
 using System.Collections.ObjectModel;
 
 namespace WPFUI.ViewModels
 {
-    public class BaseModel
+    public class BaseModel : ViewModelBase
     {
-        /*protected ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
+        private bool _ParentProjectOpenState;
 
-        protected string? _ProjectFileName;
+        public bool ParentProjectOpenState
+        {
+            get => _ParentProjectOpenState;
+            set => Set(ref _ParentProjectOpenState, value);
+        }
 
-        protected string? _ProjectSavePath;
+        private bool _NewProjectState;
 
-        protected string? _ProjectXMLFile;
+        public bool NewProjectState
+        {
+            get => _NewProjectState;
+            set => Set(ref _NewProjectState, value);
+        }
 
-        protected string? _ProjectDB;*/
+        private bool _FullMenutState;
 
+        public bool FullMenuState
+        {
+            get => _FullMenutState;
+            set => Set(ref _FullMenutState, value);
+        }
     }
 }
