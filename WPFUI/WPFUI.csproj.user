@@ -7,40 +7,31 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\About.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\AboutViews\About.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AboutViews\Help.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\CrateAttributes.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\DatabaseParameters.xaml.cs">
+    <Compile Update="Views\EditViews\EditExternalDBAttributes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\EditViews\EditStack.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ErrorViews\FileNotFoundError.xaml.cs">
+    <Compile Update="Views\EditViews\EditStackAttributes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\FileNotFoundError.xaml.cs">
+    <Compile Update="Views\ErrorViews\FileNotFoundError.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\FileViews\Preferences.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Help.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\NewBuild.xaml.cs">
+    <Compile Update="Views\FileViews\NewBuild.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\NewRoom.xaml.cs">
@@ -66,40 +57,31 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\About.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\AboutViews\About.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AboutViews\Help.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CrateAttributes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\DatabaseParameters.xaml">
+    <Page Update="Views\EditViews\EditExternalDBAttributes.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\EditViews\EditStack.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ErrorViews\FileNotFoundError.xaml">
+    <Page Update="Views\EditViews\EditStackAttributes.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\FileNotFoundError.xaml">
+    <Page Update="Views\ErrorViews\FileNotFoundError.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\FileViews\Preferences.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Help.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\NewBuild.xaml">
+    <Page Update="Views\FileViews\NewBuild.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\NewRoom.xaml">

@@ -119,14 +119,14 @@ namespace WPFUI.Views
 
         private void EditDatabaseParam_Click(object sender, RoutedEventArgs e)
         {
-            DatabaseParameters dataPrefs = new DatabaseParameters();
-            dataPrefs.Show();
+            EditExternalDBAttributes editDBAttributes = new EditExternalDBAttributes();
+            editDBAttributes.Show();
         }
 
         private void EditCrateAttribs_Click(object sender, RoutedEventArgs e)
         {
-            CrateAttributes cratePrefs = new CrateAttributes();
-            cratePrefs.Show();
+            EditStackAttributes stackAttributes = new EditStackAttributes();
+            stackAttributes.Show();
         }
 
         /// <summary>

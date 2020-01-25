@@ -1,9 +1,10 @@
-﻿<Window x:Class="WPFUI.Views.DatabaseParameters"
+﻿<Window x:Class="WPFUI.Views.EditViews.EditExternalDBAttributes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
+        xmlns:local="clr-namespace:WPFUI.Views.EditViews"
         xmlns:views="clr-namespace:WPFUI.Views"
         xmlns:viewmodels="clr-namespace:WPFUI.ViewModels"
         xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
@@ -13,8 +14,9 @@
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         
-        Title="Database Parameters" Height="440" Width="800">
+        Title="External DB Attributes" Height="450" Width="800">
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -24,7 +26,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>            
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
@@ -59,7 +61,7 @@
                             <Label Content="Password"/>
                             <Label Content="Your Password Goes Here"/>
                         </WrapPanel>
-                    </StackPanel>                    
+                    </StackPanel>
                 </Expander>
                 <Expander Name="MSSQLExpander" HorizontalAlignment="Left" Header="MSSQL" ExpandDirection="Down">
                     <StackPanel>
@@ -96,7 +98,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top">            
+        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top">
             <TextBlock Text=" Database Fields"/>
             <WrapPanel Margin="5">
                 <Label Content="Server"/>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_0
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\App.xaml
-20-398500663
+17-1178025227
 
-35-1464247290
+32796608997
 204-1287166992
-Views\About.xaml;Views\AboutViews\About.xaml;Views\AboutViews\Help.xaml;Views\CrateAttributes.xaml;Views\DatabaseParameters.xaml;Views\EditViews\EditStack.xaml;Views\ErrorViews\FileNotFoundError.xaml;Views\FileNotFoundError.xaml;Views\FileViews\Preferences.xaml;Views\Help.xaml;Views\MainWindow.xaml;Views\NewBuild.xaml;Views\NewRoom.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Prefs.xaml;Views\Splash.xaml;Views\StorageArea.xaml;Views\WarningViews\UpdateNotImplemented.xaml;
+Views\AboutViews\About.xaml;Views\AboutViews\Help.xaml;Views\EditViews\EditExternalDBAttributes.xaml;Views\EditViews\EditStack.xaml;Views\EditViews\EditStackAttributes.xaml;Views\ErrorViews\FileNotFoundError.xaml;Views\FileViews\NewBuild.xaml;Views\FileViews\Preferences.xaml;Views\MainWindow.xaml;Views\NewRoom.xaml;Views\NewStack.xaml;Views\OpenBuild.xaml;Views\OpenProject.xaml;Views\Prefs.xaml;Views\Splash.xaml;Views\StorageArea.xaml;Views\WarningViews\UpdateNotImplemented.xaml;
 
 False
 
