@@ -133,7 +133,7 @@
                 <Label x:Name="unityHWNDLabel" Content=""/>
             </Menu>
         </DockPanel>
-        <WindowsFormsHost Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+        <WindowsFormsHost Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Visibility="{Binding UnityWindowOnOff}">
             <WinForms:Panel x:Name="unityPanel"></WinForms:Panel>
         </WindowsFormsHost>
 

@@ -22,10 +22,8 @@ using System.Windows;
 
 namespace WPFUI.ViewModels
 {
-    public class MainWindowViewModel : BaseModel,INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
+    public class MainWindowViewModel : BaseModel
+    {        
         #region statement definitions
 
         private const string FILE_FILTER = @"SAUSA files (*.sausa)|*sausa|All Files (*.*)|*.*";
@@ -51,19 +49,19 @@ namespace WPFUI.ViewModels
         public bool OpenProjectState
         {
             get => _OpenProjectState;
-            set => SetProperty(ref _OpenProjectState, value);
+            set => Set(ref _OpenProjectState, value);
         }            
         
         private bool _MenuState;
         public bool MenuState {
             get => _MenuState;
-            set => SetProperty(ref _MenuState, value);            
+            set => Set(ref _MenuState, value);            
         }
 
         private bool _ProjectState;
         public bool ProjectState {
             get => _ProjectState;
-            set => SetProperty(ref _ProjectState, value);
+            set => Set(ref _ProjectState, value);
         }
 
         private StackModel? _AddContainerModel;
@@ -71,7 +69,7 @@ namespace WPFUI.ViewModels
         public StackModel? AddContainerModel
         {
             get => _AddContainerModel;
-            set => SetProperty(ref _AddContainerModel, value);
+            set => Set(ref _AddContainerModel, value);
         }
 
         private FullStackModel? _ContainerListModel;
@@ -79,7 +77,7 @@ namespace WPFUI.ViewModels
         public FullStackModel? ContainerListModel
         {
             get => _ContainerListModel;
-            set => SetProperty(ref _ContainerListModel, value);
+            set => Set(ref _ContainerListModel, value);
         }
 
         private Visibility _FieldVisibility;
@@ -87,7 +85,7 @@ namespace WPFUI.ViewModels
         public Visibility FieldVisibility
         {
             get => _FieldVisibility;
-            set => SetProperty(ref _FieldVisibility, value);
+            set => Set(ref _FieldVisibility, value);
         }
 
         private ProjectDBFieldModel? _FieldModel;
@@ -95,7 +93,7 @@ namespace WPFUI.ViewModels
         public ProjectDBFieldModel? FieldModel
         {
             get => _FieldModel;
-            set => SetProperty(ref _FieldModel, value);
+            set => Set(ref _FieldModel, value);
         }
 
         #endregion
@@ -128,7 +126,8 @@ namespace WPFUI.ViewModels
             MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
             ProjectState = false; //it is assumed no project is open, ergo menu items are disabled by default
             OpenProjectState = true; //because SAUSA opens in a closed project state by default, this must be enabled
-            FieldVisibility = Visibility.Hidden;            
+            FieldVisibility = Visibility.Hidden;
+            UnityWindowOnOff = Visibility.Hidden;
             OpenProjectCommand = new RelayCommand(OnOpenProject);
             NewProjectCommand = new RelayCommand(OnNewProject);
             NewStackCommand = new RelayCommand(OnNewStack);
@@ -171,8 +170,8 @@ namespace WPFUI.ViewModels
                 //write project details to settings file, Projects child node
 
                 //open list of stackmodel to populate the container list                
-                Containers = ReadSQLite.GetEntireStack(fqDBFilePath, _ProjectDB);                
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+                Containers = ReadSQLite.GetEntireStack(fqDBFilePath, _ProjectDB);
+                RaisePropertyChanged(nameof(Containers));
 
                 //populate field list
                 FieldModel = ReadSQLite.GetDatabaseFieldLabels(fqDBFilePath, _ProjectDB);
@@ -181,7 +180,8 @@ namespace WPFUI.ViewModels
                 AddContainerModel = new StackModel();
 
                 //change field visibility to enable use
-                FieldVisibility = Visibility.Visible;                                
+                FieldVisibility = Visibility.Visible;
+                UnityWindowOnOff = Visibility.Visible;
 
                 //TODO populate 3d window with all existing containers in the project database
             } else
@@ -292,7 +292,7 @@ namespace WPFUI.ViewModels
             //clear the container list
             Containers.Clear();
             //update view
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+            RaisePropertyChanged(nameof(Containers));
             //clear scratch folder
             foreach (FileInfo file in di.GetFiles())
             {
@@ -311,7 +311,7 @@ namespace WPFUI.ViewModels
                 //add new container to SQLite database
                 Containers.Add(new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
                 //call update on listbox List to pull new list from SQLite database
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+                RaisePropertyChanged(nameof(Containers));
                 //TODO add new container to project SQLite database when add button is pressed.
 
                 //TODO add new container to 3d view when add button is pressed.
@@ -330,24 +330,14 @@ namespace WPFUI.ViewModels
             //delete container from container List
             Containers.Remove(ContainerListModel);
             //call update on view
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Containers)));
+            RaisePropertyChanged(nameof(Containers));
             //TODO detele container from database when delete button is pressed
             //TODO delete container from 3d view when delete button is pressed
         }
 
         #endregion
 
-        #region supporting methods
-
-        private void SetProperty<T>(ref T field, T value,
-            [CallerMemberName]string propertyName = null) //<- this is an optional parameter so we dont have to pass a value to use the method
-        {
-            if (!EqualityComparer<T>.Default.Equals(field, value)) //if using custom classes need to implement equals
-            {
-                field = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        #region supporting methods             
         
         private string ConvertToSQLiteFileName (string filename)
         {
