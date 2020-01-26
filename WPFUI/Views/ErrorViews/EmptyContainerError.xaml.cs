@@ -13,14 +13,15 @@ using System.Windows.Shapes;
 namespace WPFUI.Views.ErrorViews
 {
     /// <summary>
-    /// Interaction logic for FileNotFoundError.xaml
+    /// Interaction logic for EmptyContainerError.xaml
     /// </summary>
-    public partial class FileNotFoundError : Window
+    public partial class EmptyContainerError : Window
     {
-        public FileNotFoundError()
+        public EmptyContainerError()
         {
             InitializeComponent();
         }
+
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
         {
             //closes the Window, all other processing happens in the view model

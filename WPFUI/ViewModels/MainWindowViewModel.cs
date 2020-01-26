@@ -160,14 +160,31 @@ namespace WPFUI.ViewModels
                 _ProjectSavePath = openDlg.FileName;
                 _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
                 _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
-                var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;                
 
-                OpenProjectState = false; //this is disabled so we can't open a new project again, we have one already open
-                ProjectState = true; //enable menu commands to make a new storage room and a new stack
-                MenuState = true; //enable full menu options
+                //parent class fields
+                ProjectFileName = openDlg.SafeFileName;
+                FullProjectSavePath = openDlg.FileName;
+                ProjectDBInScratchFile = ConvertToSQLiteFileName(ProjectFileName);
+                ProjectXMLInScratchFolder = ConvertToXMLFileName(ProjectFileName);
+
+                var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;
+
+                //disable new project/open project because we have one already open
+                OpenProjectState = false;
+                NewOpenProjectOnOff = false;
+
+                //enable new storage room and a new stack menu options
+                ProjectState = true;
+                NewRoomNewStackOnOff = true;
+
+                //enable full menu options
+                MenuState = true;
+                FullMenuOnOff = true;
 
                 FileCompressionUtils.OpenProject(openDlg.FileName, FilePathDefaults.ScratchFolder);
-                //write project details to settings file, Projects child node
+
+                //write project details to settings XML file, Projects child node
+
 
                 //open list of stackmodel to populate the container list                
                 Containers = ReadSQLite.GetEntireStack(fqDBFilePath, _ProjectDB);
@@ -183,10 +200,12 @@ namespace WPFUI.ViewModels
                 FieldVisibility = Visibility.Visible;
                 UnityWindowOnOff = Visibility.Visible;
 
-                //TODO populate 3d window with all existing containers in the project database
+                //TODO dump database to CSV file for unity window to read
             } else
-            {
-                //TODO show error dialog that "something went wrong" opening the given project file
+            {                
+                //launch something went wrong window
+                SomethingWentWrong wrong = new SomethingWentWrong();
+                wrong.Show();
             }            
         }
 
@@ -204,14 +223,29 @@ namespace WPFUI.ViewModels
 
             if(openDlg.ShowDialog() == true)
             {
+                //local fields
                 _ProjectFileName = openDlg.SafeFileName;
                 _ProjectSavePath = openDlg.FileName;
                 _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
                 _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
+
+                //parent class fields
+                ProjectFileName = openDlg.SafeFileName;
+                FullProjectSavePath = openDlg.FileName;
+                ProjectDBInScratchFile = ConvertToSQLiteFileName(ProjectFileName);
+                ProjectXMLInScratchFolder = ConvertToXMLFileName(ProjectFileName);
+                
+                //full qualified project database path in scratch folder
                 var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;
 
-                OpenProjectState = false; //this is set to disabled so we can't open a new project again; we have one already open
-                ProjectState = true; //enable menu commands to make a new storage room and a new stack
+                //this is set to disabled so we can't open a new project again; we have one already open
+                OpenProjectState = false;
+                NewOpenProjectOnOff = false;
+
+                //enable menu commands to make a new storage room and a new stack
+                ProjectState = true;
+                NewRoomNewStackOnOff = true;
+
                 //MenuState = true; //leave full menu options disabled, as we have nothing to act on with those menu options
 
                 //set up blank project files to the scratch directory
@@ -224,9 +258,8 @@ namespace WPFUI.ViewModels
         /// </summary>        
         private void OnNewStack()
         {
-            NewStack newStack = new NewStack(_ProjectDB, Containers);
-            newStack.Show();            
-            //TODO let 3d view know project database has been populated
+            NewStack newStack = new NewStack();
+            newStack.Show();                        
         }
 
         /// <summary>
@@ -289,16 +322,21 @@ namespace WPFUI.ViewModels
             DirectoryInfo di = new DirectoryInfo(FilePathDefaults.ScratchFolder);
             //hide container list, container fields, and container text boxes
             FieldVisibility = Visibility.Hidden;
+
+            //hide unity window
+            UnityWindowOnOff = Visibility.Hidden;
+
             //clear the container list
             Containers.Clear();
+
             //update view
             RaisePropertyChanged(nameof(Containers));
+
             //clear scratch folder
             foreach (FileInfo file in di.GetFiles())
             {
                 file.Delete();
-            }                                    
-            //TODO on close menu command turn off 3d view
+            }
         }
 
         /// <summary>
@@ -316,8 +354,9 @@ namespace WPFUI.ViewModels
 
                 //TODO add new container to 3d view when add button is pressed.
             } else
-            {
-                //TODO launch error dialog complaining about empty or unchanged container entry fields
+            {                
+                EmptyContainerError econtainerError = new EmptyContainerError();
+                econtainerError.Show();
             }
 
         }
@@ -329,9 +368,12 @@ namespace WPFUI.ViewModels
         {
             //delete container from container List
             Containers.Remove(ContainerListModel);
+
             //call update on view
             RaisePropertyChanged(nameof(Containers));
+
             //TODO detele container from database when delete button is pressed
+
             //TODO delete container from 3d view when delete button is pressed
         }
 

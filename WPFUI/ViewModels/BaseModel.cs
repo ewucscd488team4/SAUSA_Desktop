@@ -51,6 +51,14 @@ namespace WPFUI.ViewModels
             set => Set(ref _UnityWindowOnOff, value);
         }
 
+        private Visibility _MainWindowFieldVisibility;
+
+        public Visibility MainWindowFieldVisibility
+        {
+            get => _MainWindowFieldVisibility;
+            set => Set(ref _MainWindowFieldVisibility, value);
+        }
+
         public ObservableCollection<FullStackModel> ParentContainers { get; set; } = new ObservableCollection<FullStackModel>();
 
         #endregion

@@ -25,7 +25,13 @@
     <Compile Update="Views\EditViews\StorageAreaAttributes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ErrorViews\EmptyContainerError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ErrorViews\FileNotFoundError.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ErrorViews\SomethingWentWrong.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\FileViews\NewRoom.xaml.cs">
@@ -75,7 +81,13 @@
     <Page Update="Views\EditViews\StorageAreaAttributes.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ErrorViews\EmptyContainerError.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ErrorViews\FileNotFoundError.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ErrorViews\SomethingWentWrong.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\FileViews\NewRoom.xaml">

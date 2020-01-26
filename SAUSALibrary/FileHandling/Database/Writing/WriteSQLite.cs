@@ -1,5 +1,7 @@
 ﻿using SAUSALibrary.Models;
+using SAUSALibrary.Models.Database;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.IO;
 using System.Text;
@@ -245,6 +247,72 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Populate the new project SQLite database file with standard fields plus whatever custom fields were added
+        /// </summary>
+        /// <param name="fullDBFilePath"></param>
+        /// <param name="dbFileName"></param>
+        /// <param name="specifiedCustomDBFieldsList"></param>
+        /// <returns></returns>
+        public static bool PopulateCustomProjectDatabase(string fullDBFilePath, string dbFileName, ObservableCollection<IndividualDatabaseFieldModel> specifiedCustomDBFieldsList)
+        {
+            StringBuilder sb = new StringBuilder();
+            string[] table = dbFileName.Split('.');
+
+            //defines the SQLite connection
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fullDBFilePath + ";Version=3;");
+
+            //opens the connection
+            m_dbConnection.Open();
+
+            //use stringbuider to build sql command.
+            sb.Append("create table ");
+            sb.Append(table[0]);
+            sb.Append(" (ID INTEGER PRIMARY KEY AUTOINCREMENT,"); //index
+            sb.Append(defaultFields[4] + " REAL,"); //xpos
+            sb.Append(defaultFields[5] + " REAL,"); //ypos
+            sb.Append(defaultFields[6] + " REAL,"); //zpos
+            sb.Append(defaultFields[0] + " REAL,"); //length
+            sb.Append(defaultFields[1] + " REAL,"); //width
+            sb.Append(defaultFields[2] + " REAL,"); //height
+            sb.Append(defaultFields[3] + " REAL,"); //weight
+            sb.Append(defaultFields[7] + " VARCHAR(80)"); //name
+
+            //appends custom fields, if there are any given
+            if (specifiedCustomDBFieldsList.Count > 0)
+            {
+                if (specifiedCustomDBFieldsList.Count == 1)
+                {
+                    sb.Append(specifiedCustomDBFieldsList[0].FieldName + "" + specifiedCustomDBFieldsList[0].FieldType);
+                }
+                else if (specifiedCustomDBFieldsList.Count == 2)
+                {
+                    sb.Append(specifiedCustomDBFieldsList[0].FieldName + "" + specifiedCustomDBFieldsList[0].FieldType + ",");
+                    sb.Append(specifiedCustomDBFieldsList[1].FieldName + "" + specifiedCustomDBFieldsList[1].FieldType);
+                }
+                else
+                {
+                    for (int i = 0; i < specifiedCustomDBFieldsList.Count - 2; i++)
+                    {
+                        sb.Append(specifiedCustomDBFieldsList[i].FieldName + "" + specifiedCustomDBFieldsList[i] + ",");
+                    }
+                    sb.Append(specifiedCustomDBFieldsList[specifiedCustomDBFieldsList.Count - 1].FieldName + "" + specifiedCustomDBFieldsList[specifiedCustomDBFieldsList.Count - 1].FieldType);
+                }
+            }
+            sb.Append(");");
+
+            //defines the sql query command, and what database connection to execute it on
+            SQLiteCommand command = new SQLiteCommand(sb.ToString(), m_dbConnection);
+
+            //runs command to build new table
+            command.ExecuteNonQuery();
+
+            //do clean up
+            sb.Clear();
+            m_dbConnection.Close();
+            return false;
         }
 
     }

@@ -1,20 +1,18 @@
 ﻿using SAUSALibrary.Models.Database;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using SAUSALibrary.DataProcessing;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
 using System.IO;
 using SAUSALibrary.Defaults;
+using SAUSALibrary.FileHandling.Database.Reading;
+using SAUSALibrary.FileHandling.Database.Writing;
 
 namespace WPFUI.ViewModels
 {
-    public class NewStackViewModel : BaseModel,INotifyPropertyChanged
+    public class NewStackViewModel : BaseModel
     {
         #region fields
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         private string[]? _ProjectDBFile;
 
@@ -39,7 +37,7 @@ namespace WPFUI.ViewModels
         public IndividualDatabaseFieldModel? Model
         {
             get => _Model;
-            set => SetProperty(ref _Model, value);
+            set => Set(ref _Model, value);
         }
 
         #endregion
@@ -62,7 +60,7 @@ namespace WPFUI.ViewModels
             {
                 Model.FieldName = NameField; //sets the model field name to whatever text was typed into the name box
                 NewDBFields.Add(new IndividualDatabaseFieldModel() { FieldName = Model.FieldName, FieldType = Model.FieldType }); //adds the new Model to the custom field list with the selected item from the drop down box and the text in the name field.
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NewDBFields))); //tells the View to update
+                RaisePropertyChanged(nameof(NewDBFields)); //tells the View to update
             }
             else
             {
@@ -73,6 +71,17 @@ namespace WPFUI.ViewModels
         private void OnWriteFields()
         {
             //TODO write all new database fields in the optional field list to the project database
+            var fqDBFilePath = FilePathDefaults.ScratchFolder + ProjectDBInScratchFile;
+
+            WriteSQLite.PopulateCustomProjectDatabase(fqDBFilePath, ProjectFileName, NewDBFields);
+
+            //turn on main window processing fields
+            UnityWindowOnOff = System.Windows.Visibility.Visible;
+            MainWindowFieldVisibility = System.Windows.Visibility.Visible;
+
+            //initialize the parent class container list and set the "changed" flag
+            ParentContainers = ReadSQLite.GetEntireStack(fqDBFilePath, ProjectDBInScratchFile);
+            RaisePropertyChanged(nameof(ParentContainers));
         }
 
         /// <summary>
@@ -81,19 +90,10 @@ namespace WPFUI.ViewModels
         private void OnDeleteField()
         {
             NewDBFields.Remove(Model); //removes the clicked on field
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NewDBFields))); //tells the View to update
+            RaisePropertyChanged(nameof(NewDBFields)); //tells the View to update
         }
 
         #region helper_methods
-
-        private void SetProperty<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
-        {
-            if (!EqualityComparer<T>.Default.Equals(field, value)) //if using custom classes need to implement equals
-            {
-                field = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         /// <summary>
         /// Gets the project db file from the scratch folder for writing

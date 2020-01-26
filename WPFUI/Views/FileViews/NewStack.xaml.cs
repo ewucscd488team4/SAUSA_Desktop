@@ -8,20 +8,9 @@ namespace WPFUI.Views.FileViews
     /// Interaction logic for NewStack.xaml
     /// </summary>
     public partial class NewStack : Window
-    {
-        private string? projectDB;
-
-        private ObservableCollection<FullStackModel> containers;
-
+    {        
         public NewStack()
         {
-            InitializeComponent();
-        }
-
-        public NewStack(string? projectDBName, ObservableCollection<FullStackModel> incomingContainers)
-        {
-            projectDB = projectDBName;
-            containers = incomingContainers;
             InitializeComponent();
         }
 
