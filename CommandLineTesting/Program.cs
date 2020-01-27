@@ -1,5 +1,5 @@
 ﻿using SAUSALibrary.Defaults;
-using SAUSALibrary.Models;
+using SAUSALibrary.Models.Database;
 using SAUSALibrary.FileHandling.Database.Reading;
 using SAUSALibrary.FileHandling.XML.Writing;
 using SAUSALibrary.FileHandling.Database.Writing;
@@ -63,8 +63,35 @@ namespace CommandLineTesting
             model = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.DefaultSavePath, "Hangerbay");
             Console.WriteLine(model.name);*/
 
-            string test = FilePathDefaults.ScratchFolder + convertSQLiteFileName("Hangerbay.sousa");
-            Console.WriteLine(test);
+            string testDir = FilePathDefaults.DefaultSavePath + @"\Test.sqlite";
+            string testDV = "Test.sqlite";
+            ObservableCollection<IndividualDatabaseFieldModel> list = new ObservableCollection<IndividualDatabaseFieldModel>();
+
+            IndividualDatabaseFieldModel field1 = new IndividualDatabaseFieldModel();
+            IndividualDatabaseFieldModel field2 = new IndividualDatabaseFieldModel();
+            IndividualDatabaseFieldModel field3 = new IndividualDatabaseFieldModel();
+            IndividualDatabaseFieldModel field4 = new IndividualDatabaseFieldModel();
+
+            field1.FieldName = "PartNum";
+            field2.FieldName = "SerNum";
+            field3.FieldName = "FGC";
+            field4.FieldName = "Location";
+
+            field1.FieldType = "TEXT";
+            field2.FieldType = "TEXT";
+            field3.FieldType = "TEXT";
+            field4.FieldType = "TEXT";
+
+            list.Add(field1);
+            list.Add(field2);
+            list.Add(field3);
+            list.Add(field4);
+
+            WriteSQLite.CreateProjectDatabase(testDir, testDV);
+            WriteSQLite.PopulateCustomProjectDatabase(testDir, testDV, list);
+
+            Console.WriteLine(testDir);
+
         }
 
         private static string convertSQLiteFileName(string filename)

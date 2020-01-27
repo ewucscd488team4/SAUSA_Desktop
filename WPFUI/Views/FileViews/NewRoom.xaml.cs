@@ -43,7 +43,7 @@ namespace WPFUI.Views.FileViews
                 dimensions[1] = rWidth.Text;
                 dimensions[2] = rHeight.Text;
                 dimensions[3] = rWeight.Text;
-                WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder + WorkingFile, dimensions);
+                WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder, WorkingFile, dimensions);
             }
         }
     }

@@ -22,10 +22,10 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// <summary>
         /// Write a new line of data into the given project database. ValuesToEnter must be in x,y,z,L,W,H,Weight,Name order.
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="databaseFileName"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="dbFileName"></param>
         /// <param name="valuesToEnter"></param>
-        public static void AddSQLiteData(string databasePath, string databaseFileName, List<string> valuesToEnter)
+        public static void AddSQLiteData(string workingFolder, string dbFileName, List<string> valuesToEnter)
         {
             ///set up this way for testing, will make this method take two lists later
             List<string> defaultDatabaseFieldHeaders = new List<string>
@@ -34,9 +34,9 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             };
 
             //split the file name into name plus extension
-            var fileSplit = databaseFileName.Split('.');
+            var fileSplit = dbFileName.Split('.');
             //combine file path with file name to make a full file path for 
-            var fqFilePath = Path.Combine(databasePath, databaseFileName);
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
 
             //if db file exists
             if (File.Exists(fqFilePath))
@@ -107,12 +107,12 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// New database will have a default table in the database using the given file name as the table name
         /// with minimum acceptable column headers.
         /// </summary>
-        /// <param name="directoryToCreateIn"></param>
-        /// <param name="newDatabaseFileName"></param>
-        public static void CreateDefaultProjectDatabase(string directoryToCreateIn, string newDatabaseFileName)
+        /// <param name="workingFolder"></param>
+        /// <param name="dbFileName"></param>
+        public static void CreateDefaultProjectDatabase(string workingFolder, string dbFileName)
         {            
-            var fqFilePath = Path.Combine(directoryToCreateIn, newDatabaseFileName); //combines given save folder and file name into a fully qualified file path
-            string[] file = newDatabaseFileName.Split('.');
+            var fqFilePath = Path.Combine(workingFolder, dbFileName); //combines given save folder and file name into a fully qualified file path
+            string[] file = dbFileName.Split('.');
                         
             StringBuilder sb = new StringBuilder();
 
@@ -148,41 +148,30 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             sb.Clear();
             m_dbConnection.Close();
         }
-
-        /// <summary>
-        /// Create project database with default fields AND custom fields defined by the user in the New Stack View.
-        /// </summary>
-        /// <param name="fullDBFilePath"></param>
-        /// <param name="dbFileName"></param>
-        /// <param name="incomingData"></param>
-        /// <returns></returns>
-        public static bool AddToProjectDatabase(string fullDBFilePath, string dbFileName, FullStackModel incomingData)
-        {
-            return false;
-        }
-
+        
         /// <summary>
         /// Creates a project SQLite database file with nothing in it.
         /// </summary>
-        /// <param name="directoryToCreateIn"></param>
-        public static void CreateProjectDatabase(string directoryToCreateIn, string dbFileName)
+        /// <param name="workingFolder"></param>
+        public static void CreateProjectDatabase(string workingFolder, string dbFileName)
         {
-            var fqFilePath = Path.Combine(directoryToCreateIn, dbFileName);
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
             SQLiteConnection.CreateFile(fqFilePath);
         }
 
         /// <summary>
         /// Writes default project database table and minimum required SAUSA fields to the given project database, with default table being defined as the given file name minus given extension.
         /// </summary>
-        /// <param name="fullDBFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="dbFileName"></param>
-        public static void PopulateProjectDatabase(string fullDBFilePath, string dbFileName)
+        public static void PopulateProjectDatabase(string workingFolder, string dbFileName)
         {
             StringBuilder sb = new StringBuilder();
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
             string[] table = dbFileName.Split('.');
 
             //defines the SQLite connection
-            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fullDBFilePath + ";Version=3;");
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
 
             //opens the connection
             m_dbConnection.Open();
@@ -215,17 +204,18 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// <summary>
         /// Delete container presently in Main Window view from the database, if it exists therein.
         /// </summary>
-        /// <param name="fullDBFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="dbFileName"></param>
         /// <param name="IndexToDelete"></param>
         /// <returns></returns>
-        public static bool DeleteContainerFromProjectDatabase(string fullDBFilePath, string dbFileName, long IndexToDelete)
+        public static bool DeleteContainerFromProjectDatabase(string workingFolder, string dbFileName, long IndexToDelete)
         {
             //TODO when delete container is called figure out order of operations for deleting an entry out of the project sqlite database
             string[] table = dbFileName.Split('.');
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
 
             //defines the SQLite connection
-            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fullDBFilePath + ";Version=3;");
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
 
             //opens the connection
             m_dbConnection.Open();
@@ -252,17 +242,18 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// <summary>
         /// Populate the new project SQLite database file with standard fields plus whatever custom fields were added
         /// </summary>
-        /// <param name="fullDBFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="dbFileName"></param>
         /// <param name="specifiedCustomDBFieldsList"></param>
         /// <returns></returns>
-        public static bool PopulateCustomProjectDatabase(string fullDBFilePath, string dbFileName, ObservableCollection<IndividualDatabaseFieldModel> specifiedCustomDBFieldsList)
+        public static bool PopulateCustomProjectDatabase(string workingFolder, string dbFileName, ObservableCollection<IndividualDatabaseFieldModel> specifiedCustomDBFieldsList)
         {
             StringBuilder sb = new StringBuilder();
             string[] table = dbFileName.Split('.');
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
 
             //defines the SQLite connection
-            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fullDBFilePath + ";Version=3;");
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
 
             //opens the connection
             m_dbConnection.Open();
@@ -277,29 +268,33 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             sb.Append(defaultFields[0] + " REAL,"); //length
             sb.Append(defaultFields[1] + " REAL,"); //width
             sb.Append(defaultFields[2] + " REAL,"); //height
-            sb.Append(defaultFields[3] + " REAL,"); //weight
-            sb.Append(defaultFields[7] + " VARCHAR(80)"); //name
+            sb.Append(defaultFields[3] + " REAL,"); //weight            
 
             //appends custom fields, if there are any given
             if (specifiedCustomDBFieldsList.Count > 0)
             {
+                sb.Append(defaultFields[7] + " VARCHAR(80),"); //name
+
                 if (specifiedCustomDBFieldsList.Count == 1)
                 {
-                    sb.Append(specifiedCustomDBFieldsList[0].FieldName + "" + specifiedCustomDBFieldsList[0].FieldType);
+                    sb.Append(specifiedCustomDBFieldsList[0].FieldName + " " + specifiedCustomDBFieldsList[0].FieldType);
                 }
                 else if (specifiedCustomDBFieldsList.Count == 2)
                 {
-                    sb.Append(specifiedCustomDBFieldsList[0].FieldName + "" + specifiedCustomDBFieldsList[0].FieldType + ",");
-                    sb.Append(specifiedCustomDBFieldsList[1].FieldName + "" + specifiedCustomDBFieldsList[1].FieldType);
+                    sb.Append(specifiedCustomDBFieldsList[0].FieldName + " " + specifiedCustomDBFieldsList[0].FieldType + ",");
+                    sb.Append(specifiedCustomDBFieldsList[1].FieldName + " " + specifiedCustomDBFieldsList[1].FieldType);
                 }
                 else
                 {
-                    for (int i = 0; i < specifiedCustomDBFieldsList.Count - 2; i++)
+                    for (int i = 0; i < specifiedCustomDBFieldsList.Count - 1; i++)
                     {
-                        sb.Append(specifiedCustomDBFieldsList[i].FieldName + "" + specifiedCustomDBFieldsList[i] + ",");
-                    }
-                    sb.Append(specifiedCustomDBFieldsList[specifiedCustomDBFieldsList.Count - 1].FieldName + "" + specifiedCustomDBFieldsList[specifiedCustomDBFieldsList.Count - 1].FieldType);
+                        sb.Append(specifiedCustomDBFieldsList[i].FieldName + " " + specifiedCustomDBFieldsList[i].FieldType + ",");
+                    }                    
+                    sb.Append(specifiedCustomDBFieldsList[specifiedCustomDBFieldsList.Count - 1].FieldName + " " + specifiedCustomDBFieldsList[specifiedCustomDBFieldsList.Count - 1].FieldType);
                 }
+            } else
+            {
+                sb.Append(defaultFields[7] + " VARCHAR(80)"); //name
             }
             sb.Append(");");
 

@@ -14,6 +14,8 @@ namespace WPFUI.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string? _DefaultSettingFileName = "Settings.xml";
+
         /// <summary>
         /// Value for the text box
         /// </summary>
@@ -130,7 +132,7 @@ namespace WPFUI.ViewModels
         /// <param></param>
         private void SetThemeXML(string newData)
         {
-            WriteXML.WriteThemeSetting(FilePathDefaults.SettingsFile, newData);
+            WriteXML.WriteThemeSetting(FilePathDefaults.SettingsFile, _DefaultSettingFileName, newData);
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void SetDirectoryXML(string newData)
         {
-            WriteXML.WritePathSetting(FilePathDefaults.SettingsFile, newData);
+            WriteXML.WritePathSetting(FilePathDefaults.SettingsFile, _DefaultSettingFileName, newData);
         }
     }
 }

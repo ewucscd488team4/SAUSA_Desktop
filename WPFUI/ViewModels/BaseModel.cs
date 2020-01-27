@@ -11,13 +11,18 @@ namespace WPFUI.ViewModels
     public class BaseModel : ViewModelBase
     {
         #region parent class variable definitions
+
+        //full path to the project file EXAMPLE: "C:\Users\Diesel\Documents\Sausa\something.sousa"
         protected string? FullProjectSavePath { get; set; }
 
+        //project file only EXAMPLE: "something.sousa"
         protected string? ProjectFileName { get; set; }
 
-        protected string? ProjectXMLInScratchFolder { get; set; }
+        //project XML file EXAMPLE: "something.XML"
+        protected string? ProjectXMLFile { get; set; }
 
-        protected string? ProjectDBInScratchFile { get; set; }
+        //project sqlite database file EXAMPLE: "something.sqlite"
+        protected string? ProjectSQLiteDBFile { get; set; }
 
         private bool _NewOpenProjectOnOff;
 

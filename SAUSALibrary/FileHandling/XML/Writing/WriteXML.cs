@@ -15,10 +15,10 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <summary>
         /// Writes out a blank project XML file to to given fully qualified file name.
         /// </summary>
-        /// <param name="folderToCreateIn"></param>
-        public static void WriteBlankXML(string folderToCreateIn, string xmlFileName) //NOTE this includes the xml file we need to write
+        /// <param name="workingFolder"></param>
+        public static void WriteBlankXML(string workingFolder, string xmlFileName) //NOTE this includes the xml file we need to write
         {            
-            var fqPath = Path.Combine(folderToCreateIn, xmlFileName);
+            var fqPath = Path.Combine(workingFolder, xmlFileName);
 
             if (!File.Exists(fqPath)) //ensure we don't have a file 
             {
@@ -70,17 +70,18 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <summary>
         /// Writes given last project save path into given settings fully qualified settings file path.
         /// </summary>
-        /// <param name="fullyQualifiedSettingsFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="lastProjectSavePath"></param>
-        public static void WritePathSetting(string fullyQualifiedSettingsFilePath, string lastProjectSavePath)
+        public static void WritePathSetting(string workingFolder, string xmlFileName, string lastProjectSavePath)
         {
-            if (File.Exists(fullyQualifiedSettingsFilePath))
+            var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+            if (File.Exists(fqXMLFileName))
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(fullyQualifiedSettingsFilePath);
+                xmlDoc.Load(fqXMLFileName);
                 XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.SettingsSettingStructure);
                 node.Attributes[1].Value = lastProjectSavePath;
-                xmlDoc.Save(fullyQualifiedSettingsFilePath);
+                xmlDoc.Save(fqXMLFileName);
             }
             else
             {
@@ -94,15 +95,16 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// </summary>
         /// <param name="fullyQualifiedSettingsFilePath"></param>
         /// <param name="lastThemeUsed"></param>
-        public static void WriteThemeSetting(string fullyQualifiedSettingsFilePath, string lastThemeUsed)
+        public static void WriteThemeSetting(string fullyQualifiedSettingsFilePath, string xmlFileName, string lastThemeUsed)
         {
-            if (File.Exists(fullyQualifiedSettingsFilePath))
+            var fqXMLFileName = Path.Combine(fullyQualifiedSettingsFilePath, xmlFileName);
+            if (File.Exists(fqXMLFileName))
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(fullyQualifiedSettingsFilePath);
+                xmlDoc.Load(fqXMLFileName);
                 XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.SettingsSettingStructure);
                 node.Attributes[0].Value = lastThemeUsed;
-                xmlDoc.Save(fullyQualifiedSettingsFilePath);
+                xmlDoc.Save(fqXMLFileName);
             }
             else
             {
@@ -113,17 +115,18 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <summary>
         /// Sets the project name in the project XML file.
         /// </summary>
-        /// <param name="fullProjectXMLFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="projectName"></param>
-        public static void SaveProjectName(string fullProjectXMLFilePath, string projectName)
+        public static void SaveProjectName(string workingFolder, string xmlFileName, string projectName)
         {
-            if(File.Exists(fullProjectXMLFilePath))
+            var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+            if(File.Exists(fqXMLFileName))
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(fullProjectXMLFilePath);
+                xmlDoc.Load(fqXMLFileName);
                 XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectNameStructure);
                 node.Attributes[0].Value = projectName; //only one attribute in this node
-                xmlDoc.Save(fullProjectXMLFilePath);
+                xmlDoc.Save(fqXMLFileName);
             } else
             {
                 throw new FileNotFoundException("Given XML File does not exist!");
@@ -135,16 +138,17 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// </summary>
         /// <param name="dBaseFileName"></param>
         /// <param name="dBaseTableName"></param>
-        public static void SaveDatabase(string FullProjectXMLFilePath, string dBaseTableName, string dBaseFileName)
+        public static void SaveDatabase(string workingFolder, string xmlFileName, string dBaseTableName, string dBaseFileName)
         {
-            if(File.Exists(FullProjectXMLFilePath))
+            var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+            if(File.Exists(fqXMLFileName))
             {
                 XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(FullProjectXMLFilePath);
+                xmlDoc.Load(fqXMLFileName);
                 XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectStackDataStructure);
                 node.Attributes[0].Value = dBaseTableName; //database table name
                 node.Attributes[1].Value = dBaseFileName; //database file name
-                xmlDoc.Save(FullProjectXMLFilePath);
+                xmlDoc.Save(fqXMLFileName);
             } else
             {
                 throw new FileNotFoundException("Given XML File does not exist!");
@@ -156,22 +160,23 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// Sets the storage area for the project XML file.
         /// DimensionData shall be organized thus: length, width, height, weight capacity.
         /// </summary>
-        /// <param name="fullProjectXMLFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="dimensionsDataArray"></param>
-        public static void SaveDimensions(string fullProjectXMLFilePath, string[] dimensionsDataArray)
+        public static void SaveDimensions(string workingFolder, string xmlFileName, string[] dimensionsDataArray)
         {
-            if(File.Exists(fullProjectXMLFilePath))
+            var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+            if (File.Exists(fqXMLFileName))
             {
                 if (dimensionsDataArray.Length == 4)
                 {
                     XmlDocument xmlDoc = new XmlDocument();
-                    xmlDoc.Load(fullProjectXMLFilePath);
+                    xmlDoc.Load(fqXMLFileName);
                     XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectRoomDimensionsStructure);
                     node.Attributes[0].Value = dimensionsDataArray[0]; //length
                     node.Attributes[1].Value = dimensionsDataArray[1]; //width
                     node.Attributes[2].Value = dimensionsDataArray[2]; //height
                     node.Attributes[3].Value = dimensionsDataArray[3]; //weight capacity
-                    xmlDoc.Save(fullProjectXMLFilePath);
+                    xmlDoc.Save(fqXMLFileName);
                 }
                 else
                 {

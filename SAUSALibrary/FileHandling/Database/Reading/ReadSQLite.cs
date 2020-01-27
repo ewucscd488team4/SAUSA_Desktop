@@ -10,22 +10,22 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <summary>
         /// Gets a truncated list of items in the project stack, index and name only. For use in the main window crate list ListBox.
         /// </summary>
-        /// <param name="dbFullFilePath"></param>
-        /// <param name="dbFile"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="dbFileName"></param>
         /// <returns></returns>
-        public static ObservableCollection<MiniStackModel> GetContainerListInfo(string dbFullFilePath, string dbFile)
+        public static ObservableCollection<MiniStackModel> GetContainerListInfo(string workingFolder, string dbFileName)
         {
             ObservableCollection<MiniStackModel> modelList = new ObservableCollection<MiniStackModel>(); //collection to return
-            
-            string[] file = dbFile.Split('.'); //split the dbfile so we can use the file name with out the file extension
+            var fqDBFileName = Path.Combine(workingFolder, dbFileName);
+            string[] fileName = dbFileName.Split('.'); //split the dbfile so we can use the file name with out the file extension
 
-            if (File.Exists(dbFullFilePath))
+            if (File.Exists(fqDBFileName))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + dbFullFilePath + ";Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqDBFileName + ";Version=3;");
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
-                var queryString = "select ID, Name from " + file[0];
+                var queryString = "select ID, Name from " + fileName[0];
 
                 SQLiteCommand command = new SQLiteCommand(queryString, m_dbConnection);                
 
@@ -48,21 +48,22 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <summary>
         /// Reads and returns the entire project database for use in drawing the 3D GUI view window
         /// </summary>
-        /// <param name="dbFullFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public static ObservableCollection<FullStackModel> GetEntireStack(string dbFullFilePath, string dbFile)
+        public static ObservableCollection<FullStackModel> GetEntireStack(string workingFolder, string dbFileName)
         {
             ObservableCollection<FullStackModel> modelList = new ObservableCollection<FullStackModel>();
-            string[] file = dbFile.Split('.');
+            var fqDBFileName = Path.Combine(workingFolder, dbFileName);
+            string[] fileName = dbFileName.Split('.');
 
-            if (File.Exists(dbFullFilePath))
+            if (File.Exists(fqDBFileName))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + dbFullFilePath + ";Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqDBFileName + ";Version=3;");
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
-                SQLiteCommand command = new SQLiteCommand("select * from " + file[0], m_dbConnection);
+                SQLiteCommand command = new SQLiteCommand("select * from " + fileName[0], m_dbConnection);
 
                 dritem = command.ExecuteReader();
 
@@ -94,22 +95,22 @@ namespace SAUSALibrary.FileHandling.Database.Reading
         /// <summary>
         /// Reads the current project SQLite database and returns the column header labels for the database
         /// </summary>
-        /// <param name="dbFullFilePath"></param>
-        /// <param name="dbFile"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="dbFileName"></param>
         /// <returns></returns>
-        public static ProjectDBFieldModel GetDatabaseFieldLabels(string dbFullFilePath, string dbFile)
+        public static ProjectDBFieldModel GetDatabaseFieldLabels(string workingFolder, string dbFileName)
         {
             ProjectDBFieldModel model = new ProjectDBFieldModel();
+            var fqDBFileName = Path.Combine(workingFolder, dbFileName);
+            string[] fileName = dbFileName.Split('.');
 
-            string[] file = dbFile.Split('.');
-
-            if (File.Exists(dbFullFilePath))
+            if (File.Exists(fqDBFileName))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + dbFullFilePath + ";Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqDBFileName + ";Version=3;");
                 SQLiteDataReader dritem = null;
                 m_dbConnection.Open();
 
-                SQLiteCommand command = new SQLiteCommand("select * from " + file[0], m_dbConnection);
+                SQLiteCommand command = new SQLiteCommand("select * from " + fileName[0], m_dbConnection);
 
                 dritem = command.ExecuteReader();
                 

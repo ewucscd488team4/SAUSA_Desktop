@@ -34,14 +34,6 @@ namespace WPFUI.ViewModels
 
         private const string XML_FILE = ".xml";
 
-        private string? _ProjectFileName;
-
-        private string? _ProjectSavePath;
-
-        private string? _ProjectXMLFile;
-
-        private string? _ProjectDB;
-
         public ObservableCollection<FullStackModel> Containers { get; set; } = new ObservableCollection<FullStackModel>();
 
         private bool _OpenProjectState;
@@ -123,10 +115,10 @@ namespace WPFUI.ViewModels
         //constructor
         public MainWindowViewModel()
         {
-            MenuState = false; //it is assumed no project is open, ergo menu items are disabled by default
-            ProjectState = false; //it is assumed no project is open, ergo menu items are disabled by default
-            OpenProjectState = true; //because SAUSA opens in a closed project state by default, this must be enabled
-            FieldVisibility = Visibility.Hidden;
+            FullMenuOnOff = false; //it is assumed no project is open, ergo menu items are disabled by default
+            NewRoomNewStackOnOff = false; //it is assumed no project is open, ergo menu items are disabled by default
+            NewOpenProjectOnOff = true; //because SAUSA opens in a closed project state by default, this must be enabled
+            MainWindowFieldVisibility = Visibility.Hidden;
             UnityWindowOnOff = Visibility.Hidden;
             OpenProjectCommand = new RelayCommand(OnOpenProject);
             NewProjectCommand = new RelayCommand(OnNewProject);
@@ -154,50 +146,37 @@ namespace WPFUI.ViewModels
             };
 
             if(openDlg.ShowDialog() == true)
-            {                
-                //variables needed for methods used in this command
-                _ProjectFileName = openDlg.SafeFileName;
-                _ProjectSavePath = openDlg.FileName;
-                _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
-                _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
-
+            {
                 //parent class fields
                 ProjectFileName = openDlg.SafeFileName;
                 FullProjectSavePath = openDlg.FileName;
-                ProjectDBInScratchFile = ConvertToSQLiteFileName(ProjectFileName);
-                ProjectXMLInScratchFolder = ConvertToXMLFileName(ProjectFileName);
-
-                var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;
+                ProjectSQLiteDBFile = ConvertToSQLiteFileName(ProjectFileName);
+                ProjectXMLFile = ConvertToXMLFileName(ProjectFileName);
 
                 //disable new project/open project because we have one already open
-                OpenProjectState = false;
                 NewOpenProjectOnOff = false;
+                NewRoomNewStackOnOff = false;
 
-                //enable new storage room and a new stack menu options
-                ProjectState = true;
-                NewRoomNewStackOnOff = true;
-
-                //enable full menu options
-                MenuState = true;
+                //enable full menu options                
                 FullMenuOnOff = true;
 
-                FileCompressionUtils.OpenProject(openDlg.FileName, FilePathDefaults.ScratchFolder);
+                FileCompressionUtils.OpenProject(FullProjectSavePath, FilePathDefaults.ScratchFolder);
 
-                //write project details to settings XML file, Projects child node
+                //write project details to settings XML file, in the Projects child node
 
 
                 //open list of stackmodel to populate the container list                
-                Containers = ReadSQLite.GetEntireStack(fqDBFilePath, _ProjectDB);
-                RaisePropertyChanged(nameof(Containers));
+                ParentContainers = ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
+                RaisePropertyChanged(nameof(ParentContainers));
 
                 //populate field list
-                FieldModel = ReadSQLite.GetDatabaseFieldLabels(fqDBFilePath, _ProjectDB);
+                FieldModel = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
 
                 //initialize the attribute entry fields
                 AddContainerModel = new StackModel();
 
                 //change field visibility to enable use
-                FieldVisibility = Visibility.Visible;
+                MainWindowFieldVisibility = Visibility.Visible;
                 UnityWindowOnOff = Visibility.Visible;
 
                 //TODO dump database to CSV file for unity window to read
@@ -222,21 +201,15 @@ namespace WPFUI.ViewModels
             };
 
             if(openDlg.ShowDialog() == true)
-            {
-                //local fields
-                _ProjectFileName = openDlg.SafeFileName;
-                _ProjectSavePath = openDlg.FileName;
-                _ProjectDB = ConvertToSQLiteFileName(_ProjectFileName);
-                _ProjectXMLFile = ConvertToXMLFileName(_ProjectFileName);
-
+            {                
                 //parent class fields
                 ProjectFileName = openDlg.SafeFileName;
                 FullProjectSavePath = openDlg.FileName;
-                ProjectDBInScratchFile = ConvertToSQLiteFileName(ProjectFileName);
-                ProjectXMLInScratchFolder = ConvertToXMLFileName(ProjectFileName);
+                ProjectSQLiteDBFile = ConvertToSQLiteFileName(ProjectFileName);
+                ProjectXMLFile = ConvertToXMLFileName(ProjectFileName);
                 
                 //full qualified project database path in scratch folder
-                var fqDBFilePath = FilePathDefaults.ScratchFolder + _ProjectDB;
+                //var fqDBFilePath = FilePathDefaults.ScratchFolder + ProjectSQLiteDBFile;
 
                 //this is set to disabled so we can't open a new project again; we have one already open
                 OpenProjectState = false;
@@ -249,7 +222,7 @@ namespace WPFUI.ViewModels
                 //MenuState = true; //leave full menu options disabled, as we have nothing to act on with those menu options
 
                 //set up blank project files to the scratch directory
-                NewProjectInit.NewProjectDetailOperations(FilePathDefaults.ScratchFolder, _ProjectXMLFile, _ProjectDB);
+                NewProjectInit.NewProjectDetailOperations(FilePathDefaults.ScratchFolder, ProjectXMLFile, ProjectSQLiteDBFile);
             }            
         }
 
@@ -259,6 +232,8 @@ namespace WPFUI.ViewModels
         private void OnNewStack()
         {
             NewStack newStack = new NewStack();
+            //TODO move relevent view model stuff to this view model, and then new stack can work like I want it to
+            //newStack.DataContext = this;
             newStack.Show();                        
         }
 
@@ -267,7 +242,8 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnNewStoreroom()
         {
-            NewRoom newRoom = new NewRoom(_ProjectXMLFile);
+            NewRoom newRoom = new NewRoom(ProjectXMLFile);
+            //newRoom.DataContext = this;
             newRoom.Show();
             //TODO let 3d view know that room state has changed
         }
@@ -278,7 +254,7 @@ namespace WPFUI.ViewModels
         private void OnSaveProject()
         {            
             //compress project XML and SQLite database to save directory
-            FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, _ProjectSavePath);
+            FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, FullProjectSavePath);
 
             //TODO write NEW containers in container list to the project database when save menu dialog is involked.
 
@@ -299,9 +275,9 @@ namespace WPFUI.ViewModels
 
             if(saveDlg.ShowDialog() == true)
             {
-                _ProjectSavePath = saveDlg.FileName;
+                FullProjectSavePath = saveDlg.FileName;
                 //compress working files in scratch folder to given save directory.
-                FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, _ProjectSavePath);
+                FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, FullProjectSavePath);
 
                 //write given save directory to settings file, LastProjectSavedDirectory attribute.
                 //_Savepath set to given save directory, so that save command saves to the right place.

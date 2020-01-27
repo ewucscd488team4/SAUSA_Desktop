@@ -76,34 +76,34 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="New" InputGestureText="Ctrl+N">
-                        <MenuItem x:Name="fineNewProject" Header="New Project" Command="{Binding NewProjectCommand}" IsEnabled="{Binding OpenProjectState}"/>
+                        <MenuItem x:Name="fineNewProject" Header="New Project" Command="{Binding NewProjectCommand}" IsEnabled="{Binding NewOpenProjectOnOff}"/>
                         <MenuItem x:Name="fineNewDesign" Header="New Design" Click="FileNewDesign_Click"/>
-                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" Command="{Binding NewStorageCommand}" IsEnabled="{Binding ProjectState}"/>
-                        <MenuItem x:Name="fineNewStack" Header="New Stack" Command="{Binding NewStackCommand}" IsEnabled="{Binding ProjectState}"/>
+                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" Command="{Binding NewStorageCommand}" IsEnabled="{Binding NewRoomNewStackOnOff}"/>
+                        <MenuItem x:Name="fineNewStack" Header="New Stack" Command="{Binding NewStackCommand}" IsEnabled="{Binding NewRoomNewStackOnOff}"/>
                     </MenuItem>
                     <MenuItem Header="Open" InputGestureText="Ctrl+O">
-                        <MenuItem x:Name="fileOpenProject" Header="Open Project" Command="{Binding OpenProjectCommand}"/>
-                        <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click"/>
+                        <MenuItem x:Name="fileOpenProject" Header="Open Project" Command="{Binding OpenProjectCommand}" IsEnabled="{Binding NewOpenProjectOnOff}"/>
+                        <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click" IsEnabled="{Binding NewOpenProjectOnOff}"/>
                     </MenuItem>
-                    <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}" IsEnabled="{Binding MenuState}" />
-                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding MenuState}"/>
-                    <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding ProjectState}"/>                    
+                    <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}" IsEnabled="{Binding FullMenuOnOff}" />
+                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding FullMenuOnOff}"/>
+                    <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding FullMenuOnOff}"/>                    
                     <Separator/>
-                    <MenuItem Header="Import" IsEnabled="{Binding MenuState}">
+                    <MenuItem Header="Import" IsEnabled="{Binding FullMenuOnOff}">
                         <MenuItem x:Name="importData" Header="Import Database"/>
                         <MenuItem x:Name="importCSV" Header="Import CSV"/>
                     </MenuItem>
-                    <MenuItem Header="Export" IsEnabled="{Binding MenuState}">
+                    <MenuItem Header="Export" IsEnabled="{Binding FullMenuOnOff}">
                         <MenuItem x:Name="exportData" Header="Export Database"/>
                         <MenuItem x:Name="exportCSV" Header="Export CSV"/>
                     </MenuItem>
                     <Separator/>
                     <MenuItem x:Name="filePref" Header="Preferences" Click="FilePref_Click"/>
-                    <MenuItem x:Name="filePrint" Header="Print" InputGestureText="Ctrl+P" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem x:Name="filePrint" Header="Print" InputGestureText="Ctrl+P" IsEnabled="{Binding FullMenuOnOff}"/>
                     <Separator/>
                     <MenuItem Header="Exit" Click="MenuExit_Click" InputGestureText="Alt+F4"/>
                 </MenuItem>
-                <MenuItem Header="_Edit" IsEnabled="{Binding MenuState}">
+                <MenuItem Header="_Edit" IsEnabled="{Binding FullMenuOnOff}">
                     <MenuItem x:Name="editUndo" Header="Undo" Command="ApplicationCommands.Undo" InputGestureText="Ctrl+Z"/>
                     <MenuItem x:Name="editCut" Header="Cut" Command="ApplicationCommands.Cut" InputGestureText="Ctrl+X"/>
                     <MenuItem x:Name="editCopy" Header="Copy" Command="ApplicationCommands.Copy" InputGestureText="Ctrl+C"/>
@@ -121,9 +121,9 @@
                 </MenuItem>
                 <MenuItem Header="_View">
                     <MenuItem x:Name="viewTheme" Header="Light/Dark"/>
-                    <MenuItem x:Name="viewZoomIn" Header="Zoom In" IsEnabled="{Binding MenuState}"/>
-                    <MenuItem x:Name="viewZoomOut" Header="Zoom Out" IsEnabled="{Binding MenuState}"/>
-                    <MenuItem x:Name="viewZoomRes" Header="Zoom Reset" IsEnabled="{Binding MenuState}"/>
+                    <MenuItem x:Name="viewZoomIn" Header="Zoom In" IsEnabled="{Binding FullMenuOnOff}"/>
+                    <MenuItem x:Name="viewZoomOut" Header="Zoom Out" IsEnabled="{Binding FullMenuOnOff}"/>
+                    <MenuItem x:Name="viewZoomRes" Header="Zoom Reset" IsEnabled="{Binding FullMenuOnOff}"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem x:Name="helpHelp" Header="Help" InputGestureText="F1" Click="HelpHelp_Click"/>
@@ -149,7 +149,7 @@
             
             <TextBlock Text="Stack Containers" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Medium" Grid.Row="0"/>
             
-            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1" ItemsSource="{Binding Containers}" SelectedItem="{Binding ContainerListModel}" ItemTemplate="{StaticResource ContainerItemTemplate}" Visibility="{Binding FieldVisibility}">
+            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1" ItemsSource="{Binding ParentContainers}" SelectedItem="{Binding ContainerListModel}" ItemTemplate="{StaticResource ContainerItemTemplate}" Visibility="{Binding MainWindowFieldVisibility}">
                 <!-- text -->                
             </ListBox>
         </Grid>
@@ -169,7 +169,7 @@
             
             <TextBlock Text="Container Fields" Margin="5" FontSize="24" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <ContentControl Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" Content="{Binding FieldModel}" ContentTemplate="{StaticResource ContainerAttributesTemplate}" Visibility="{Binding FieldVisibility}">
+            <ContentControl Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" Content="{Binding FieldModel}" ContentTemplate="{StaticResource ContainerAttributesTemplate}" Visibility="{Binding MainWindowFieldVisibility}">
                 <!-- crate fields entry box labels go here -->
                 <!-- <TextBlock Text="Length" Margin="5" FontSize="18"/> -->
                 <!-- <TextBlock Text="Width" Margin="5" FontSize="18"/> -->
@@ -178,7 +178,7 @@
                 <!-- <TextBlock Text="Name" Margin="5" FontSize="18"/> -->
             </ContentControl>
 
-            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding AddContainerModel}" ContentTemplate="{StaticResource ContainerFieldsTemplate}" Visibility="{Binding FieldVisibility}">
+            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding AddContainerModel}" ContentTemplate="{StaticResource ContainerFieldsTemplate}" Visibility="{Binding MainWindowFieldVisibility}">
                 
             </ContentControl>
             
