@@ -26,7 +26,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Empty container field!" FontSize="24" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="Empty container fields!" FontSize="24" Margin="5"/>
 
         <Button Content="OK"
                 Grid.Column="1"

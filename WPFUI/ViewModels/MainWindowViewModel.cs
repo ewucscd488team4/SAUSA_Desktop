@@ -156,6 +156,7 @@ namespace WPFUI.ViewModels
                 //disable new project/open project because we have one already open
                 NewOpenProjectOnOff = false;
                 NewRoomNewStackOnOff = false;
+                ProjectState = true;
 
                 //enable full menu options                
                 FullMenuOnOff = true;
