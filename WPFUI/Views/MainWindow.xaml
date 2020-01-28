@@ -11,7 +11,7 @@
         xmlns:WinForms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         
@@ -54,6 +54,9 @@
         
         
     </Window.Resources>
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
     
     <Grid>
 
@@ -76,14 +79,14 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="New" InputGestureText="Ctrl+N">
-                        <MenuItem x:Name="fineNewProject" Header="New Project" Command="{Binding NewProjectCommand}" IsEnabled="{Binding NewOpenProjectOnOff}"/>
+                        <MenuItem x:Name="fineNewProject" Header="New Project" Command="{Binding NewProjectCommand}" IsEnabled="{Binding NewProjectOnOff}"/>
                         <MenuItem x:Name="fineNewDesign" Header="New Design" Click="FileNewDesign_Click"/>
-                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" Command="{Binding NewStorageCommand}" IsEnabled="{Binding NewRoomNewStackOnOff}"/>
-                        <MenuItem x:Name="fineNewStack" Header="New Stack" Command="{Binding NewStackCommand}" IsEnabled="{Binding NewRoomNewStackOnOff}"/>
+                        <MenuItem x:Name="fileNewStor" Header="New Storage Area" Command="{Binding NewStorageCommand}" IsEnabled="{Binding NewRoomOnOff}"/>
+                        <MenuItem x:Name="fineNewStack" Header="New Stack" Command="{Binding NewStackCommand}" IsEnabled="{Binding NewStackOnOff}"/>
                     </MenuItem>
                     <MenuItem Header="Open" InputGestureText="Ctrl+O">
-                        <MenuItem x:Name="fileOpenProject" Header="Open Project" Command="{Binding OpenProjectCommand}" IsEnabled="{Binding NewOpenProjectOnOff}"/>
-                        <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click" IsEnabled="{Binding NewOpenProjectOnOff}"/>
+                        <MenuItem x:Name="fileOpenProject" Header="Open Project" Command="{Binding OpenProjectCommand}" IsEnabled="{Binding OpenProjectOnOff}"/>
+                        <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click" IsEnabled="{Binding OpenProjectOnOff}"/>
                     </MenuItem>
                     <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}" IsEnabled="{Binding FullMenuOnOff}" />
                     <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding FullMenuOnOff}"/>
@@ -149,7 +152,7 @@
             
             <TextBlock Text="Stack Containers" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Medium" Grid.Row="0"/>
             
-            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1" ItemsSource="{Binding ParentContainers}" SelectedItem="{Binding ContainerListModel}" ItemTemplate="{StaticResource ContainerItemTemplate}" Visibility="{Binding MainWindowFieldVisibility}">
+            <ListBox x:Name="mCrates" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" Grid.Row="1" ItemsSource="{Binding Containers}" SelectedItem="{Binding MainWindowContainerListModel}" ItemTemplate="{StaticResource ContainerItemTemplate}" Visibility="{Binding CrateListVisibility}">
                 <!-- text -->                
             </ListBox>
         </Grid>
@@ -169,7 +172,7 @@
             
             <TextBlock Text="Container Fields" Margin="5" FontSize="24" FontWeight="Medium" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <ContentControl Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" Content="{Binding FieldModel}" ContentTemplate="{StaticResource ContainerAttributesTemplate}" Visibility="{Binding MainWindowFieldVisibility}">
+            <ContentControl Grid.Column="0" Grid.Row="1" Margin="20,0,0,0" Content="{Binding FieldModel}" ContentTemplate="{StaticResource ContainerAttributesTemplate}" Visibility="{Binding FieldListVisibility}">
                 <!-- crate fields entry box labels go here -->
                 <!-- <TextBlock Text="Length" Margin="5" FontSize="18"/> -->
                 <!-- <TextBlock Text="Width" Margin="5" FontSize="18"/> -->
@@ -178,14 +181,14 @@
                 <!-- <TextBlock Text="Name" Margin="5" FontSize="18"/> -->
             </ContentControl>
 
-            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding AddContainerModel}" ContentTemplate="{StaticResource ContainerFieldsTemplate}" Visibility="{Binding MainWindowFieldVisibility}">
+            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding AddContainerModel}" ContentTemplate="{StaticResource ContainerFieldsTemplate}" Visibility="{Binding FieldListVisibility}">
                 
             </ContentControl>
             
             <!-- add container to list and to unity view via adding to sqlite databse -->
             <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">
-                <Button x:Name="mAddContainer" Width="80" Margin="20,0,30,0" Content="Add" IsEnabled="{Binding ProjectState}" Command="{Binding AddContainerCommand}"/>
-                <Button x:Name="mDelContainer" Width="80" Margin="30,0,0,0" Content="Delete" IsEnabled="{Binding ProjectState}" Command="{Binding DeleteContainerCommand}"/>
+                <Button x:Name="mAddContainer" Width="80" Margin="20,0,30,0" Content="Add" IsEnabled="{Binding AddDelButtons}" Command="{Binding AddContainerToContainerListCommand}"/>
+                <Button x:Name="mDelContainer" Width="80" Margin="30,0,0,0" Content="Delete" IsEnabled="{Binding AddDelButtons}" Command="{Binding DeleteContainerFromContainerListCommand}"/>
             </WrapPanel>
         </Grid>
     </Grid>

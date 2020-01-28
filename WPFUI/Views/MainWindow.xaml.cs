@@ -38,7 +38,7 @@ namespace WPFUI.Views
         {
             InitializeComponent();
             InitializePanel();
-            DataContext = new MainWindowViewModel();
+            
             try
             {
                 process = new Process();

@@ -11,7 +11,7 @@
         xmlns:models="clr-namespace:SAUSALibrary.Models.Database;assembly=SAUSALibrary"
         
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewmodels:NewStackViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         
@@ -28,7 +28,7 @@
     </Window.Resources>
 
     <Window.DataContext>
-        <viewmodels:NewStackViewModel/>
+        <viewmodels:MainViewModel/>
     </Window.DataContext>
     <Grid>
 
@@ -62,7 +62,7 @@
 
         <StackPanel Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center">
             <!-- add new optional database fields here -->
-            <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" ItemsSource="{Binding NewDBFields}" SelectedItem="{Binding SelectedModelOnCustomFieldList}" ItemTemplate="{StaticResource DefFields}">
+            <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" ItemsSource="{Binding NewDBFields}" SelectedItem="{Binding SelectedModelOnCustomDBFieldList}" ItemTemplate="{StaticResource DefFields}">
                 <!-- text -->
             </ListBox>
         </StackPanel>
@@ -71,7 +71,7 @@
             <TextBlock Text="Name:" VerticalAlignment="Center" FontSize="18" Margin="0,0,15,0"/>
             <TextBox Width="140" VerticalAlignment="Center" Text="{Binding FieldNameTextField}" FontSize="18"/>
             <TextBlock Text="Type:" VerticalAlignment="Center" FontSize="18" Margin="15,0,15,0"/>
-            <ComboBox Margin="5" Width="120" ItemsSource="{Binding DropDownFieldList}" SelectedItem="{Binding SelectedModelOnCustomFieldList}">
+            <ComboBox Margin="5" Width="120" ItemsSource="{Binding DropDownFieldList}" SelectedItem="{Binding SelectedModelOnCustomDBFieldList}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding FieldType}" TextAlignment="Center" Margin="5" FontSize="18"/>

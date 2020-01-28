@@ -18,6 +18,9 @@ using WPFUI.Views.FileViews;
 
 namespace WPFUI.ViewModels
 {
+    /// <summary>
+    /// View model for main window, new room, and new stack.
+    /// </summary>
     public class MainViewModel : ViewModelBase
     {
         #region Variable Declarations
@@ -84,6 +87,14 @@ namespace WPFUI.ViewModels
             set => Set(ref _FullMenuOnOff, value);
         }
 
+        private bool _AddDelButtons;
+
+        public bool AddDelButtons
+        {
+            get => _AddDelButtons;
+            set => Set(ref _AddDelButtons, value);
+        }
+
         private Visibility _UnityWindowOnOff;
 
         public Visibility UnityWindowOnOff
@@ -118,23 +129,23 @@ namespace WPFUI.ViewModels
 
         public RelayCommand? DeleteFieldFromCustomFieldList { get; private set; }
 
-        public RelayCommand? OpenProjectCommand { get; }
+        public RelayCommand? OpenProjectCommand { get; private set; }
 
-        public RelayCommand? NewProjectCommand { get; }
+        public RelayCommand? NewProjectCommand { get; private set; }
 
-        public RelayCommand? NewStackCommand { get; }
+        public RelayCommand? NewStackCommand { get; private set; }
 
-        public RelayCommand? NewStorageCommand { get; }
+        public RelayCommand? NewStorageCommand { get; private set; }
 
-        public RelayCommand? SaveCommand { get; }
+        public RelayCommand? SaveCommand { get; private set; }
 
-        public RelayCommand? SaveAsCommand { get; }
+        public RelayCommand? SaveAsCommand { get; private set; }
 
-        public RelayCommand? CloseCommand { get; }
+        public RelayCommand? CloseCommand { get; private set; }
 
-        public RelayCommand? AddContainerToContainerListCommand { get; }
+        public RelayCommand? AddContainerToContainerListCommand { get; private set; }
 
-        public RelayCommand? DeleteContainerFromContainerListCommand { get; }
+        public RelayCommand? DeleteContainerFromContainerListCommand { get; private set; }
 
         #endregion
 
@@ -194,7 +205,10 @@ namespace WPFUI.ViewModels
 
         #region Command Methods
 
-        private void OnAddField()
+        /// <summary>
+        /// Adds a custom DB field to the custom DB field list. Used in NewStack
+        /// </summary>
+        private void OnAddCustomFieldToCustomDBFieldList()
         {
             if (!FieldNameTextField.Contains("Enter Field Name") || !string.IsNullOrEmpty(FieldNameTextField))
             {
@@ -209,25 +223,27 @@ namespace WPFUI.ViewModels
             }
         }
 
+        /// <summary>
+        /// Writes the custom DB fields (if any) to the project DB. Used in NewStack
+        /// </summary>
+        /// <param name="window"></param>
         private void OnWriteCustomDBFields(Window window)
         {
-            //hard coded folder and database file
-            WriteSQLite.PopulateCustomProjectDatabase(FilePathDefaults.ScratchFolder, "Test.sqlite", NewDBFields);
-
-            //dynamic coded database file NOTE: trying to read ProjectSQLiteDBFile from the parent class gets a null, I dont know why
-            //WriteSQLite.PopulateCustomProjectDatabase(FilePathDefaults.ScratchFolder, dbFile[0], NewDBFields);
-
+            //write project database fields with defaults and any custom ones as defined by the user
+            WriteSQLite.PopulateCustomProjectDatabase(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, NewDBFields);
+            
+            //clear the custom field list
             NewDBFields.Clear();
 
-            //turn on main window processing fields
+            //apply view state approprate to the current project state
             PostApplyNewStackCustomFields();
 
-            //turn on full menu options
-            FullMenuOnOff = true;
-
-            //initialize the parent class container list and set the "changed" flag
-            Containers = ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, "Test.sqlite");
+            //initialize the container list and set the "changed" flag
+            Containers = ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
             RaisePropertyChanged(nameof(Containers));
+
+            //initialize container property list and the model used for adding containers to the container list
+            InitializeMainWindowFields();
 
             if (window != null)
             {
@@ -235,8 +251,22 @@ namespace WPFUI.ViewModels
             }
         }
 
+        private void OnApplyRoomDimensions(Window window)
+        {
+            //TODO write room dimensions to the CSV file unity looks at
+
+            //set view state appropriate to project state
+            NewProjectWithRoomNoStack();
+
+            //close the window
+            if(window != null)
+            {
+                window.Close();
+            }
+        }
+
         /// <summary>
-        /// Delete the selected field out of the custom field list.
+        /// Delete the selected field out of the custom DB field list. Used in NewStack
         /// </summary>
         private void OnDeleteCustDBField()
         {
@@ -245,7 +275,7 @@ namespace WPFUI.ViewModels
         }
 
         /// <summary>
-        /// Language to open an existing project
+        /// Language to open an existing project. Used in MainWindow
         /// </summary>
         private void OnOpenProject()
         {
@@ -263,35 +293,24 @@ namespace WPFUI.ViewModels
                 FullProjectSavePath = openDlg.FileName;
                 ProjectSQLiteDBFile = ConvertToSQLiteFileName(ProjectFileName);
                 ProjectXMLFile = ConvertToXMLFileName(ProjectFileName);
-
-                //disable new project/open project because we have one already open
-                NewProjectOnOff = false;
-                NewRoomOnOff = false;
-                NewStackOnOff = false;
-
-                //enable full menu options                
-                FullMenuOnOff = true;
                 
+                //extract the save project to the scratch folder
                 FileCompressionUtils.OpenProject(FullProjectSavePath, FilePathDefaults.ScratchFolder);
 
                 //write project details to settings XML file, in the Projects child node
-
+                //TODO write opened project details to setting XML file
 
                 //open list of stackmodel to populate the container list                
                 Containers = ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
                 RaisePropertyChanged(nameof(Containers));
 
-                //populate field list
-                FieldModel = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
-
-                //initialize the attribute entry fields
-                AddContainerModel = new StackModel();
+                //initialize container property list and the model used for adding containers to the container list
+                InitializeMainWindowFields();
 
                 //change field visibility to enable use
-                CrateListVisibility = Visibility.Visible;
-                FieldListVisibility = Visibility.Visible;
-                UnityWindowOnOff = Visibility.Visible;
+                OpenProjectState();
 
+                //write out CSV file for the unity window to initialize with
                 //TODO dump database to CSV file for unity window to read
             }
             else
@@ -325,15 +344,8 @@ namespace WPFUI.ViewModels
                 //full qualified project database path in scratch folder
                 //var fqDBFilePath = FilePathDefaults.ScratchFolder + ProjectSQLiteDBFile;
 
-                //this is set to disabled so we can't open a new project again; we have one already open
-                OpenProjectOnOff = false;
-                NewProjectOnOff = false;
-
-                //enable menu commands to make a new storage room and a new stack
-                NewRoomOnOff = true;
-                NewStackOnOff = true;
-
-                //MenuState = true; //leave full menu options disabled, as we have nothing to act on with those menu options
+                //set view state appropriate to our current project state
+                NewProjectNoRoomNoStack();
 
                 //set up blank project files to the scratch directory
                 NewProjectInit.NewProjectDetailOperations(FilePathDefaults.ScratchFolder, ProjectXMLFile, ProjectSQLiteDBFile);
@@ -346,7 +358,7 @@ namespace WPFUI.ViewModels
         private void OnNewStack()
         {
             NewStack newStack = new NewStack();
-            //TODO move relevent view model stuff to this view model, and then new stack can work like I want it to
+            InitializeNewStackLists();
             newStack.DataContext = this;
             newStack.Show();
         }
@@ -354,12 +366,11 @@ namespace WPFUI.ViewModels
         /// <summary>
         /// Set up a new store room to store a stack in.
         /// </summary>
-        private void OnNewStoreroom()
+        private void OnOpenNewStoreroom()
         {
             NewRoom newRoom = new NewRoom(ProjectXMLFile);
             newRoom.DataContext = this;
-            newRoom.Show();
-            //TODO let 3d view know that room state has changed
+            newRoom.Show();            
         }
 
         /// <summary>
@@ -370,7 +381,7 @@ namespace WPFUI.ViewModels
             //compress project XML and SQLite database to save directory
             FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, FullProjectSavePath);
 
-            //TODO write NEW containers in container list to the project database when save menu dialog is involked.
+            //TODO write NEW containers in container list to the project database when save menu dialog is invoked.
 
             //TODO write new project save date to appropriate project in settings XML file
         }
@@ -390,12 +401,12 @@ namespace WPFUI.ViewModels
             if (saveDlg.ShowDialog() == true)
             {
                 FullProjectSavePath = saveDlg.FileName;
+
                 //compress working files in scratch folder to given save directory.
                 FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, FullProjectSavePath);
 
-                //write given save directory to settings file, LastProjectSavedDirectory attribute.
-                //_Savepath set to given save directory, so that save command saves to the right place.
-
+                //TODO write given save directory to settings file, LastProjectSavedDirectory attribute.
+                //TODO update settings XML with new project save time
             }
         }
 
@@ -403,32 +414,24 @@ namespace WPFUI.ViewModels
         /// Sets the menu to default state, closes the design windows, and deletes the files in the working directory.
         /// </summary>
         private void OnClose()
-        {
-            //set menu state
-            OpenProjectOnOff = true; //so we can open a new project again.
-            FullMenuOnOff = false;  //no open project, so all fields not relevent get disabled.
-            NewRoomOnOff = false; //project is closed, so disable project related options
-            NewStackOnOff = false;
+        {            
+            //TODO tell unity window to clear room dimensions and any stacks when project is closed
 
+            //clear the scratch folder
             DirectoryInfo di = new DirectoryInfo(FilePathDefaults.ScratchFolder);
-            //hide container list, container fields, and container text boxes
-            CrateListVisibility = Visibility.Hidden;
-            FieldListVisibility = Visibility.Hidden;
+            foreach (FileInfo file in di.GetFiles())
+            {
+                file.Delete();
+            }
 
-            //hide unity window
-            UnityWindowOnOff = Visibility.Hidden;
+            //set view state to cold boot
+            ColdBoot();
 
             //clear the container list
             Containers.Clear();
 
             //update view
             RaisePropertyChanged(nameof(Containers));
-
-            //clear scratch folder
-            foreach (FileInfo file in di.GetFiles())
-            {
-                file.Delete();
-            }
         }
 
         /// <summary>
@@ -438,10 +441,10 @@ namespace WPFUI.ViewModels
         {
             if (ContainerFieldValidator())
             {
-                //add new container to SQLite database
+                //add new container to container list and call "update" on it
                 Containers.Add(new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
-                //call update on listbox List to pull new list from SQLite database
                 RaisePropertyChanged(nameof(Containers));
+
                 //TODO add new container to project SQLite database when add button is pressed.
 
                 //TODO add new container to 3d view when add button is pressed.
@@ -459,10 +462,8 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnDeleteContainer()
         {
-            //delete container from container List
+            //delete container from container List and call "update" on the list
             Containers.Remove(MainWindowContainerListModel);
-
-            //call update on view
             RaisePropertyChanged(nameof(Containers));
 
             //TODO detele container from database when delete button is pressed
@@ -479,11 +480,15 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void ColdBoot()
         {
+            //we need to open a project or make a new one, so make these two true
             NewProjectOnOff = true;
             OpenProjectOnOff = true;
+            //set everything else to false
             NewStackOnOff = false;
             NewRoomOnOff = false;
             FullMenuOnOff = false;
+            AddDelButtons = false;
+            //set everything to hidden
             UnityWindowOnOff = Visibility.Hidden;
             CrateListVisibility = Visibility.Hidden;
             FieldListVisibility = Visibility.Hidden;
@@ -491,16 +496,105 @@ namespace WPFUI.ViewModels
 
         private void CommandInit()
         {
-            AddCustomFieldToCustomFieldList = new RelayCommand(OnAddField); //sets up the command that adds a new field to the user defined database field list
-            WriteCustomFieldsToDatabase = new RelayCommand<Window>(OnWriteCustomDBFields); //sets up the command that writes default fields and any custom fields into the project database
-            DeleteFieldFromCustomFieldList = new RelayCommand(OnDeleteCustDBField); //sets up the command that deletes a selected field in the custom field list out of the list.
+            AddCustomFieldToCustomFieldList = new RelayCommand(OnAddCustomFieldToCustomDBFieldList);    // 1 sets up the command that adds a new field to the user defined database field list
+            WriteCustomFieldsToDatabase = new RelayCommand<Window>(OnWriteCustomDBFields);              // 2 sets up the command that writes default fields and any custom fields into the project database
+            ApplyRoomDimensionstoProjectXML = new RelayCommand<Window>(OnApplyRoomDimensions);          // 3 sets up the command that applies storage dimensions to a new project storage room
+            DeleteFieldFromCustomFieldList = new RelayCommand(OnDeleteCustDBField);                     // 4 sets up the command that deletes a selected field in the custom field list out of the list.
+            OpenProjectCommand = new RelayCommand(OnOpenProject);                                       // 5 sets up the command that opens an existing project.
+            NewProjectCommand = new RelayCommand(OnNewProject);                                         // 6 sets up the command that makes a new project.
+            NewStackCommand = new RelayCommand(OnNewStack);                                             // 7 sets up the command that opens the view which defines the database fields for a new container stack.
+            NewStorageCommand = new RelayCommand(OnOpenNewStoreroom);                                       // 8 sets up the command that opens the view which defines the storage dimensions for a new project storage room dimensions.
+            SaveCommand = new RelayCommand(OnSaveProject);                                              // 9 sets up the command that saves the current open project as it current state.
+            SaveAsCommand = new RelayCommand(OnSaveAs);                                                 //10 sets up the command that saves the current open project as a file name and a location of the user's choice.
+            CloseCommand = new RelayCommand(OnClose);                                                   //11 sets up the command that closes the currently open project, abandoning any unsaved changes.
+            AddContainerToContainerListCommand = new RelayCommand(OnAddContainer);                      //12 sets up the command that adds a new container to the container list on the main page view.
+            DeleteContainerFromContainerListCommand = new RelayCommand(OnDeleteContainer);              //13 sets up the command that deletes the selected container from the container list on the main page view.
+            //                                                                                          //14 extra.
+        }
+
+        private void InitializeNewStackLists()
+        {
+            DefaultFieldList = GetDefaultFields(); //sets the default fields
+            DropDownFieldList = GetFieldsFromEnum(); //sets the drop down fields in the List used to populate the list in the GUI
+            SelectedModelOnCustomDBFieldList = new IndividualDatabaseFieldModel() { FieldName = "BLANK", FieldType = "BLANK" }; //don't know if this is needed or not, but leaving it in here anyway.
+        }
+
+        private void InitializeMainWindowFields()
+        {
+            //populate field list
+            FieldModel = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
+
+            //initialize the attribute entry fields
+            AddContainerModel = new StackModel();
         }
 
         #endregion
 
         #region State change methods
 
+        /// <summary>
+        /// Applies view state appropriate for the completion of the new project work flow
+        /// </summary>
         private void PostApplyNewStackCustomFields()
+        {
+            NewProjectOnOff = false;
+            OpenProjectOnOff = false;
+            NewRoomOnOff = false;
+            NewStackOnOff = false;
+            FullMenuOnOff = true;
+            AddDelButtons = true;
+
+            UnityWindowOnOff = Visibility.Visible;
+            CrateListVisibility = Visibility.Visible;
+            FieldListVisibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Applies view state appropriate for opening a saved project.
+        /// </summary>
+        private void OpenProjectState()
+        {
+            NewProjectOnOff = false;
+            OpenProjectOnOff = false;
+            NewRoomOnOff = false;
+            NewStackOnOff = false;
+            FullMenuOnOff = true;
+            AddDelButtons = true;
+
+            UnityWindowOnOff = Visibility.Visible;
+            CrateListVisibility = Visibility.Visible;
+            FieldListVisibility = Visibility.Visible;
+        }
+
+        private void NewProjectNoRoomNoStack()
+        {
+            NewProjectOnOff = false;
+            OpenProjectOnOff = false;
+            NewRoomOnOff = true;
+            NewStackOnOff = true;
+            FullMenuOnOff = false;
+            AddDelButtons = false;
+
+            UnityWindowOnOff = Visibility.Hidden;
+            CrateListVisibility = Visibility.Hidden;
+            FieldListVisibility = Visibility.Hidden;
+        }
+
+        private void NewProjectWithRoomNoStack()
+        {
+            NewProjectOnOff = false;
+            OpenProjectOnOff = false;
+            NewRoomOnOff = false;
+            NewStackOnOff = true;
+            FullMenuOnOff = false;
+            AddDelButtons = false;
+
+            UnityWindowOnOff = Visibility.Visible;
+            CrateListVisibility = Visibility.Hidden;
+            FieldListVisibility = Visibility.Hidden;
+        }
+
+        private void ClosedProjectState()
         {
 
         }
@@ -564,6 +658,8 @@ namespace WPFUI.ViewModels
                 return false;
             return true;
         }
+
+        
 
         #endregion
     }
