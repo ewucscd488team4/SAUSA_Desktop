@@ -60,7 +60,7 @@ namespace WPFUI.Views
             try
             {
                 //Testing communication between Unity and Application
-                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\TestFile.csv", "10,10,30");
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\TestFile.csv", "1,100,5,100,10,10,30,1,Test");
             }
             catch (Exception ex)
             {
