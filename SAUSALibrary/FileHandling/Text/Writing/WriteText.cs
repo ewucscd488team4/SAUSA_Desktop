@@ -55,8 +55,8 @@ namespace SAUSALibrary.FileHandling.Text.Writing
 
             modelList = ReadSQLite.GetEntireStack(fullDBFilePath, dbFileName);
 
-            var fqFilePath = Path.Combine(fullDBFilePath, "TestFile.csv");
-            
+            //var fqFilePath = Path.Combine(fullDBFilePath, "TestFile.csv");
+            var fqFilePath = "\\EmbedTest\\ToUnity.csv";
             using (var textWriter = File.CreateText(fqFilePath))
             {
                 foreach (var line in ConvertToCSV(modelList))
