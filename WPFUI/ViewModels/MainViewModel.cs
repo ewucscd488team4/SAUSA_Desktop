@@ -311,7 +311,8 @@ namespace WPFUI.ViewModels
                 OpenProjectState();
 
                 //write out CSV file for the unity window to initialize with
-                //TODO dump database to CSV file for unity window to read
+                SAUSALibrary.FileHandling.Text.Writing.WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
+
             }
             else
             {
