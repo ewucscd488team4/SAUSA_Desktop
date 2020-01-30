@@ -63,7 +63,7 @@ namespace CommandLineTesting
             model = ReadSQLite.GetDatabaseFieldLabels(FilePathDefaults.DefaultSavePath, "Hangerbay");
             Console.WriteLine(model.name);*/
 
-            string testDir = FilePathDefaults.DefaultSavePath + @"\Test.sqlite";
+            /*string testDir = FilePathDefaults.DefaultSavePath + @"\Test.sqlite";
             string testDV = "Test.sqlite";
             ObservableCollection<IndividualDatabaseFieldModel> list = new ObservableCollection<IndividualDatabaseFieldModel>();
 
@@ -90,7 +90,7 @@ namespace CommandLineTesting
             WriteSQLite.CreateProjectDatabase(testDir, testDV);
             WriteSQLite.PopulateCustomProjectDatabase(testDir, testDV, list);
 
-            Console.WriteLine(testDir);
+            Console.WriteLine(testDir);*/
 
         }
 

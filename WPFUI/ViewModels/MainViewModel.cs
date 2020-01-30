@@ -6,6 +6,8 @@ using SAUSALibrary.Defaults;
 using SAUSALibrary.FileHandling.Compression;
 using SAUSALibrary.FileHandling.Database.Reading;
 using SAUSALibrary.FileHandling.Database.Writing;
+using SAUSALibrary.FileHandling.XML.Writing;
+using SAUSALibrary.FileHandling.Text.Writing;
 using SAUSALibrary.Init;
 using SAUSALibrary.Models;
 using SAUSALibrary.Models.Database;
@@ -118,6 +120,34 @@ namespace WPFUI.ViewModels
             get => _FieldListVisibility;
             set => Set(ref _FieldListVisibility, value);
         }
+
+        private string? _XStorageDimension;
+        public string? XStorageDimension
+        {
+            get => _XStorageDimension;
+            set => Set(ref _XStorageDimension, value);
+        }
+
+        private string? _YStorageDimension;
+        public string? YStorageDimension
+        {
+            get => _YStorageDimension;
+            set => Set(ref _YStorageDimension, value);
+        }
+        private string? _ZStorageDimension;
+        public string? ZStorageDimension
+        {
+            get => _ZStorageDimension;
+            set => Set(ref _ZStorageDimension, value);
+        }
+        private string? _WeightStorageMax;
+        public string? WeightStorageMax
+        {
+            get => _WeightStorageMax;
+            set => Set(ref _WeightStorageMax, value);
+        }
+
+
         #endregion
 
         #region Command Declerations
@@ -201,6 +231,7 @@ namespace WPFUI.ViewModels
         {
             ColdBoot();
             CommandInit();
+            InitStorageFields();
         }
 
         #region Command Methods
@@ -253,15 +284,28 @@ namespace WPFUI.ViewModels
 
         private void OnApplyRoomDimensions(Window window)
         {
-            //TODO write room dimensions to the CSV file unity looks at
-
-            //set view state appropriate to project state
-            NewProjectWithRoomNoStack();
-
-            //close the window
-            if(window != null)
+            if(RoomDimensionFieldValidator())
             {
-                window.Close();
+                //create string array to write room dimensions 
+                string[] NewRoomDimensions = { XStorageDimension, YStorageDimension, ZStorageDimension, WeightStorageMax };
+
+                //send array to the write method
+                WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder, ProjectXMLFile, NewRoomDimensions);
+
+                //TODO write room dimensions to the CSV file unity looks at
+                //WriteText.WriteRoomDimensionsToCSV(NewRoomDimensions);
+
+                //set view state appropriate to project state
+                NewProjectWithRoomNoStack();
+
+                //close the window
+                if (window != null)
+                {
+                    window.Close();
+                }
+            } else
+            {
+                //TODO launch room dimension error dialog
             }
         }
 
@@ -660,7 +704,26 @@ namespace WPFUI.ViewModels
             return true;
         }
 
-        
+        private bool RoomDimensionFieldValidator()
+        {
+            if (string.IsNullOrEmpty(XStorageDimension) || XStorageDimension is "0")
+                return false;
+            if (string.IsNullOrEmpty(YStorageDimension) || YStorageDimension is "0")
+                return false;
+            if (string.IsNullOrEmpty(ZStorageDimension) || ZStorageDimension is "0")
+                return false;
+            if (string.IsNullOrEmpty(WeightStorageMax) || WeightStorageMax is "0")
+                return false;
+            return true;
+        }
+
+        private void InitStorageFields()
+        {
+            XStorageDimension = "0";
+            YStorageDimension = "0";
+            ZStorageDimension = "0";
+            WeightStorageMax = "0";
+        }
 
         #endregion
     }

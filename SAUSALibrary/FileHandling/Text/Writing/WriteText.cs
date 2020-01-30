@@ -65,5 +65,24 @@ namespace SAUSALibrary.FileHandling.Text.Writing
                 }
             }
         }
+
+        /// <summary>
+        /// Write room dimenions to CSV for unity to use.
+        /// </summary>
+        /// <param name="workingFolder"></param>
+        /// <param name="csvFileName"></param>
+        /// <param name="roomDimensions"></param>
+        public static void WriteRoomDimensionsToCSV(string[] roomDimensions)
+        {            
+            var fqFilePath = @"\EmbedTest\ToUnityRoom.csv";
+
+            using (var textWriter = File.CreateText(fqFilePath))
+            {
+                for(int i = 0 ; i < roomDimensions.Length ; i++)
+                {
+                    textWriter.WriteLine(roomDimensions[i]);
+                }
+            }
+        }
     }
 }
