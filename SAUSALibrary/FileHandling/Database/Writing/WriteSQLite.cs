@@ -1,4 +1,4 @@
-﻿using SAUSALibrary.Models;
+using SAUSALibrary.Models;
 using SAUSALibrary.Models.Database;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -310,5 +310,72 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             return false;
         }
 
+        /// <summary>
+        /// Clears out current contents of Database
+        /// </summary>
+        /// <param name="workingFolder"></param>
+        /// <param name="dbFileName"></param>
+        /// 
+        public static void ClearDatabase(string workingFolder, string dbFileName)
+        {
+
+            //split the file name into name plus extension
+            string[] fileSplit = dbFileName.Split('.');
+            //combine file path with file name to make a full file path for 
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
+
+
+            //if db file exists
+            if (File.Exists(fqFilePath))
+            {
+                StringBuilder sb = new StringBuilder();
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
+
+                m_dbConnection.Open();
+
+                sb.Append("delete from ");
+                sb.Append(fileSplit[0]);
+                sb.Append(");");
+                sb.Clear(); //clear StringBuilder
+                SQLiteCommand command = new SQLiteCommand(sb.ToString(), m_dbConnection);
+                
+                command.ExecuteNonQuery(); //delete data
+
+                m_dbConnection.Close();
+
+            }
+        }
+
+
+        /// <summary>
+        /// Clears out current contents of Database
+        /// </summary>
+        /// <param name="workingFolder"></param>
+        /// <param name="CSVFileName">The CSV File that houses the current data</param>
+        /// <param name="dbFileName">The DB File that has the DB info</param>
+        /// 
+        public static void UpdateDatabasefromCSV(string workingFolder, string CSVFileName, string dbFileName)
+        {
+            ObservableCollection<FullStackModel> modelList = Text.Reading.ReadText.ConvertCSVToStack(workingFolder, CSVFileName);
+
+            ClearDatabase(workingFolder, dbFileName);
+
+            List<string> oneLine = new List<string>();
+            string[] items;
+
+            foreach(var model in modelList)
+            {
+                items = model.ToString().Split(',');
+
+                foreach(string str in items)
+                {
+                    oneLine.Add(str);
+                }
+                
+                AddSQLiteData(workingFolder, dbFileName, oneLine);
+                
+            }
+      
+        }
     }
 }
