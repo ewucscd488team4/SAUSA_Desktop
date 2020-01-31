@@ -413,7 +413,7 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnOpenNewStoreroom()
         {
-            NewRoom newRoom = new NewRoom(ProjectXMLFile);
+            NewRoom newRoom = new NewRoom();
             newRoom.DataContext = this;
             newRoom.Show();            
         }
@@ -493,7 +493,7 @@ namespace WPFUI.ViewModels
                 //TODO add new container to project SQLite database when add button is pressed.
 
                 //TODO add new container to 3d view when add button is pressed.
-                SAUSALibrary.FileHandling.Text.Writing.WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, "ToGUI.csv", new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
             }
             else
             {

@@ -12,6 +12,9 @@ namespace SAUSALibrary.FileHandling.Text.Writing
 {
     public class WriteText
     {
+        private const string UNITY_DBCSV = @"\EmbedTest\ToUnity.csv";
+        private const string UNITY_ROOMCSV = @"\EmbedTest\ToUnityRoom.csv";
+        private const string UNITY_NEWCONTAINER = "ToGUI.csv";
         public static Boolean WriteUnityCSV(string fqFilePath)
         {
             return false;
@@ -54,10 +57,8 @@ namespace SAUSALibrary.FileHandling.Text.Writing
             string[] file = dbFileName.Split('.');
 
             modelList = ReadSQLite.GetEntireStack(fullDBFilePath, dbFileName);
-
-            //var fqFilePath = Path.Combine(fullDBFilePath, "TestFile.csv");
-            var fqFilePath = "\\EmbedTest\\ToUnity.csv";
-            using (var textWriter = File.CreateText(fqFilePath))
+                        
+            using (var textWriter = File.CreateText(UNITY_DBCSV))
             {
                 foreach (var line in ConvertToCSV(modelList))
                 {
@@ -74,15 +75,25 @@ namespace SAUSALibrary.FileHandling.Text.Writing
         /// <param name="roomDimensions"></param>
         public static void WriteRoomDimensionsToCSV(string[] roomDimensions)
         {            
-            var fqFilePath = @"\EmbedTest\ToUnityRoom.csv";
-
-            using (var textWriter = File.CreateText(fqFilePath))
+            using (var textWriter = File.CreateText(UNITY_ROOMCSV))
             {
                 for(int i = 0 ; i < roomDimensions.Length ; i++)
                 {
                     textWriter.WriteLine(roomDimensions[i]);
                 }
             }
+        }
+
+        /// <summary>
+        /// Writes the newly added container to a Unity "packet" text file
+        /// </summary>
+        /// <param name="FullwriteDirectory"></param>
+        /// <param name="fileName"></param>
+        /// <param name="modelToWrite"></param>
+        public static void AddFullStackModeltoCSV(string FullwriteDirectory, FullStackModel modelToWrite)
+        {
+            //TODO write file for Unity reading
+            //use UNITY_NEWCONTAINER constant for the file name
         }
     }
 }
