@@ -205,15 +205,16 @@ namespace SAUSALibrary.FileHandling.XML.Reading
         /// <summary>
         /// Reads the storage attributes from the project file and returns them as a model class.
         /// </summary>
-        /// <param name="fullFilePath"></param>
+        /// <param name="workingFolder"></param>
         /// <returns></returns>
-        public static ProjectStorageModel ReadProjectStorage(string fullFilePath)
+        public static ProjectStorageModel ReadProjectStorage(string workingFolder, string projectXMLFile)
         {
             ProjectStorageModel model = new ProjectStorageModel();
+            var fqFilePath = Path.Combine(workingFolder, projectXMLFile);
 
             try
             {
-                using (XmlReader _Reader = XmlReader.Create(new FileStream(fullFilePath, FileMode.Open), new XmlReaderSettings() { CloseInput = true }))
+                using (XmlReader _Reader = XmlReader.Create(new FileStream(fqFilePath, FileMode.Open), new XmlReaderSettings() { CloseInput = true }))
                 {
                     while (_Reader.Read())
                     {

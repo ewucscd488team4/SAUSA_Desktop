@@ -17,6 +17,7 @@ using System.IO;
 using System.Windows;
 using WPFUI.Views.ErrorViews;
 using WPFUI.Views.FileViews;
+using SAUSALibrary.FileHandling.XML.Reading;
 
 namespace WPFUI.ViewModels
 {
@@ -357,8 +358,10 @@ namespace WPFUI.ViewModels
                 //change field visibility to enable use
                 OpenProjectState();
 
-                //write out CSV file for the unity window to initialize with
-                SAUSALibrary.FileHandling.Text.Writing.WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
+                //write out the CSV files for the unity window to initialize with
+                WriteCSVForUnityInit(ProjectSQLiteDBFile, ProjectXMLFile);
+
+                //WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
 
             }
             else
@@ -545,6 +548,9 @@ namespace WPFUI.ViewModels
             FieldListVisibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Initialize all relaycommand menu and button press commands
+        /// </summary>
         private void CommandInit()
         {
             AddCustomFieldToCustomFieldList = new RelayCommand(OnAddCustomFieldToCustomDBFieldList);    // 1 sets up the command that adds a new field to the user defined database field list
@@ -563,6 +569,9 @@ namespace WPFUI.ViewModels
             //                                                                                          //14 extra.
         }
 
+        /// <summary>
+        /// Initialize the lists used with New Stack view
+        /// </summary>
         private void InitializeNewStackLists()
         {
             DefaultFieldList = GetDefaultFields(); //sets the default fields
@@ -570,6 +579,9 @@ namespace WPFUI.ViewModels
             SelectedModelOnCustomDBFieldList = new IndividualDatabaseFieldModel() { FieldName = "BLANK", FieldType = "BLANK" }; //don't know if this is needed or not, but leaving it in here anyway.
         }
 
+        /// <summary>
+        /// Initialize the main window lists for use with adding new containers
+        /// </summary>
         private void InitializeMainWindowFields()
         {
             //populate field list
@@ -577,6 +589,17 @@ namespace WPFUI.ViewModels
 
             //initialize the attribute entry fields
             AddContainerModel = new StackModel();
+        }
+
+        /// <summary>
+        /// initialize storage fields in the storage field model for use with the new room view
+        /// </summary>
+        private void InitStorageFields()
+        {
+            XStorageDimension = "0";
+            YStorageDimension = "0";
+            ZStorageDimension = "0";
+            WeightStorageMax = "0";
         }
 
         #endregion
@@ -723,12 +746,16 @@ namespace WPFUI.ViewModels
             return true;
         }
 
-        private void InitStorageFields()
+        private void WriteCSVForUnityInit(string dbFile, string xmlFile)
         {
-            XStorageDimension = "0";
-            YStorageDimension = "0";
-            ZStorageDimension = "0";
-            WeightStorageMax = "0";
+            var model = ReadXML.ReadProjectStorage(FilePathDefaults.ScratchFolder, xmlFile);
+            string[] dimensions = { model.Length, model.Weight, model.Height, model.Weight };
+
+            //write room dimensions to CSV file
+            WriteText.WriteRoomDimensionsToCSV(dimensions);
+
+            //write database to SCV File
+            WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, dbFile);
         }
 
         #endregion
