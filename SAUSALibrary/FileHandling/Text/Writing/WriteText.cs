@@ -58,7 +58,7 @@ namespace SAUSALibrary.FileHandling.Text.Writing
 
             modelList = ReadSQLite.GetEntireStack(fullDBFilePath, dbFileName);
                         
-            using (var textWriter = File.CreateText(UNITY_DBCSV))
+            using (var textWriter = File.CreateText(AppDomain.CurrentDomain.BaseDirectory.ToString() + UNITY_DBCSV))
             {
                 foreach (var line in ConvertToCSV(modelList))
                 {
@@ -75,7 +75,7 @@ namespace SAUSALibrary.FileHandling.Text.Writing
         /// <param name="roomDimensions"></param>
         public static void WriteRoomDimensionsToCSV(string[] roomDimensions)
         {            
-            using (var textWriter = File.CreateText(UNITY_ROOMCSV))
+            using (var textWriter = File.CreateText(AppDomain.CurrentDomain.BaseDirectory.ToString() + UNITY_ROOMCSV))
             {
                 for(int i = 0 ; i < roomDimensions.Length ; i++)
                 {
@@ -92,8 +92,24 @@ namespace SAUSALibrary.FileHandling.Text.Writing
         /// <param name="modelToWrite"></param>
         public static void AddFullStackModeltoCSV(string FullwriteDirectory, FullStackModel modelToWrite)
         {
-            //TODO write file for Unity reading
             //use UNITY_NEWCONTAINER constant for the file name
+
+            //set up a string to write
+            StringBuilder sb = new StringBuilder();
+            sb.Append(modelToWrite.Index + ",");
+            sb.Append(modelToWrite.XPOS + ",");
+            sb.Append(modelToWrite.YPOS + ",");
+            sb.Append(modelToWrite.ZPOS + ",");
+            sb.Append(modelToWrite.Length + ",");
+            sb.Append(modelToWrite.Width + ",");
+            sb.Append(modelToWrite.Height + ",");
+            sb.Append(modelToWrite.CrateName);
+
+            //write to the file
+            using (var textWriter = File.CreateText(AppDomain.CurrentDomain.BaseDirectory.ToString() + UNITY_NEWCONTAINER))
+            {
+                textWriter.WriteLine(sb);
+            }
         }
     }
 }

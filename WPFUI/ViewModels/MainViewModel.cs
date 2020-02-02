@@ -262,6 +262,9 @@ namespace WPFUI.ViewModels
         {
             //write project database fields with defaults and any custom ones as defined by the user
             WriteSQLite.PopulateCustomProjectDatabase(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, NewDBFields);
+
+            //write the project DB table name and DB file to the project XML file
+            WriteXML.SaveDatabase(FilePathDefaults.ScratchFolder, ProjectXMLFile, ProjectSQLiteDBFile);
             
             //clear the custom field list
             NewDBFields.Clear();
@@ -385,15 +388,17 @@ namespace WPFUI.ViewModels
                 FullProjectSavePath = openDlg.FileName;
                 ProjectSQLiteDBFile = ConvertToSQLiteFileName(ProjectFileName);
                 ProjectXMLFile = ConvertToXMLFileName(ProjectFileName);
-
-                //full qualified project database path in scratch folder
-                //var fqDBFilePath = FilePathDefaults.ScratchFolder + ProjectSQLiteDBFile;
-
+                                
                 //set view state appropriate to our current project state
                 NewProjectNoRoomNoStack();
 
                 //set up blank project files to the scratch directory
                 NewProjectInit.NewProjectDetailOperations(FilePathDefaults.ScratchFolder, ProjectXMLFile, ProjectSQLiteDBFile);
+
+                //write project name to project XML file
+                WriteXML.SaveProjectName(FilePathDefaults.ScratchFolder, ProjectXMLFile);
+
+                //and we are done with project set up
             }
         }
 

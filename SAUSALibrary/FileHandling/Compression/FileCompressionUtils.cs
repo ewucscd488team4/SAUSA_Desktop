@@ -20,7 +20,10 @@ namespace SAUSALibrary.FileHandling.Compression
             {
                 if (Directory.Exists(workingFolder))
                 {
-                    ZipFile.ExtractToDirectory(fullProjectFilePath, workingFolder);
+                    if (File.Exists(fullProjectFilePath))
+                    {
+                        ZipFile.ExtractToDirectory(fullProjectFilePath, workingFolder);
+                    }                    
                 }
                 else
                 {

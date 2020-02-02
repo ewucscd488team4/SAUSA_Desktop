@@ -117,15 +117,16 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// </summary>
         /// <param name="workingFolder"></param>
         /// <param name="projectName"></param>
-        public static void SaveProjectName(string workingFolder, string xmlFileName, string projectName)
+        public static void SaveProjectName(string workingFolder, string xmlFileName)
         {
             var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+            string[] file = xmlFileName.Split('.');
             if(File.Exists(fqXMLFileName))
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(fqXMLFileName);
                 XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectNameStructure);
-                node.Attributes[0].Value = projectName; //only one attribute in this node
+                node.Attributes[0].Value = file[0]; //only one attribute in this node
                 xmlDoc.Save(fqXMLFileName);
             } else
             {
@@ -138,15 +139,16 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// </summary>
         /// <param name="dBaseFileName"></param>
         /// <param name="dBaseTableName"></param>
-        public static void SaveDatabase(string workingFolder, string xmlFileName, string dBaseTableName, string dBaseFileName)
+        public static void SaveDatabase(string workingFolder, string xmlFileName, string dBaseFileName)
         {
             var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+            string[] file = dBaseFileName.Split('.');
             if(File.Exists(fqXMLFileName))
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(fqXMLFileName);
                 XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectStackDataStructure);
-                node.Attributes[0].Value = dBaseTableName; //database table name
+                node.Attributes[0].Value = file[0]; //database table name
                 node.Attributes[1].Value = dBaseFileName; //database file name
                 xmlDoc.Save(fqXMLFileName);
             } else
