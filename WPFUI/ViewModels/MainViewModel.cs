@@ -501,7 +501,7 @@ namespace WPFUI.ViewModels
                 //TODO add new container to project SQLite database when add button is pressed.
 
                 //TODO add new container to 3d view when add button is pressed.
-                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(Containers.Count + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
             }
             else
             {
