@@ -12,7 +12,7 @@ namespace SAUSALibrary.FileHandling.Text.Writing
 {
     public class WriteText
     {
-        private const string UNITY_DBCSV = @"\EmbedTest\ToUnity.csv";
+        private const string UNITY_DBCSV = @"EmbedTest\ToUnity.csv";
         private const string UNITY_ROOMCSV = @"\EmbedTest\ToUnityRoom.csv";
         private const string UNITY_NEWCONTAINER = "ToGUI.csv";
         public static Boolean WriteUnityCSV(string fqFilePath)
@@ -84,32 +84,38 @@ namespace SAUSALibrary.FileHandling.Text.Writing
             }
         }
 
+        
         /// <summary>
-        /// Writes the newly added container to a Unity "packet" text file
+        /// Appends the newly added container to a Unity "packet" text file
         /// </summary>
         /// <param name="FullwriteDirectory"></param>
         /// <param name="fileName"></param>
         /// <param name="modelToWrite"></param>
-        public static void AddFullStackModeltoCSV(string FullwriteDirectory, FullStackModel modelToWrite)
+        public static void AddFullStackModeltoCSV(string fullCSVFilePath, FullStackModel fullStack)
         {
-            //use UNITY_NEWCONTAINER constant for the file name
-
-            //set up a string to write
+            var fqFilePath = Path.Combine(fullCSVFilePath, UNITY_DBCSV);
+            //Convert FullStackModel to csvString
             StringBuilder sb = new StringBuilder();
-            sb.Append(modelToWrite.Index + ",");
-            sb.Append(modelToWrite.XPOS + ",");
-            sb.Append(modelToWrite.YPOS + ",");
-            sb.Append(modelToWrite.ZPOS + ",");
-            sb.Append(modelToWrite.Length + ",");
-            sb.Append(modelToWrite.Width + ",");
-            sb.Append(modelToWrite.Height + ",");
-            sb.Append(modelToWrite.CrateName);
 
-            //write to the file
-            using (var textWriter = File.CreateText(AppDomain.CurrentDomain.BaseDirectory.ToString() + UNITY_NEWCONTAINER))
+            sb.Append(fullStack.Index.ToString() + ",");
+            sb.Append(fullStack.XPOS.ToString() + ",");
+            sb.Append(fullStack.YPOS.ToString() + ",");
+            sb.Append(fullStack.ZPOS.ToString() + ",");
+            sb.Append(fullStack.Length.ToString() + ",");
+            sb.Append(fullStack.Width.ToString() + ",");
+            sb.Append(fullStack.Height.ToString() + ",");
+            sb.Append(fullStack.Weight.ToString() + ",");
+            sb.Append(fullStack.CrateName);
+
+            using (FileStream fs = new FileStream(fqFilePath, FileMode.Append, FileAccess.Write))
             {
-                textWriter.WriteLine(sb);
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(sb);
+                }
             }
+
         }
+        
     }
 }
