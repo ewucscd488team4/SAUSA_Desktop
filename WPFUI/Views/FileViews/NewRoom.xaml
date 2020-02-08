@@ -79,8 +79,7 @@
         </Grid>
 
         <WrapPanel Margin="5" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
-            <Button Content="Save"  Width="80"  Margin="5" Command="{Binding ApplyRoomDimensionstoProjectXML}"/>
-            <Button Content="Close" Width="80"  Margin="5" Click="CloseNewRoom_Click"/>
+            <Button Content="Apply"  Width="80"  Margin="5" Command="{Binding ApplyRoomDimensionstoProjectXML, Mode=OneWay}" CommandParameter="{Binding ElementName=NewRoomView}"/>            
         </WrapPanel>
 
     </Grid>

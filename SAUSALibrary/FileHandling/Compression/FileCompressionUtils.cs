@@ -47,7 +47,7 @@ namespace SAUSALibrary.FileHandling.Compression
         /// <param name="projectFilePath"></param>
         public static void SaveProject(string workingDirectory, string fullSaveFilePath)
         {            
-            if (Directory.Exists(workingDirectory))
+            if (!Directory.Exists(workingDirectory))
             {
                 throw new DirectoryNotFoundException("Directory to compress does not exist!");
             }

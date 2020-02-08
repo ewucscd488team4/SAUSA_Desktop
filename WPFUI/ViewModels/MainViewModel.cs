@@ -98,6 +98,14 @@ namespace WPFUI.ViewModels
             set => Set(ref _AddDelButtons, value);
         }
 
+        private bool _SaveSaveAsClose;
+
+        public bool SaveSaveAsClose
+        {
+            get => _SaveSaveAsClose;
+            set => Set(ref _SaveSaveAsClose, value);
+        }
+
         private Visibility _UnityWindowOnOff;
 
         public Visibility UnityWindowOnOff
@@ -309,7 +317,8 @@ namespace WPFUI.ViewModels
                 }
             } else
             {
-                //TODO launch room dimension error dialog
+                NewRoomErrorDialog error = new NewRoomErrorDialog();
+                error.Show();
             }
         }
 
@@ -540,6 +549,7 @@ namespace WPFUI.ViewModels
             //set everything else to false
             NewStackOnOff = false;
             NewRoomOnOff = false;
+            SaveSaveAsClose = false;
             FullMenuOnOff = false;
             AddDelButtons = false;
             //set everything to hidden
@@ -615,6 +625,7 @@ namespace WPFUI.ViewModels
             OpenProjectOnOff = false;
             NewRoomOnOff = false;
             NewStackOnOff = false;
+            SaveSaveAsClose = true;
             FullMenuOnOff = true;
             AddDelButtons = true;
 
@@ -632,6 +643,7 @@ namespace WPFUI.ViewModels
             OpenProjectOnOff = false;
             NewRoomOnOff = false;
             NewStackOnOff = false;
+            SaveSaveAsClose = true;
             FullMenuOnOff = true;
             AddDelButtons = true;
 
@@ -646,6 +658,7 @@ namespace WPFUI.ViewModels
             OpenProjectOnOff = false;
             NewRoomOnOff = true;
             NewStackOnOff = true;
+            SaveSaveAsClose = true;
             FullMenuOnOff = false;
             AddDelButtons = false;
 
@@ -666,12 +679,7 @@ namespace WPFUI.ViewModels
             UnityWindowOnOff = Visibility.Visible;
             CrateListVisibility = Visibility.Hidden;
             FieldListVisibility = Visibility.Hidden;
-        }
-
-        private void ClosedProjectState()
-        {
-
-        }
+        }        
 
         #endregion
 

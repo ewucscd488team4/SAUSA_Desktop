@@ -88,9 +88,9 @@
                         <MenuItem x:Name="fileOpenProject" Header="Open Project" Command="{Binding OpenProjectCommand}" IsEnabled="{Binding OpenProjectOnOff}"/>
                         <MenuItem x:Name="fileOpenBuild" Header="Open Design" Click="FileOpenDesign_Click" IsEnabled="{Binding OpenProjectOnOff}"/>
                     </MenuItem>
-                    <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}" IsEnabled="{Binding FullMenuOnOff}" />
-                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding FullMenuOnOff}"/>
-                    <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding FullMenuOnOff}"/>                    
+                    <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}" IsEnabled="{Binding SaveSaveAsClose}" />
+                    <MenuItem Header="Save As" InputGestureText="Ctrl+A" Command="{Binding SaveAsCommand}" IsEnabled="{Binding SaveSaveAsClose}"/>
+                    <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding SaveSaveAsClose}"/>                    
                     <Separator/>
                     <MenuItem Header="Import" IsEnabled="{Binding FullMenuOnOff}">
                         <MenuItem x:Name="importData" Header="Import Database"/>
