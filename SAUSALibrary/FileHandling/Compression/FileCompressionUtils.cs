@@ -54,8 +54,15 @@ namespace SAUSALibrary.FileHandling.Compression
             if (string.IsNullOrEmpty(fullSaveFilePath))
             {
                 throw new ArgumentOutOfRangeException("Project file name cannot be null or empty!");
-            }         
-            ZipFile.CreateFromDirectory(workingDirectory, fullSaveFilePath);
+            }
+            if(File.Exists(fullSaveFilePath))
+            {
+                File.Delete(fullSaveFilePath);
+                ZipFile.CreateFromDirectory(workingDirectory, fullSaveFilePath);
+            } else {
+                ZipFile.CreateFromDirectory(workingDirectory, fullSaveFilePath);
+            }
+            
         }
     }
 }
