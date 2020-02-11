@@ -1,4 +1,5 @@
 ﻿<Window x:Class="WPFUI.Views.EditViews.EditExternalDBAttributes"
+        x:Name="EditDBParams"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,115 +11,56 @@
         xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
         
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:EditViewModel}"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         
-        Title="External DB Attributes" Height="450" Width="800">
+        Title="External Database Attributes" Height="450" Width="550" MinHeight="450" MinWidth="550">
+    <Window.DataContext>
+        <viewmodels:EditViewModel/>
+    </Window.DataContext>
     <Grid>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>         <!-- 1 -->
+            <RowDefinition Height="auto"/>         <!-- 2 -->
+            <RowDefinition Height="*"/>            <!-- 3 -->
+            <RowDefinition Height="auto"/>         <!-- 4 -->
+            <RowDefinition Height="auto"/>         <!-- 5 -->
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="External Database Parameters" FontSize="36" TextAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="External Database Parameters" TextAlignment="Center" FontSize="36"/>
 
-        <Label Content="Database Type" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Center" FontSize="16" FontWeight="Light"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Database Type" FontSize="18" FontWeight="Medium"/>
 
-        <WrapPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="10">
-            <RadioButton IsChecked="True">MSSQL</RadioButton>
-            <RadioButton>MySQL</RadioButton>
-            <RadioButton>SQLite</RadioButton>
+        <WrapPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10">
+            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding DataBaseArray[0], Mode=TwoWay}">MSSQL</RadioButton>
+            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding DataBaseArray[1], Mode=TwoWay}">MySQL</RadioButton>
+            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding DataBaseArray[2], Mode=TwoWay}">Oracle</RadioButton>
         </WrapPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Width="380" VerticalAlignment="Top">
-            <TextBlock Text="Server Data" TextAlignment="Center"/>
-            <StackPanel Margin="5">
-                <Expander Name="myExpander" HorizontalAlignment="Left" Header="MySQL" ExpandDirection="Down">
-                    <StackPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="Server"/>
-                            <Label Content="Your Server Goes Here"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="User"/>
-                            <Label Content="Your Server Goes Here"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="Password"/>
-                            <Label Content="Your Password Goes Here"/>
-                        </WrapPanel>
-                    </StackPanel>
-                </Expander>
-                <Expander Name="MSSQLExpander" HorizontalAlignment="Left" Header="MSSQL" ExpandDirection="Down">
-                    <StackPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="Server"/>
-                            <Label Content="Your Server Goes Here"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="User"/>
-                            <Label Content="Your Server Goes Here"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="Password"/>
-                            <Label Content="Your Password Goes Here"/>
-                        </WrapPanel>
-                    </StackPanel>
-                </Expander>
-                <Expander Name="SQLiteExpander" HorizontalAlignment="Left" Header="SQLite" ExpandDirection="Up">
-                    <StackPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="Server"/>
-                            <Label Content="Your Server Goes Here"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="User"/>
-                            <Label Content="Your Server Goes Here"/>
-                        </WrapPanel>
-                        <WrapPanel Margin="5">
-                            <Label Content="Password"/>
-                            <Label Content="Your Password Goes Here"/>
-                        </WrapPanel>
-                    </StackPanel>
-                </Expander>
-            </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBlock Text="Server" TextAlignment="Right" Margin="5,15,5,0" FontSize="24"/>
+            <TextBlock Text="Database" TextAlignment="Right" Margin="5,18,5,0" FontSize="24"/>
+            <TextBlock Text="UserID" TextAlignment="Right" Margin="5,18,5,0" FontSize="24"/>
+            <TextBlock Text="Password" TextAlignment="Right" Margin="5,18,5,0" FontSize="24"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <TextBlock Text=" Database Fields"/>
-            <WrapPanel Margin="5">
-                <Label Content="Server"/>
-                <TextBlock Width="90" Background="Gray"/>
-            </WrapPanel>
-            <WrapPanel Margin="5">
-                <Label Content="User"/>
-                <TextBlock Width="100" Background="Gray"/>
-            </WrapPanel>
-            <WrapPanel Margin="5">
-                <Label Content="Password"/>
-                <TextBlock Width="75" Background="Gray"/>
-            </WrapPanel>
-            <WrapPanel Margin="5">
-                <Label Content="Extra"/>
-                <TextBlock Width="100" Background="Gray"/>
-            </WrapPanel>
-            <Button Content="Apply" Width="80"/>
+        <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" Width="360" VerticalAlignment="Top">
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24"/>
         </StackPanel>
 
-        <Button Content="OK" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Margin="5" Click="ApplyDatabaseParam_Click"/>
+        <Button Content="Apply" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding ApplySettings, Mode=OneWay}" CommandParameter="{Binding ElementName=EditDBParams}"/>
     </Grid>
 </Window>
