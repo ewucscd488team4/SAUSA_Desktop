@@ -12,7 +12,7 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_0
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\App.xaml
 21-1959049347
 
-30-386869827
+29-735285110
 204-1287166992
 Views\AboutViews\About.xaml;Views\AboutViews\Help.xaml;Views\EditViews\EditExternalDBAttributes.xaml;Views\EditViews\EditStack.xaml;Views\EditViews\EditStackAttributes.xaml;Views\EditViews\StorageAreaAttributes.xaml;Views\ErrorViews\DirectoryNotFoundError.xaml;Views\ErrorViews\EmptyContainerError.xaml;Views\ErrorViews\EmptyCustomDBFieldNameError.xaml;Views\ErrorViews\FileNotFoundError.xaml;Views\ErrorViews\NewRoomErrorDialog.xaml;Views\ErrorViews\SomethingWentWrong.xaml;Views\FileViews\NewBuild.xaml;Views\FileViews\NewRoom.xaml;Views\FileViews\NewStack.xaml;Views\FileViews\OpenBuild.xaml;Views\FileViews\OpenProject.xaml;Views\FileViews\Preferences.xaml;Views\MainWindow.xaml;Views\Splash.xaml;Views\WarningViews\UpdateNotImplemented.xaml;
 
