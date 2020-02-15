@@ -11,14 +11,16 @@ namespace WPFUI.ViewModels
         #region test data
 
         private const string _SmarterASPTestServer = "MYSQL5022.site4now.net";
-
         private const string _SmarterASPTestDB = "db_a4733c_sausa";
-
         private const string _SmarterASPTestUserID = "a4733c_sausa";
-
         private const string _SmarterASPTestPassword = "Sausa#1test";
+        private string[] _HardCodedTestMySQLFields = new string[] { _SmarterASPTestServer, _SmarterASPTestDB, _SmarterASPTestUserID, _SmarterASPTestPassword };
 
-        private string[] _HardCodedTestDBFields = new string[] { _SmarterASPTestServer, _SmarterASPTestDB, _SmarterASPTestUserID, _SmarterASPTestPassword };
+        private const string _SmarterASPTestSQLServer = "SQL5047.site4now.net";
+        private const string _SmarterASPTestSQLTestDB = "DB_A4733C_SAUSA";
+        private const string _SmarterASPTestSQLTestUserID = "DB_A4733C_SAUSA_admin";
+        private const string _SmarterASPTestSQLTestPassword = "Sausa#1test";
+        private string[] _HardCodedTestSQLFields = new string[] { _SmarterASPTestSQLServer, _SmarterASPTestSQLTestDB, _SmarterASPTestSQLTestUserID, _SmarterASPTestSQLTestPassword };
 
         #endregion
 
@@ -88,7 +90,7 @@ namespace WPFUI.ViewModels
             if (!CheckDBFields())
             {
                 //if (WriteExternalDB.TestMySQL_DBConnection(DBFieldData)) //use field data from view
-                if (WriteExternalDB.TestMySQL_DBConnection(_HardCodedTestDBFields)) //hard coded to work with smarterASP test database; for testing
+                if (TestDBSettings(SelectedDBType)) //hard coded to work with smarterASP test database; for testing
                 {
                     TestSuccessOrFailString = "TEST SUCCESSFUL";
                 }
@@ -106,9 +108,8 @@ namespace WPFUI.ViewModels
             {
                 //TODO launch an error view complaining about the database fields
             }
-
-
         }
+
 
         #endregion
 
@@ -118,6 +119,26 @@ namespace WPFUI.ViewModels
         {
             get { return Array.IndexOf(DataBaseArray, true); }
         }
+
+        private bool TestDBSettings(int type)
+        {
+            if (type == 0)
+            {
+                //test MSSQL settings
+                return WriteExternalDB.TestMSSQL_DBConnection(_HardCodedTestSQLFields);
+            }
+            else if (type == 1)
+            {
+                //test MySQL settings
+                return WriteExternalDB.TestMySQL_DBConnection(_HardCodedTestMySQLFields);
+            }
+            else
+            {
+                //test Oracle settings
+                return false;
+            }
+        }
+
 
         private void WriteDBSettings(int type)
         {
