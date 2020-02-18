@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using SAUSALibrary.FileHandling.Database.Writing;
 using System;
 using System.Windows;
+using WPFUI.Views.ErrorViews;
 
 namespace WPFUI.ViewModels
 {
@@ -106,7 +107,8 @@ namespace WPFUI.ViewModels
             }
             else
             {
-                //TODO launch an error view complaining about the database fields
+                ExternalDBFieldError error = new ExternalDBFieldError();
+                error.Show();
             }
         }
 
