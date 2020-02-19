@@ -377,5 +377,69 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             }
       
         }
+        
+        
+        /// <summary>
+        /// Update DB from CSV file
+        /// </summary>
+        /// <param name="workingFolder"></param>
+        /// <param name="CSVFileName">The CSV File that houses the current data</param>
+        /// <param name="dbFileName">The DB File that has the DB info</param>
+        /// 
+        public static void UpdateDatabasefromCSV(string workingFolder, string CSVFileName, string dbFileName)
+        {
+            ObservableCollection<FullStackModel> modelList = Text.Reading.ReadText.ConvertCSVToStack(workingFolder, CSVFileName);
+
+            ClearDatabase(workingFolder, dbFileName);
+
+            List<string> oneLine = new List<string>();
+            string[] items;
+
+            foreach(var model in modelList)
+            {
+                items = model.ToString().Split(',');
+
+                foreach(string str in items)
+                {
+                    oneLine.Add(str);
+                }
+                
+                AddSQLiteData(workingFolder, dbFileName, oneLine);
+                
+            }
+      
+        }
+
+        /// <summary>
+        /// Updates Database based on FullStackModel provided
+        /// </summary>
+        /// <param name="workingFolder"></param>
+        /// <param name="CSVFileName">The CSV File that houses the current data</param>
+        /// <param name="dbFileName">The DB File that has the DB info</param>
+        /// 
+        public static void UpdateDatabasefromFullStackModel(string workingFolder, string dbFileName, ObservableCollection<FullStackModel> newModels)
+        {
+            
+
+            ClearDatabase(workingFolder, dbFileName);
+
+            List<string> oneLine = new List<string>();
+            string[] items;
+
+            foreach (var model in newModels)
+            {
+                items = model.ToString().Split(',');
+
+                foreach (string str in items)
+                {
+                    oneLine.Add(str);
+                }
+
+                AddSQLiteData(workingFolder, dbFileName, oneLine);
+
+            }
+
+        }
+        
     }
 }
