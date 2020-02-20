@@ -73,19 +73,7 @@ namespace WPFUI.Views
             this.unityPanel.TabIndex = 1;
             this.unityPanel.TabStop = true;
             this.unityPanel.Resize += new EventHandler(this.UnityPanelResize);
-        }
-
-        private void FileNewDesign_Click(object sender, RoutedEventArgs e)
-        {
-            NewBuild newBuild = new NewBuild();
-            newBuild.Show();
-        }
-
-        private void FileOpenDesign_Click(object sender, RoutedEventArgs e)
-        {
-            OpenBuild openBuild = new OpenBuild();
-            openBuild.Show();
-        }        
+        }               
 
         private void FilePref_Click(object sender, RoutedEventArgs e)
         {

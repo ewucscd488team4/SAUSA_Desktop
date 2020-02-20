@@ -62,8 +62,12 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <WrapPanel HorizontalAlignment="Center" Width="190" VerticalAlignment="Center">
+                <Button Content="Test" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding TestDatabaseSettings}"/>
+                <Button Content="Initialize" Width="90" HorizontalAlignment="Center" Margin="5" Command="{Binding InitializeProjectTable}" IsEnabled="{Binding InitExternalDB}"/>
+            </WrapPanel>
             <TextBlock Text="{Binding TestSuccessOrFailString}" Margin="5" FontSize="24" TextAlignment="Center" Visibility="{Binding TestFieldVisibility}"/>
-            <Button Content="Test" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding TestDatabaseSettings}"/>
+
             <Button Content="Apply" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding ApplyDatabaseSettings, Mode=OneWay}" CommandParameter="{Binding ElementName=EditDataBaseParametersView}"/>
         </StackPanel>
     </Grid>

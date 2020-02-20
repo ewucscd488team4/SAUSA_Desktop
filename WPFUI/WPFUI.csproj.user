@@ -43,19 +43,10 @@
     <Compile Update="Views\FileViews\NewStack.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\FileViews\OpenProject.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\FileViews\Preferences.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\MainWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\FileViews\NewBuild.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\FileViews\OpenBuild.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Splash.xaml.cs">
@@ -105,19 +96,10 @@
     <Page Update="Views\FileViews\NewStack.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\FileViews\OpenProject.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="Views\FileViews\Preferences.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\FileViews\NewBuild.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\FileViews\OpenBuild.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Splash.xaml">

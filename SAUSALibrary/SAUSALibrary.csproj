@@ -84,25 +84,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Containers\Box.cs" />
-    <Compile Include="Containers\Can.cs" />
-    <Compile Include="Containers\Container.cs" />
-    <Compile Include="Containers\Container_Factory.cs" />
-    <Compile Include="Containers\Crate.cs" />
-    <Compile Include="Containers\Drum.cs" />
     <Compile Include="DataProcessing\GetEnums.cs" />
     <Compile Include="Defaults\DBFieldEnum.cs" />
     <Compile Include="Defaults\FilePathDefaults.cs" />
     <Compile Include="Defaults\ThemeEnums.cs" />
     <Compile Include="Defaults\XMLDataDefaults.cs" />
-    <Compile Include="export\ExportAdapter.cs" />
-    <Compile Include="export\ToBMP.cs" />
-    <Compile Include="export\ToCSV.cs" />
     <Compile Include="export\ToDatabase.cs" />
-    <Compile Include="export\ToIMG.cs" />
-    <Compile Include="export\ToPDF.cs" />
-    <Compile Include="export\ToTablet.cs" />
     <Compile Include="FileHandling\Compression\FileCompressionUtils.cs" />
+    <Compile Include="FileHandling\Database\Reading\ReadExternlDB.cs" />
     <Compile Include="FileHandling\Database\Reading\ReadMSSQL.cs" />
     <Compile Include="FileHandling\Database\Reading\ReadMYSQL.cs" />
     <Compile Include="FileHandling\Database\Reading\ReadSQLite.cs" />
@@ -114,12 +103,8 @@
     <Compile Include="FileHandling\Text\Writing\WriteText.cs" />
     <Compile Include="FileHandling\XML\Reading\ReadXML.cs" />
     <Compile Include="FileHandling\XML\Writing\WriteXML.cs" />
-    <Compile Include="import\FromCSV.cs" />
     <Compile Include="import\FromDatabase.cs" />
-    <Compile Include="import\FromTablet.cs" />
-    <Compile Include="import\ImportAdapter.cs" />
     <Compile Include="Init\NewProjectInit.cs" />
-    <Compile Include="Init\ViewController.cs" />
     <Compile Include="Models\Database\IndividualDatabaseFieldModel.cs" />
     <Compile Include="Models\ExternalDBModel.cs" />
     <Compile Include="Models\FullStackModel.cs" />

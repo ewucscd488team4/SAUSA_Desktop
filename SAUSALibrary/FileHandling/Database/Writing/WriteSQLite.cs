@@ -386,7 +386,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// <param name="CSVFileName">The CSV File that houses the current data</param>
         /// <param name="dbFileName">The DB File that has the DB info</param>
         /// 
-        public static void UpdateDatabasefromCSV(string workingFolder, string CSVFileName, string dbFileName)
+        public static void UpdateProjectDatabasefromCSV(string workingFolder, string CSVFileName, string dbFileName)
         {
             ObservableCollection<FullStackModel> modelList = Text.Reading.ReadText.ConvertCSVToStack(workingFolder, CSVFileName);
 
