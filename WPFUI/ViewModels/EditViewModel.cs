@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using SAUSALibrary.FileHandling.Database.Writing;
+using SAUSALibrary.FileHandling.XML.Writing;
 using System;
 using System.Windows;
 using WPFUI.Views.ErrorViews;
@@ -164,15 +165,15 @@ namespace WPFUI.ViewModels
         {
             if (type == 0)
             {
-                //TODO write MSSQL settings
+                WriteXML.StoreExternalDBData("", "", DBFieldData);
             }
             else if (type == 1)
             {
-                //TODO write MySQL settings
+                WriteXML.StoreExternalDBData("", "", DBFieldData);
             }
             else
             {
-                //TODO write Oracle settings
+                WriteXML.StoreExternalDBData("", "", DBFieldData);
             }
         }
 

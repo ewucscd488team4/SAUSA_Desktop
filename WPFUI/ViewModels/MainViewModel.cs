@@ -355,7 +355,7 @@ namespace WPFUI.ViewModels
                 FileCompressionUtils.OpenProject(FullProjectSavePath, FilePathDefaults.ScratchFolder);
 
                 //write project details to settings XML file, in the Projects child node
-                //TODO write opened project details to setting XML file
+                //TODO -ignore- write opened project details to setting XML file
 
                 //open list of stackmodel to populate the container list                
                 Containers = ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
@@ -445,7 +445,7 @@ namespace WPFUI.ViewModels
 
             //TODO write NEW containers in container list to the project database when save menu dialog is invoked.
 
-            //TODO write new project save date to appropriate project in settings XML file
+            //TODO -ignore- write new project save date to appropriate project in settings XML file
         }
 
         /// <summary>
@@ -467,8 +467,8 @@ namespace WPFUI.ViewModels
                 //compress working files in scratch folder to given save directory.
                 FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, FullProjectSavePath);
 
-                //TODO write given save directory to settings file, LastProjectSavedDirectory attribute.
-                //TODO update settings XML with new project save time
+                //TODO -mark- write given save directory to settings file, LastProjectSavedDirectory attribute.
+                //TODO -ignore- update settings XML with new project save time
             }
         }
 

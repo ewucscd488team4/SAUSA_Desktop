@@ -13,7 +13,7 @@ namespace SAUSALibrary.Init
         {
             WriteXML.WriteBlankXML(tempFileDirectory, newProjectXMLFile); //write a new project file out with the given path and file name
             WriteSQLite.CreateProjectDatabase(tempFileDirectory, newProjectDBFile); //write a new project database out with the given path and file name
-            //TODO write project name, savepath, and time accessed to settings XML file, or move to top and update time if already there
+            //TODO -ignore- write project name, savepath, and time accessed to settings XML file, or move to top and update time if already there
         }
     }
 }
