@@ -305,7 +305,7 @@ namespace WPFUI.ViewModels
                 WriteXML.SaveDimensions(FilePathDefaults.ScratchFolder, ProjectXMLFile, NewRoomDimensions);
 
                 //TODO write room dimensions to the CSV file unity looks at
-                //WriteText.WriteRoomDimensionsToCSV(NewRoomDimensions);
+                WriteText.WriteRoomDimensionsToCSV(NewRoomDimensions);
 
                 //set view state appropriate to project state
                 NewProjectWithRoomNoStack();
