@@ -182,6 +182,10 @@ namespace WPFUI.ViewModels
 
         public RelayCommand? CloseCommand { get; private set; }
 
+        public RelayCommand? ExportCommand { get; private set; }
+
+        public RelayCommand? ImportCommand { get; private set; }
+
         public RelayCommand? AddContainerToContainerListCommand { get; private set; }
 
         public RelayCommand? DeleteContainerFromContainerListCommand { get; private set; }
@@ -468,6 +472,8 @@ namespace WPFUI.ViewModels
                 FileCompressionUtils.SaveProject(FilePathDefaults.ScratchFolder, FullProjectSavePath);
 
                 //TODO -mark- write given save directory to settings file, LastProjectSavedDirectory attribute.
+
+
                 //TODO -ignore- update settings XML with new project save time
             }
         }
@@ -497,8 +503,25 @@ namespace WPFUI.ViewModels
         }
 
         /// <summary>
+        /// Import data to a project sqlite database from an already existing external database
+        /// </summary>
+        private void OnImport()
+        {
+
+        }
+
+        /// <summary>
+        /// Export project sqlite database to a pre-existing external database
+        /// </summary>
+        private void OnExport()
+        {
+
+        }
+
+        /// <summary>
         /// Add a container to the container list, and to the 3d Window for placement
         /// </summary>
+        /// 
         private void OnAddContainer()
         {
             if (ContainerFieldValidator())
@@ -574,9 +597,10 @@ namespace WPFUI.ViewModels
             SaveCommand = new RelayCommand(OnSaveProject);                                              // 9 sets up the command that saves the current open project as it current state.
             SaveAsCommand = new RelayCommand(OnSaveAs);                                                 //10 sets up the command that saves the current open project as a file name and a location of the user's choice.
             CloseCommand = new RelayCommand(OnClose);                                                   //11 sets up the command that closes the currently open project, abandoning any unsaved changes.
-            AddContainerToContainerListCommand = new RelayCommand(OnAddContainer);                      //12 sets up the command that adds a new container to the container list on the main page view.
-            DeleteContainerFromContainerListCommand = new RelayCommand(OnDeleteContainer);              //13 sets up the command that deletes the selected container from the container list on the main page view.
-            //                                                                                          //14 extra.
+            ImportCommand = new RelayCommand(OnImport);                                                 //12 sets up the command that closes the currently open project, abandoning any unsaved changes.)
+            ExportCommand = new RelayCommand(OnExport);                                                 //13 sets up the command that closes the currently open project, abandoning any unsaved changes.)
+            AddContainerToContainerListCommand = new RelayCommand(OnAddContainer);                      //14 sets up the command that adds a new container to the container list on the main page view.
+            DeleteContainerFromContainerListCommand = new RelayCommand(OnDeleteContainer);              //15 sets up the command that deletes the selected container from the container list on the main page view.            
         }
 
         /// <summary>

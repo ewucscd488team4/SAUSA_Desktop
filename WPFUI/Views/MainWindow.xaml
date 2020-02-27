@@ -91,10 +91,10 @@
                     <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding SaveSaveAsClose}"/>                    
                     <Separator/>
                     <MenuItem Header="Import" IsEnabled="{Binding FullMenuOnOff}">
-                        <MenuItem x:Name="importData" Header="Import External Database"/>                        
+                        <MenuItem x:Name="importData" Header="Import External Database" Command="{Binding ImportCommand}"/>                        
                     </MenuItem>
                     <MenuItem Header="Export" IsEnabled="{Binding FullMenuOnOff}">
-                        <MenuItem x:Name="exportData" Header="Export to External Database"/>                        
+                        <MenuItem x:Name="exportData" Header="Export to External Database" Command="{Binding ExportCommand}"/>                        
                     </MenuItem>
                     <Separator/>
                     <MenuItem x:Name="filePref" Header="Preferences" Click="FilePref_Click"/>                    
