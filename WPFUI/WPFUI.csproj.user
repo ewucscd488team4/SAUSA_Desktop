@@ -37,6 +37,12 @@
     <Compile Update="Views\ErrorViews\SomethingWentWrong.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\FileViews\ExportData.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\FileViews\ImportData.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\FileViews\NewRoom.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +94,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ErrorViews\SomethingWentWrong.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileViews\ExportData.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\FileViews\ImportData.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\FileViews\NewRoom.xaml">

@@ -365,6 +365,9 @@ namespace WPFUI.ViewModels
                 Containers = ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
                 RaisePropertyChanged(nameof(Containers));
 
+                //populate external database fields from the project xml file in case we want to export
+                //TODO -Mark- grab external project database attributes from the project XML file and populate the model.
+
                 //initialize container property list and the model used for adding containers to the container list
                 InitializeMainWindowFields();
 
@@ -374,7 +377,8 @@ namespace WPFUI.ViewModels
                 //write out the CSV files for the unity window to initialize with
                 WriteCSVForUnityInit(ProjectSQLiteDBFile, ProjectXMLFile);
 
-                //WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
+                //prompt the unity window to load the project stack
+                //TODO write CSV for project stack so unity can read it and display it.
 
             }
             else
@@ -507,7 +511,12 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnImport()
         {
+            //grab expernal database items from project XML file if we have not done so already.
+            //TODO read external DB attributes from project XML file and populate the array with them
 
+            ImportData importData = new ImportData();
+            importData.DataContext = this;
+            importData.Show();
         }
 
         /// <summary>
@@ -515,7 +524,12 @@ namespace WPFUI.ViewModels
         /// </summary>
         private void OnExport()
         {
+            //grab expernal database items from project XML file if we have not done so already.
+            //TODO read external DB attributes from project XML file and populate the array with them
 
+            ExportData exportData = new ExportData();
+            exportData.DataContext = this;
+            exportData.Show();
         }
 
         /// <summary>
