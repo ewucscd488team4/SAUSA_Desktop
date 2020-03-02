@@ -23,4 +23,3 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI_Tests\obj\Debug\WPFUI_Tests.csproj.CopyComplete
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI_Tests\obj\Debug\WPFUI_Tests.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI_Tests\obj\Debug\WPFUI_Tests.pdb
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI_Tests\obj\Debug\WPFUI_Tests.csprojAssemblyReference.cache

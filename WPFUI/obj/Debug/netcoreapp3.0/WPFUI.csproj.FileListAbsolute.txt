@@ -145,3 +145,7 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\bin\Debug\netcoreapp3.0\Google.Protobuf.xml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\bin\Debug\netcoreapp3.0\Renci.SshNet.xml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\ErrorViews\ExternalDBFieldError.baml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\FileViews\ExportData.g.cs
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\FileViews\ImportData.g.cs
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\FileViews\ExportData.baml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\WPFUI\obj\Debug\netcoreapp3.0\Views\FileViews\ImportData.baml
