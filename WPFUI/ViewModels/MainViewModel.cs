@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using SAUSALibrary.DataProcessing;
@@ -18,6 +18,9 @@ using System.Windows;
 using WPFUI.Views.ErrorViews;
 using WPFUI.Views.FileViews;
 using SAUSALibrary.FileHandling.XML.Reading;
+using System;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace WPFUI.ViewModels
 {
@@ -380,6 +383,8 @@ namespace WPFUI.ViewModels
                 //prompt the unity window to load the project stack
                 //TODO write CSV for project stack so unity can read it and display it.
 
+                //Start the FileSystemWatcher!!!
+                MonitorCSV();
             }
             else
             {
@@ -504,6 +509,9 @@ namespace WPFUI.ViewModels
 
             //update view
             RaisePropertyChanged(nameof(Containers));
+
+            //TODO remove Close LOGGER
+            writer.Close();
         }
 
         /// <summary>
@@ -540,14 +548,19 @@ namespace WPFUI.ViewModels
         {
             if (ContainerFieldValidator())
             {
+
+                //Get newStack from DB.
+                ObservableCollection<FullStackModel> UpdatedStack = SAUSALibrary.FileHandling.Database.Reading.ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
+
                 //add new container to container list and call "update" on it
-                Containers.Add(new FullStackModel(Containers.Count + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                Containers.Add(new FullStackModel(UpdatedStack[UpdatedStack.Count - 1].Index, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
                 RaisePropertyChanged(nameof(Containers));
 
                 //TODO add new container to project SQLite database when add button is pressed.
+                WriteSQLite.UpdateDatabasefromFullStackModel(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, Containers);
 
-                //TODO add new container to 3d view when add button is pressed.
-                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(Containers.Count + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                //add new container to 3d view when add button is pressed.
+                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(UpdatedStack[UpdatedStack.Count - 1].Index + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
             }
             else
             {
@@ -565,10 +578,12 @@ namespace WPFUI.ViewModels
             //delete container from container List and call "update" on the list
             Containers.Remove(MainWindowContainerListModel);
             RaisePropertyChanged(nameof(Containers));
+            
+           //delete container from database when delete button is pressed
+            WriteSQLite.UpdateDatabasefromFullStackModel(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, Containers);
 
-            //TODO detele container from database when delete button is pressed
-
-            //TODO delete container from 3d view when delete button is pressed
+            //delete container from 3d view when delete button is pressed
+            WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
         }
 
         #endregion
@@ -804,6 +819,84 @@ namespace WPFUI.ViewModels
             WriteText.WriteDatabasetoCSV(FilePathDefaults.ScratchFolder, dbFile);
         }
 
+        #endregion
+
+
+        #region File System Watching CSV from Unity
+
+
+        static StreamWriter writer = new StreamWriter("FileSystemWatcherlog.txt", true);
+
+        private void UpdateContainersfromNewStack(ObservableCollection<FullStackModel> NewStackModels)
+        {
+            Containers.Clear();
+            foreach (FullStackModel stack in NewStackModels)
+            {
+                Containers.Add(stack);
+            }
+        }
+
+        public void MonitorCSV()
+        {
+
+            FileSystemWatcher watcher = new FileSystemWatcher(System.AppDomain.CurrentDomain.BaseDirectory.ToString() + "EmbedTest", "ToGUI.csv");
+
+            watcher.NotifyFilter = NotifyFilters.LastWrite;
+            watcher.IncludeSubdirectories = true;
+
+            var switchThreadForFsEvent = (Func<FileSystemEventHandler, FileSystemEventHandler>)((FileSystemEventHandler handler) =>
+            (object obj, FileSystemEventArgs e) => Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Send, new Action(() =>
+                    handler(obj, e))));
+
+            Log(watcher.Path);
+            watcher.Changed += switchThreadForFsEvent(OnChanged);
+            watcher.Created += switchThreadForFsEvent(OnChanged);
+            watcher.Deleted += switchThreadForFsEvent(OnChanged);
+
+
+            watcher.EnableRaisingEvents = true;
+
+
+
+            void OnChanged(object source, FileSystemEventArgs e)
+            {
+                Thread.Sleep(1000);
+                //read from the CSV the new positions
+                //update the current ObservableCollection of FullStackModels with new positions
+                ObservableCollection<FullStackModel> newStack = SAUSALibrary.FileHandling.Text.Reading.ReadText.ComparePositionStackToCurrentStack(SAUSALibrary.FileHandling.Text.Reading.ReadText.ConvertCSVToPositionStack(), Containers);
+
+                //update the local DB with the new info by sending in the newStack with updated positions
+                WriteSQLite.UpdateDatabasefromFullStackModel(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, newStack);
+
+                //update the toUnity.csv by sending in the newStack with updated positions
+                WriteText.WriteStackCollectiontoCSV(newStack);
+
+                UpdateContainersfromNewStack(newStack);
+
+                //Refresh and list the new containers in the GUI Window
+                RaisePropertyChanged(Containers.Count.ToString());
+            }
+
+            static void Log(string message)
+            {
+                writer.WriteLine();
+
+                string newmessage = System.DateTime.Now.ToString("MM-dd HH:mm:ss") + ": " + message;
+                writer.Write(newmessage);
+                writer.WriteLine();
+            }
+
+            static void LogStack(ObservableCollection<FullStackModel> LogThisStack)
+            {
+                foreach (FullStackModel LoggableStack in LogThisStack)
+                {
+                    writer.WriteLine("Name: " + LoggableStack.CrateName + " ID: " + LoggableStack.Index.ToString() + " XPOS: " + LoggableStack.XPOS.ToString() + " YPOS: " + LoggableStack.YPOS.ToString() + " ZPOS: " + LoggableStack.ZPOS.ToString() + " ");
+                }
+            }
+
+
+
+        }
         #endregion
     }
 }
