@@ -1,4 +1,4 @@
-﻿using SAUSALibrary.Models;
+using SAUSALibrary.Models;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
 using System.IO;
