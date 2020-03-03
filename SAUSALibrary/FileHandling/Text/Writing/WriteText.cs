@@ -68,6 +68,27 @@ namespace SAUSALibrary.FileHandling.Text.Writing
         }
 
         /// <summary>
+        /// Write the database to a CSV using the GetEntireStack method and a ConvertToCSV helper method
+        /// </summary>
+        /// <param name="fullDBFilePath"></param>
+        /// <param name="dbFileName"></param>
+        /// <param name="specifiedCustomDBFieldsList"></param>
+        /// <returns></returns>
+        /// 
+        public static void WriteStackCollectiontoCSV(ObservableCollection<FullStackModel> NewStack)
+        {
+
+            using (StreamWriter textWriter = File.CreateText(AppDomain.CurrentDomain.BaseDirectory.ToString() + UNITY_DBCSV))
+            {
+                foreach (string line in ConvertToCSV(NewStack))
+                {
+                    textWriter.WriteLine(line);
+                }
+            }
+        }
+
+
+        /// <summary>
         /// Write room dimenions to CSV for unity to use.
         /// </summary>
         /// <param name="workingFolder"></param>
