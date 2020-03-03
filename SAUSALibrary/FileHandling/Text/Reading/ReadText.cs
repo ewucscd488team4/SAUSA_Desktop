@@ -11,7 +11,7 @@ namespace SAUSALibrary.FileHandling.Text.Reading
 {
     public class ReadText
     {
-        private const string UNITY_NEWCONTAINER = "EmbedTest\\ToGUI.csv";
+        private const string UNITY_NEW_POSITION = "EmbedTest\\ToGUI.csv";
 
         public static bool ReadUnityCSV(string fqFilePath)
         {
@@ -32,8 +32,6 @@ namespace SAUSALibrary.FileHandling.Text.Reading
             ObservableCollection<FullStackModel> modelList = new ObservableCollection<FullStackModel>();
             var fqCSVFileName = Path.Combine(fullCSVFilePath, CSVFileName);
 
-            //StreamReader stream = new StreamReader(fqCSVFileName);
-            //var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\ToGUI.csv");
             var lines = File.ReadLines(fqCSVFileName);
 
             foreach (string container in lines)
@@ -54,23 +52,22 @@ namespace SAUSALibrary.FileHandling.Text.Reading
         /// <param name="modelList"></param>
         /// <returns></returns>
         /// 
-        public static ObservableCollection<FullStackModel> ConvertCSVToPositionStack (string fullCSVFilePath, string CSVFileName)
+        public static ObservableCollection<FullStackModel> ConvertCSVToPositionStack()
         {
             ObservableCollection<FullStackModel> modelList = new ObservableCollection<FullStackModel>();
-            var fqCSVFileName = Path.Combine(fullCSVFilePath, CSVFileName);
 
-            //StreamReader stream = new StreamReader(fqCSVFileName);
-            //var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory.ToString() + "\\EmbedTest\\ToGUI.csv");
-            var lines = File.ReadLines(fqCSVFileName);
+            var lines = File.ReadLines(AppDomain.CurrentDomain.BaseDirectory.ToString() + UNITY_NEW_POSITION);
+
 
             foreach (string container in lines)
             {
                 string[] FSMline = container.Split(',');
-                modelList.Add(new FullStackModel(long.Parse(FSMline[0]), long.Parse(FSMline[1]), long.Parse(FSMline[2]), long.Parse(FSMline[3]), 0,0,0,0,null));
+                modelList.Add(new FullStackModel(long.Parse(FSMline[0]), double.Parse(FSMline[1]), double.Parse(FSMline[2]), double.Parse(FSMline[3]), 0, 0, 0, 0, null));
             }
 
             return modelList;
         }
+
 
         ///<summary>
         ///Compare a Position Stack and a Full Stack and update the Full Stack
