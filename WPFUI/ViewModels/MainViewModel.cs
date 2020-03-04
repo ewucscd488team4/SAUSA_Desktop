@@ -553,14 +553,14 @@ namespace WPFUI.ViewModels
                 ObservableCollection<FullStackModel> UpdatedStack = SAUSALibrary.FileHandling.Database.Reading.ReadSQLite.GetEntireStack(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile);
 
                 //add new container to container list and call "update" on it
-                Containers.Add(new FullStackModel(UpdatedStack[UpdatedStack.Count - 1].Index, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                Containers.Add(new FullStackModel(UpdatedStack[UpdatedStack.Count - 1].Index + 1, 0, 0, 0, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
                 RaisePropertyChanged(nameof(Containers));
 
                 //TODO add new container to project SQLite database when add button is pressed.
                 WriteSQLite.UpdateDatabasefromFullStackModel(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, Containers);
 
                 //add new container to 3d view when add button is pressed.
-                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(UpdatedStack[UpdatedStack.Count - 1].Index + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(UpdatedStack[UpdatedStack.Count - 1] + 1.Index + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
             }
             else
             {
