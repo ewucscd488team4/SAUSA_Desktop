@@ -2,7 +2,6 @@
 using SAUSALibrary.FileHandling.XML.Reading;
 using SAUSALibrary.Models;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Text;
@@ -12,7 +11,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
     public class WriteExternalDB
     {
         /// <summary>
-        /// Tests the given mysql connection using the paremeters given in the parameters array
+        /// Tests the given external MySQL connection paremeters for validity and returns true if they are valid, false if they are not.
         /// </summary>
         /// <param name="testParameters"></param>
         /// <returns></returns>
@@ -26,7 +25,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
                 UserID = testParameters[2],
                 Password = testParameters[3]
             };
-            
+
             try
             {
                 using (conn = new MySqlConnection(dbConString.ConnectionString))
@@ -40,11 +39,11 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             {
                 return false;
             }
-            
+
         }
 
         /// <summary>
-        /// Tests the given sql connection using the paremeters given in the paremeters array
+        /// Tests the given external Microsoft SQL connection paremeters for validity and returns true if they are valid, false if they are not.
         /// </summary>
         /// <param name="testParameters"></param>
         /// <returns></returns>
@@ -72,8 +71,29 @@ namespace SAUSALibrary.FileHandling.Database.Writing
 
         }
 
-        public static bool SetUpMySQLDatabase(string[] dbparemeters, string workingFolder, string projectXMLFile)
+        /// <summary>
+        /// Sets up the default Sausa table at the given external MySQL database.
+        /// </summary>
+        /// <param name="dbparemeters"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="projectXMLFile"></param>
+        /// <returns></returns>
+        public static bool SetUp_MySQLDatabase(string[] dbparemeters, string workingFolder, string projectXMLFile)
         {
+            /*
+             CREATE TABLE TestData (
+            crateIndex smallint(4) NOT NULL AUTO_INCREMENT,
+            xPos Decimal(10,4),
+            yPos Decimal(10,4),
+            zPos Decimal(10,4),
+            length Decimal(8,4) NOT NULL,
+            width Decimal(8,4) NOT NULL,
+            height Decimal(8,4) NOT NULL,
+            weight Decimal(7,2) NOT NULL,
+            name VARCHAR(150) NOT NULL,
+            PRIMARY KEY (crateIndex)
+            )
+             */
 
             string table;
 
@@ -87,8 +107,6 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             {
                 throw new FileNotFoundException("Project file not found!");
             }
-
-
 
             MySqlConnectionStringBuilder dbConString = new MySqlConnectionStringBuilder
             {
@@ -107,19 +125,32 @@ namespace SAUSALibrary.FileHandling.Database.Writing
                     //build the command to execute
                     StringBuilder commandBuilder = new StringBuilder();
 
-
+                    //1
                     commandBuilder.Append("CREATE TABLE ");
+                    //2
                     commandBuilder.Append(table + "(");
+                    //3
                     commandBuilder.Append("crateIndex smallint(4) NOT NULL AUTO_INCREMENT,");
+                    //4
                     commandBuilder.Append("xPos Decimal(10,4),");
+                    //5
                     commandBuilder.Append("yPos Decimal(10,4),");
+                    //6
                     commandBuilder.Append("zPos Decimal(10,4),");
+                    //7
                     commandBuilder.Append("length Decimal(8,4) NOT NULL,");
+                    //8
                     commandBuilder.Append("width Decimal(8,4) NOT NULL,");
+                    //9
                     commandBuilder.Append("height Decimal(8,4) NOT NULL,");
+                    //10
                     commandBuilder.Append("weight Decimal(7,2) NOT NULL,");
+                    //11
                     commandBuilder.Append("name VARCHAR(150) NOT NULL,");
+                    //12
                     commandBuilder.Append("PRIMARY KEY (crateIndex)");
+                    //13
+                    commandBuilder.Append(")");
 
 
                     MySqlCommand cmd = new MySqlCommand(commandBuilder.ToString(), connection);
@@ -132,11 +163,31 @@ namespace SAUSALibrary.FileHandling.Database.Writing
                     return false;
                 }
             }
-
         }
 
-        public static bool SetUpSQLDatabase(string[] dbparameters, string workingFolder, string projectXMLFile)
+        /// <summary>
+        /// Sets up Sausa default table in the given external Microsoft SQL database.
+        /// </summary>
+        /// <param name="dbparameters"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="projectXMLFile"></param>
+        /// <returns></returns>
+        public static bool SetUp_MSSQLDatabase(string[] dbparameters, string workingFolder, string projectXMLFile)
         {
+            /*//mysql
+            CREATE TABLE TestData (
+            crateIndex smallint IDENTITY(1,1) NOT NULL,
+            xPos Decimal(10,4) NOT NULL,
+            ypos Decimal(10,4) NOT NULL,
+            zPos Decimal(10,4) NOT NULL,
+            length Decimal(8,4) NOT NULL,
+            width Decimal(8,4) NOT NULL,
+            height Decimal(8,4) NOT NULL,
+            weight Decimal(7,2) NOT NULL,
+            name VARCHAR(150) NOT NULL
+            )
+            )*/
+
             string table;
 
             var fqProjectFilePath = Path.Combine(workingFolder, projectXMLFile);
@@ -210,9 +261,19 @@ namespace SAUSALibrary.FileHandling.Database.Writing
                     return false;
                 }
             }
+
+
         }
 
-        public static bool ExportProjectToSQL(string[] model, ObservableCollection<FullStackModel> containerList, string workingFolder, string projectXMLFile)
+        /// <summary>
+        /// Exports a given container list to the given Microsoft SQL server. All data is tacked on to the end of what data may already exist.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="containerList"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="projectXMLFile"></param>
+        /// <returns></returns>
+        public static bool Export_ToMSSQL(string[] model, ObservableCollection<FullStackModel> containerList, string workingFolder, string projectXMLFile)
         {
             string table;
 
@@ -285,9 +346,18 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             {
                 return false;
             }
+
         }
 
-        public static bool ExportProjectToMySQL(string[] model, ObservableCollection<FullStackModel> containerList, string workingFolder, string projectXMLFile)
+        /// <summary>
+        /// Exports a given container list to the given external MySQL database. All data is tacked on to the end of whatever data already exists.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="containerList"></param>
+        /// <param name="workingFolder"></param>
+        /// <param name="projectXMLFile"></param>
+        /// <returns></returns>
+        public static bool Export_ToMySQL(string[] model, ObservableCollection<FullStackModel> containerList, string workingFolder, string projectXMLFile)
         {
             string table;
 
@@ -314,6 +384,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             {
                 using (MySqlConnection conn = new MySqlConnection(dbConString.ConnectionString))
                 {
+                    conn.Open();
                     foreach (FullStackModel listModel in containerList)
                     {
                         string importCommand = "INSERT INTO " + table + " (xPos, yPos, zPos, length, width, height, weight, name) values " +
@@ -356,6 +427,7 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             {
                 return false;
             }
-        }
+
+        }        
     }
 }
