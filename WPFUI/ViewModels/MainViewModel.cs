@@ -560,7 +560,7 @@ namespace WPFUI.ViewModels
                 WriteSQLite.UpdateDatabasefromFullStackModel(FilePathDefaults.ScratchFolder, ProjectSQLiteDBFile, Containers);
 
                 //add new container to 3d view when add button is pressed.
-                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(UpdatedStack[UpdatedStack.Count - 1] + 1.Index + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
+                WriteText.AddFullStackModeltoCSV(System.AppDomain.CurrentDomain.BaseDirectory, new FullStackModel(UpdatedStack[UpdatedStack.Count - 1].Index + 1, 100, 100, 100, AddContainerModel.Length, AddContainerModel.Width, AddContainerModel.Height, AddContainerModel.Weight, AddContainerModel.CrateName));
             }
             else
             {
