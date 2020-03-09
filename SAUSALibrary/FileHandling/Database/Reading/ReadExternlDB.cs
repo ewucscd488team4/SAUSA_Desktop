@@ -1,6 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
+using SAUSALibrary.Defaults;
+using SAUSALibrary.FileHandling.Database.Writing;
 using SAUSALibrary.FileHandling.XML.Reading;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -138,27 +141,48 @@ namespace SAUSALibrary.FileHandling.Database.Reading
 
                     using (MySqlCommand cmd = new MySqlCommand(command, connection))
                     {
+                        MySqlDataReader drItem = cmd.ExecuteReader();
+
                         //make a List to send to the SQL Lite add method
-                        //List<string> list = new List<string>();
+                        List<string> list = new List<string>();
 
                         //populate the List
-                        //TODO populate the list of read data from the database
-                                                
-                        if(File.Exists(fqProjectDBFilePath))
+                        while (drItem.Read())
                         {
-                            //finally add the new list to the project database
-                            //WriteSQLite.AddSQLiteData(FilePathDefaults.ScratchFolder, projectSqLiteFile, list);
-                        }
-                        else
-                        {
-                            throw new FileNotFoundException("Project database to write new data into not found!");
-                        }
-                    }
+                            //populate the List
+                            string xPos = drItem["xPos"].ToString();
+                            string yPos = drItem["yPos"].ToString();
+                            string zPos = drItem["zPos"].ToString();
+                            string length = drItem["length"].ToString();
+                            string width = drItem["width"].ToString();
+                            string height = drItem["height"].ToString();
+                            string weight = drItem["weight"].ToString();
+                            string name = drItem["name"].ToString();
+                            list.Add(xPos);
+                            list.Add(yPos);
+                            list.Add(zPos);
+                            list.Add(length);
+                            list.Add(width);
+                            list.Add(height);
+                            list.Add(weight);
+                            list.Add(name);
 
-                    //read data
+                            if (File.Exists(fqProjectDBFilePath))
+                            {
+                                //finally add the new list to the project database
+                                WriteSQLite.AddSQLiteData(FilePathDefaults.ScratchFolder, projectSqLiteFile, list);
+                            }
+                            else
+                            {
+                                throw new FileNotFoundException("Project database to write new MySql data into not found!");
+                            }
+                        } //end of while loop                       
 
-                    return true;
-                }
+                        return true;
+
+                    } //end of using MySqlCommand
+
+                } //end of try
                 catch (MySqlException)
                 {
                     return false;
@@ -200,27 +224,49 @@ namespace SAUSALibrary.FileHandling.Database.Reading
 
                     using (SqlCommand cmd = new SqlCommand(command, connection))
                     {
+                        SqlDataReader drItem = cmd.ExecuteReader();
+
                         //make a List to send to the SQL Lite add method
-                        //List<string> list = new List<string>();
+                        List<string> list = new List<string>();
 
                         //populate the List
-                        //TODO populate the list of read data from the database
-                                                
-                        if (File.Exists(fqProjectDBFilePath))
+                        while (drItem.Read())
                         {
-                            //finally add the new list to the project database
-                            //WriteSQLite.AddSQLiteData(FilePathDefaults.ScratchFolder, projectSqLiteFile, list);
-                        }
-                        else
-                        {
-                            throw new FileNotFoundException("Project database to write new data into not found!");
-                        }
-                    }
+                            //populate the List
+                            string xPos = drItem["xPos"].ToString();
+                            string yPos = drItem["yPos"].ToString();
+                            string zPos = drItem["zPos"].ToString();
+                            string length = drItem["length"].ToString();
+                            string width = drItem["width"].ToString();
+                            string height = drItem["height"].ToString();
+                            string weight = drItem["weight"].ToString();
+                            string name = drItem["name"].ToString();
+                            list.Add(xPos);
+                            list.Add(yPos);
+                            list.Add(zPos);
+                            list.Add(length);
+                            list.Add(width);
+                            list.Add(height);
+                            list.Add(weight);
+                            list.Add(name);
 
-                    //read data
+                            if (File.Exists(fqProjectDBFilePath))
+                            {
+                                //finally add the new list to the project database
+                                WriteSQLite.AddSQLiteData(FilePathDefaults.ScratchFolder, projectSqLiteFile, list);
+                            }
+                            else
+                            {
+                                throw new FileNotFoundException("Project database to write new SQL data into not found!");
+                            }
 
-                    return true;
-                }
+                        } //end of while
+
+                        return true;
+
+                    } //end of using SqlCommand
+
+                } //end of try
                 catch (SqlException)
                 {
                     return false;
