@@ -88,10 +88,10 @@ namespace SAUSALibrary.FileHandling.Database.Writing
                 sb.Append(");");
 
                 //Console.WriteLine(sb.ToString()); for testing
-                sb.Clear(); //clear StringBuilder
+
                 SQLiteCommand command = new SQLiteCommand(sb.ToString(), m_dbConnection);
                 command.ExecuteNonQuery(); //add data
-
+                sb.Clear(); //clear StringBuilder
                 m_dbConnection.Close();
 
             }
@@ -409,7 +409,6 @@ namespace SAUSALibrary.FileHandling.Database.Writing
             }
       
         }
-
         /// <summary>
         /// Updates Database based on FullStackModel provided
         /// </summary>
@@ -419,27 +418,89 @@ namespace SAUSALibrary.FileHandling.Database.Writing
         /// 
         public static void UpdateDatabasefromFullStackModel(string workingFolder, string dbFileName, ObservableCollection<FullStackModel> newModels)
         {
-            
 
-            ClearDatabase(workingFolder, dbFileName);
+            //split the file name into name plus extension
+            var fileSplit = dbFileName.Split('.');
+            //combine file path with file name to make a full file path for 
+            var fqFilePath = Path.Combine(workingFolder, dbFileName);
 
-            List<string> oneLine = new List<string>();
-            string[] items;
-
-            foreach (var model in newModels)
+            //if db file exists
+            if (File.Exists(fqFilePath))
             {
-                items = model.ToString().Split(',');
+                StringBuilder UpdateQuery = new StringBuilder();
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + fqFilePath + ";Version=3;");
+                SQLiteCommand updateCommand = new SQLiteCommand(m_dbConnection);
+                List<long> IDsPresent = new List<long>();
 
-                foreach (string str in items)
+                m_dbConnection.Open();
+
+                //Go through the stack and update the position fields by creating U
+                foreach (FullStackModel Stack in newModels)
                 {
-                    oneLine.Add(str);
+                    //start making a string list of all the IDs present (there probably is a better way to do this but TIME and all...)
+                    IDsPresent.Add(Stack.Index);
+
+                    //UPDATE tablename SET xpos = #, ypos = #, zpos = # WHERE ID = #;
+                    UpdateQuery.Append("UPDATE " + fileSplit[0] + " SET xpos = " + Stack.XPOS + ", ypos = " + Stack.YPOS + ", zpos = " + Stack.ZPOS + " WHERE ID = " + Stack.Index + ";");
+
+                    //Make the command text
+                    updateCommand.CommandText = UpdateQuery.ToString();
+
+                    //execute the command
+                    updateCommand.ExecuteNonQuery();
                 }
 
-                AddSQLiteData(workingFolder, dbFileName, oneLine);
+                UpdateQuery.Clear();
 
+                //Go through the list and delete any containers that aren't in the stack
+                //DELETE from tablename WHERE ID NOT IN (list of strings that are IDs);
+                UpdateQuery.Append("DELETE from " + fileSplit[0] + " WHERE ID NOT IN (");
+                foreach (long ID in IDsPresent)
+                {
+                    UpdateQuery.Append(ID);//adding the index to a list
+                    if (IDsPresent.IndexOf(ID) != IDsPresent.Count - 1) UpdateQuery.Append(", "); //followed by a comma unless it's the last one
+                }
+                //Finish the line with );
+                UpdateQuery.Append(");");
+
+                //make command text
+                updateCommand.CommandText = UpdateQuery.ToString();
+
+                //Execute the DELETE command
+                updateCommand.ExecuteNonQuery();
+
+                //Clear StringBuilder
+                UpdateQuery.Clear();
+                //Close database connection
+                m_dbConnection.Close();
             }
 
         }
-        
+
+        /// <summary>
+        /// Writes a stack into the SQLite Database File provided
+        /// </summary>
+        /// <param name="workingFolder"></param>
+        /// <param name="dbFileName"></param>
+        /// <param name="StackCollection"></param>
+        public static void AddSQLiteDatafromStack(string workingFolder, string dbFileName, ObservableCollection<FullStackModel> StackCollection)
+        {
+            List<string> ListToAdd = new List<string>();
+
+            foreach (FullStackModel stack in StackCollection)
+            {
+                ListToAdd.Add(stack.XPOS.ToString());
+                ListToAdd.Add(stack.YPOS.ToString());
+                ListToAdd.Add(stack.ZPOS.ToString());
+                ListToAdd.Add(stack.Length.ToString());
+                ListToAdd.Add(stack.Width.ToString());
+                ListToAdd.Add(stack.Height.ToString());
+                ListToAdd.Add(stack.Weight.ToString());
+                ListToAdd.Add(stack.CrateName);
+                AddSQLiteData(workingFolder, dbFileName, ListToAdd);
+                ListToAdd.Clear();
+            }
+        }
+
     }
 }
