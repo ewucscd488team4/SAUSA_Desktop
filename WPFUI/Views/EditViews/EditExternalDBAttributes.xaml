@@ -11,13 +11,13 @@
         xmlns:models="clr-namespace:SAUSALibrary.Models;assembly=SAUSALibrary"
         
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=viewmodels:EditViewModel}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" Background="{DynamicResource MaterialDesignPaper}"
         
         Title="External Database Attributes" Height="550" Width="550" MinHeight="550" MinWidth="550">
     <Window.DataContext>
-        <viewmodels:EditViewModel/>
+        <viewmodels:MainViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,9 +42,9 @@
         <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Database Type" FontSize="18" FontWeight="Medium"/>
 
         <WrapPanel Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10">
-            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding DataBaseTypeArray[0], Mode=TwoWay}">MSSQL</RadioButton>
-            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding DataBaseTypeArray[1], Mode=TwoWay}">MySQL</RadioButton>
-            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding DataBaseTypeArray[2], Mode=TwoWay}">Oracle</RadioButton>
+            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding ExternalDataBaseTypeArray[0], Mode=TwoWay}">MSSQL</RadioButton>
+            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding ExternalDataBaseTypeArray[1], Mode=TwoWay}">MySQL</RadioButton>
+            <RadioButton GroupName="DB" Margin="5" IsChecked="{Binding ExternalDataBaseTypeArray[2], Mode=TwoWay}">Oracle</RadioButton>
         </WrapPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top">
@@ -55,20 +55,20 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" Width="360" VerticalAlignment="Top">
-            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding DBFiendsArray[0]}"/>
-            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding DBFiendsArray[1]}"/>
-            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding DBFiendsArray[2]}"/>
-            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding DBFiendsArray[3]}"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding ExternalDBConnectionFields[0]}"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding ExternalDBConnectionFields[1]}"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding ExternalDBConnectionFields[2]}"/>
+            <TextBox Width="350" Background="Gray" Margin="5" FontSize="24" Text="{Binding ExternalDBConnectionFields[3]}"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center">
             <WrapPanel HorizontalAlignment="Center" Width="190" VerticalAlignment="Center">
-                <Button Content="Test" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding TestDatabaseSettings}"/>
-                <Button Content="Initialize" Width="90" HorizontalAlignment="Center" Margin="5" Command="{Binding InitializeProjectTable}" IsEnabled="{Binding InitExternalDB}"/>
+                <Button Content="Test" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding ExternalDB_TestDatabaseSettings}"/>
+                <Button Content="Initialize" Width="90" HorizontalAlignment="Center" Margin="5" Command="{Binding ExternalDB_InitializeProjectTable}" IsEnabled="{Binding InitExternalDB}"/>
             </WrapPanel>
-            <TextBlock Text="{Binding TestSuccessOrFailString}" Margin="5" FontSize="24" TextAlignment="Center" Visibility="{Binding TestFieldVisibility}"/>
+            <TextBlock Text="{Binding ExternalDB_SuccessOrFail}" Margin="5" FontSize="24" TextAlignment="Center" Visibility="{Binding TestFieldVisibility}"/>
 
-            <Button Content="Apply" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding ApplyDatabaseSettings, Mode=OneWay}" CommandParameter="{Binding ElementName=EditDataBaseParametersView}"/>
+            <Button Content="Apply" Width="80" HorizontalAlignment="Center" Margin="5" Command="{Binding ExternalDB_ApplyDBSettingsCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=EditDataBaseParametersView}"/>
         </StackPanel>
     </Grid>
 </Window>

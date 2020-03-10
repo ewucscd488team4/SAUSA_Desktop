@@ -4,10 +4,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
-using WPFUI.ViewModels;
 using WPFUI.Views.AboutViews;
 using WPFUI.Views.EditViews;
-using WPFUI.Views.ErrorViews;
 using WPFUI.Views.FileViews;
 using WPFUI.Views.WarningViews;
 
@@ -80,24 +78,14 @@ namespace WPFUI.Views
             Preferences prefs = new Preferences();
             prefs.Show();
         }
-
-        private void EditStorageAttribs_Click(object sender, RoutedEventArgs e)
-        {
-            StorageAreaAttributes storageArea = new StorageAreaAttributes();
-            storageArea.Show();
-        }
+                
 
         private void EditDatabaseParam_Click(object sender, RoutedEventArgs e)
         {
             EditExternalDBAttributes editDBAttributes = new EditExternalDBAttributes();
             editDBAttributes.Show();
         }
-
-        private void EditCrateAttribs_Click(object sender, RoutedEventArgs e)
-        {
-            EditStackAttributes stackAttributes = new EditStackAttributes();
-            stackAttributes.Show();
-        }
+                
 
         /// <summary>
         /// Clears the scratch folder and closes the application

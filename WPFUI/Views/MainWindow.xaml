@@ -91,19 +91,17 @@
                     <MenuItem Header="Close" InputGestureText="Ctrl+N" Command="{Binding CloseCommand}" IsEnabled="{Binding SaveSaveAsClose}"/>                    
                     <Separator/>
                     <MenuItem Header="Import" IsEnabled="{Binding FullMenuOnOff}">
-                        <MenuItem x:Name="importData" Header="Import External Database" Command="{Binding ImportCommand}"/>                        
+                        <MenuItem x:Name="importData" Header="Import External Database" Command="{Binding LaunchImportCommand}"/>                        
                     </MenuItem>
                     <MenuItem Header="Export" IsEnabled="{Binding FullMenuOnOff}">
-                        <MenuItem x:Name="exportData" Header="Export to External Database" Command="{Binding ExportCommand}"/>                        
+                        <MenuItem x:Name="exportData" Header="Export to External Database" Command="{Binding LaunchExportCommand}"/>                        
                     </MenuItem>
                     <Separator/>
                     <MenuItem x:Name="filePref" Header="Preferences" Click="FilePref_Click"/>                    
                     <Separator/>
                     <MenuItem Header="Exit" Click="MenuExit_Click" InputGestureText="Alt+F4"/>
                 </MenuItem>
-                <MenuItem Header="_Edit" IsEnabled="{Binding FullMenuOnOff}">                    
-                    <MenuItem x:Name="editArea" Header="Storage Area" Click="EditStorageAttribs_Click"/>
-                    <MenuItem x:Name="editAttr" Header="Crate Attributes" Click="EditCrateAttribs_Click"/>
+                <MenuItem Header="_Edit" IsEnabled="{Binding FullMenuOnOff}">
                     <MenuItem x:Name="editData" Header="External DB Parameters" Click="EditDatabaseParam_Click"/>
                 </MenuItem>                
                 <MenuItem Header="_Help">

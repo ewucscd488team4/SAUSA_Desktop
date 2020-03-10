@@ -59,7 +59,7 @@ namespace WPFUI.ViewModels
         /// <summary>
         /// Xaml buttons point to this to execute a button click
         /// </summary>
-        public RelayCommand ApplyChangesCommand { get; }
+        public RelayCommand ApplyPreferencesCommand { get; }
 
         /// <summary>
         /// Xaml buttons point to this to execute a button click
@@ -74,7 +74,7 @@ namespace WPFUI.ViewModels
             OnLoadFolder = FilePathDefaults.DefaultSavePath; //set to the default file save directory in settings
             Themes = GetThemesFromEnumClass(); //gets list of setting types from settings enum class
             Theme = new ThemeModel(); //sets default ThemeModel (will have "blank")
-            ApplyChangesCommand = new RelayCommand(OnChangeTheme); //wires up command
+            ApplyPreferencesCommand = new RelayCommand(OnChangeTheme); //wires up command
             OpenFileSelectDialogCommand = new RelayCommand(OnChangeSaveFolder); //wires up command
         }
 

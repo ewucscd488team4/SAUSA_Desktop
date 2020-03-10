@@ -32,7 +32,6 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\bin\Debug\netcoreapp3.0\SAUSALibrary.dll
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\bin\Debug\netcoreapp3.0\SAUSALibrary.pdb
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\bin\Debug\netcoreapp3.0\SAUSALibrary.dll.config
-C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\obj\Debug\netcoreapp3.0\CommandLineTesting.csprojAssemblyReference.cache
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\obj\Debug\netcoreapp3.0\CommandLineTesting.AssemblyInfoInputs.cache
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\obj\Debug\netcoreapp3.0\CommandLineTesting.AssemblyInfo.cs
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\obj\Debug\netcoreapp3.0\CommandLineTesting.csproj.CopyComplete
@@ -46,3 +45,4 @@ C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Deskto
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\bin\Debug\netcoreapp3.0\MySql.Data.xml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\bin\Debug\netcoreapp3.0\Google.Protobuf.xml
 C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\bin\Debug\netcoreapp3.0\Renci.SshNet.xml
+C:\Users\Diesel\Documents\c sharp workspaces\cscd488\senior project\SAUSA_Desktop\CommandLineTesting\obj\Debug\netcoreapp3.0\CommandLineTesting.csprojAssemblyReference.cache

@@ -196,17 +196,18 @@ namespace SAUSALibrary.FileHandling.XML.Writing
         /// <param name="workingFolder"></param>
         /// <param name="xmlFileName"></param>
         /// <param name="externalDBData"></param>
-        public static void StoreExternalDBData(string workingFolder, string xmlFileName, string[] externalDBData)
+        public static void StoreExternalDBData(string workingFolder, string xmlFileName, string type, string[] externalDBData)
         {
             var fqXMLFileName = Path.Combine(workingFolder, xmlFileName);
+
             if (File.Exists(fqXMLFileName))
             {
-                if (externalDBData.Length == 5)
+                if (externalDBData.Length == 4)
                 {
                     XmlDocument xmlDoc = new XmlDocument();
                     xmlDoc.Load(fqXMLFileName);
                     XmlNode node = xmlDoc.SelectSingleNode(XMLDataDefaults.ProjectExternalDatabaseStructure);
-                    node.Attributes[0].Value = externalDBData[0]; //type
+                    node.Attributes[0].Value = type;              //type
                     node.Attributes[1].Value = externalDBData[1]; //server
                     node.Attributes[2].Value = externalDBData[2]; //database
                     node.Attributes[3].Value = externalDBData[3]; //userID

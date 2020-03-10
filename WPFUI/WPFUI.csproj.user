@@ -16,15 +16,6 @@
     <Compile Update="Views\EditViews\EditExternalDBAttributes.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\EditViews\EditStack.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\EditViews\EditStackAttributes.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\EditViews\StorageAreaAttributes.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\ErrorViews\EmptyContainerError.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,15 +61,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\EditViews\EditExternalDBAttributes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\EditViews\EditStack.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\EditViews\EditStackAttributes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\EditViews\StorageAreaAttributes.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\ErrorViews\EmptyContainerError.xaml">

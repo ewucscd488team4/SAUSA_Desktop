@@ -18,7 +18,7 @@
         Title="New Stack" Height="750" Width="900" MinHeight="750" MinWidth="900">
     <Window.Resources>
 
-        <DataTemplate DataType="{x:Type models:IndividualDatabaseFieldModel}" x:Key="DefFields">
+        <DataTemplate DataType="{x:Type models:IndividualDatabaseFieldModel}" x:Key="DefaultFieldsTemplate">
             <WrapPanel>
                 <TextBlock Text="{Binding FieldName}" FontSize="18" Margin="5" Width="110"/>
                 <TextBlock Text="{Binding FieldType}" FontSize="18" Margin="5"/>
@@ -55,23 +55,23 @@
 
         <StackPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
             <!-- add default database fields here -->
-            <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" ItemsSource="{Binding DefaultFieldList}" ItemTemplate="{StaticResource DefFields}">
+            <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" ItemsSource="{Binding NewStack_DefaultDBFieldList}" ItemTemplate="{StaticResource DefaultFieldsTemplate}">
                 <!-- text -->
             </ListBox>
         </StackPanel>
 
         <StackPanel Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center">
             <!-- add new optional database fields here -->
-            <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" ItemsSource="{Binding NewDBFields}" SelectedItem="{Binding SelectedModelOnCustomDBFieldList}" ItemTemplate="{StaticResource DefFields}">
+            <ListBox VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5" ItemsSource="{Binding NewStack_CustomDBFieldsList}" SelectedItem="{Binding SelectedModelOnCustomDBFieldList}" ItemTemplate="{StaticResource DefaultFieldsTemplate}">
                 <!-- text -->
             </ListBox>
         </StackPanel>
 
         <WrapPanel Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center">
             <TextBlock Text="Name:" VerticalAlignment="Center" FontSize="18" Margin="0,0,15,0"/>
-            <TextBox Width="140" VerticalAlignment="Center" Text="{Binding FieldNameTextField}" FontSize="18"/>
+            <TextBox Width="140" VerticalAlignment="Center" Text="{Binding NewStack_NewCustomDBFieldNameTextField}" FontSize="18"/>
             <TextBlock Text="Type:" VerticalAlignment="Center" FontSize="18" Margin="15,0,15,0"/>
-            <ComboBox Margin="5" Width="120" ItemsSource="{Binding DropDownFieldList}" SelectedItem="{Binding SelectedModelOnCustomDBFieldList}">
+            <ComboBox Margin="5" Width="120" ItemsSource="{Binding NewStack_DropDownDBFieldTypeList}" SelectedItem="{Binding SelectedModelOnCustomDBFieldList}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding FieldType}" TextAlignment="Center" Margin="5" FontSize="18"/>

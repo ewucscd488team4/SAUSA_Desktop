@@ -92,12 +92,8 @@
     <Compile Include="export\ToDatabase.cs" />
     <Compile Include="FileHandling\Compression\FileCompressionUtils.cs" />
     <Compile Include="FileHandling\Database\Reading\ReadExternlDB.cs" />
-    <Compile Include="FileHandling\Database\Reading\ReadMSSQL.cs" />
-    <Compile Include="FileHandling\Database\Reading\ReadMYSQL.cs" />
     <Compile Include="FileHandling\Database\Reading\ReadSQLite.cs" />
     <Compile Include="FileHandling\Database\Writing\WriteExternalDB.cs" />
-    <Compile Include="FileHandling\Database\Writing\WriteMSSQL.cs" />
-    <Compile Include="FileHandling\Database\Writing\WriteMySQL.cs" />
     <Compile Include="FileHandling\Database\Writing\WriteSQLite.cs" />
     <Compile Include="FileHandling\Text\Reading\ReadText.cs" />
     <Compile Include="FileHandling\Text\Writing\WriteText.cs" />
